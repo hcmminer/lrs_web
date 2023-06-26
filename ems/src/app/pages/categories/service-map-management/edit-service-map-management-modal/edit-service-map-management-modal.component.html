@@ -1,0 +1,133 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="serviceMap">
+        <ng-container *ngIf="serviceMap.mapId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.SERVICE_MAP.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!serviceMap.mapId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.SERVICE_MAP.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="serviceMap">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="service1">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_1' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="service1"
+                    id="service1"
+                    formControlName="service1"
+                    [(ngModel)]="serviceMap.serviceId"
+                    (change)="onChangeService(1)"
+            >
+              <option *ngFor="let service of serviceManagementService.cbxService | async"  [value]="service.serviceId.valueOf()">{{ service.serviceCode }}</option>
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="serviceName1">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_1' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName1"
+                id="serviceName1"
+                [placeholder]="'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_1' | translate"
+                autocomplete="off"
+                disabled
+                formControlName="serviceName1"
+                [(ngModel)]="serviceName.serviceName1"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="service2">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_2' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="service2"
+                    id="service2"
+                    formControlName="service2"
+                    [(ngModel)]="serviceMap.secondServiceId"
+                    (change)="onChangeService(2)"
+            >
+              <option *ngFor="let service of serviceManagementService.cbxService | async"  [value]="service.serviceId.valueOf()">{{ service.serviceCode }}</option>
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="serviceName2">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_2' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName2"
+                id="serviceName2"
+                [placeholder]="'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_2' | translate"
+                autocomplete="off"
+                disabled
+                formControlName="serviceName2"
+                [(ngModel)]="serviceName.serviceName2"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label">{{ 'COMMON.STATUS.TITLE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="status"
+                    id="status"
+                    formControlName="status"
+                    [(ngModel)]="serviceMap.status"
+            >
+              <option *ngFor="let status of listServiceMapStatus"  [value]="status.CODE">{{ 'CATEGORY.SERVICE_MAP.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="orderNo">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.ORDER_NO' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="orderNo"
+                id="orderNo"
+                [placeholder]="'CATEGORY.SERVICE_MAP.TABLE_TITLE.ORDER_NO' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('orderNo')"
+                [class.is-valid]="isControlValid('orderNo')"
+                formControlName="orderNo"
+                maxlength="15"
+                (keyup)="eOnKeyUp()"
+                [(ngModel)]="serviceMap.orderNo"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'orderNo')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SERVICE_MAP.TABLE_TITLE.ORDER_NO' | translate, max: 10} }}
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="serviceMap">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

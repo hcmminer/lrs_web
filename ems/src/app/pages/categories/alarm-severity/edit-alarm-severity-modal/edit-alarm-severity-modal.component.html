@@ -1,0 +1,96 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="alarmSeverityModel">
+        <ng-container *ngIf="alarmSeverityModel.alarmSeverityId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.ALARM_SEVERITY.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!alarmSeverityModel.alarmSeverityId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.ALARM_SEVERITY.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="alarmSeverityModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="alarmSeverityCode">{{ 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmSeverityCode"
+                id="alarmSeverityCode"
+                [placeholder]="'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmSeverityCode')"
+                [class.is-valid]="isControlValid('alarmSeverityCode')"
+                formControlName="alarmSeverityCode"
+                [(ngModel)]="alarmSeverityModel.code"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'alarmSeverityCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmSeverityCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="alarmSeverityName">{{ 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmSeverityName"
+                id="alarmSeverityName"
+                [placeholder]="'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmSeverityName')"
+                [class.is-valid]="isControlValid('alarmSeverityName')"
+                formControlName="alarmSeverityName"
+                [(ngModel)]="alarmSeverityModel.name"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'alarmSeverityName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmSeverityName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_SEVERITY.TABLE_TITLE.ALARM_SEVERITY_NAME' | translate, max: 100} }}
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="alarmSeverityModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+img {
+  width: 6em;
+  height: 14em;
+}
+
+.border-bottom {
+  border-bottom: 3px solid #EBEDF3 !important;
+}
+
+.border-logic {
+  border-top: 3px #01bf0a solid;
+  position: relative;
+}
+
+.border-bottom-logic {
+  border-bottom: 3px #01bf0a solid;
+  position: relative;
+}
+
+.border-half-right {
+  border-image: linear-gradient(to right, #01bf0a 50%, #EEF0F8 50%) 100% 1;
+
+}
+
+.border-half-left {
+  border-image: linear-gradient(to left, #01bf0a 50%, #EEF0F8 50%) 100% 1;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin-bottom-sub-container {
+  margin: 2rem
+}
+
+.text-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.span-flex {
+  margin: 0px 7px;
+}
+
+//
+.tooltip2 {
+  display: none;
+  background: green;
+  color: white;
+}
+
+.content:hover .tooltip2 {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  /* Transform looks at the element itself and not the parent. */
+  transform: translateY(-50%) translateX(100%);
+}
+
+//
+.half-a-border-on-top-right {
+  border-top: 1px solid black;
+  position: relative;
+}
+
+.half-a-border-on-top-right:after {
+  padding: 0;
+  margin: 0;
+  display: block; /* probably not really needed? */
+  content: "";
+  width: 50%;
+  height: 1.1px;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: -1px;
+}
+
+.half-a-border-on-top-left {
+  border-top: 1px solid black;
+  position: relative;
+}
+
+.half-a-border-on-top-left:after {
+  padding: 0;
+  margin: 0;
+  display: block; /* probably not really needed? */
+  content: "";
+  width: 50%;
+  height: 1.1px;
+  background-color: white;
+  position: absolute;
+  //right:0;
+  top: -1px;
+}
+
+.a-border-on-top {
+  border-top: 1px solid black;
+  position: relative;
+}
+
+
+// shadow
+.node-tren {
+  //z-index: 999;
+  //width: 6rem;
+  //height: 6rem;
+  //border-radius: 50px;
+  //margin-top: 3rem;
+  //box-shadow: 0 0 76px #2d0000;
+  //position: absolute;
+  z-index: -999;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  margin-top: 4rem;
+  position: absolute;
+  transform: rotate(-41deg);
+}
+
+.service-goc {
+  z-index: 999;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 10px;
+  margin-top: 3.9rem;
+  //box-shadow: 0 0 76px #2d0000;
+  position: absolute;
+}
+
+.node-duoi {
+  //z-index: 999;
+  //width: 6rem;
+  //height: 6rem;
+  //border-radius: 50px;
+  //margin-top: 4rem;
+  ////box-shadow: 0 0 76px #2d0000;
+  //position: absolute;
+  z-index: -999;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  margin-top: 5rem;
+  position: absolute;
+  transform: rotate(-41deg);
+}

@@ -1,0 +1,203 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/categories"> {{ 'CATEGORY.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/categories/alarm-dictionary"> {{ 'CATEGORY.ALARM_DICTIONARY.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row gutter-b">
+    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+      <div class="label-card">
+        <label
+            class="form-label title-screen text-uppercase">{{ 'CATEGORY.ALARM_DICTIONARY.TITLE' | translate }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="alarmCodeSearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="alarmCodeSearch"
+                id="alarmCodeSearch"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate"
+                autocomplete="off"
+                formControlName="alarmCodeSearch"
+                [(ngModel)]="query.alarmCode"
+            />
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="alarmNameSearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="alarmNameSearch"
+                id="alarmNameSearch"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate"
+                autocomplete="off"
+                formControlName="alarmNameSearch"
+                [(ngModel)]="query.alarmName"
+            />
+          </div>
+        </div>
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="alarmTypeSearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_TYPE' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="alarmTypeSearch"
+                    id="alarmTypeSearch"
+                    formControlName="alarmTypeSearch"
+                    [(ngModel)]="query.alarmTypeCode"
+            >
+              <option *ngFor="let alarmType of errorCategoriesService.cbxAlarmType | async"
+                      [value]="alarmType.code">{{ alarmType.name | truncate:40 }}</option>
+            </select>
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="alarmSeveritySearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_SEVERITY' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="alarmSeveritySearch"
+                    id="alarmSeveritySearch"
+                    formControlName="alarmSeveritySearch"
+                    [(ngModel)]="query.alarmSeverityId"
+            >
+              <option *ngFor="let alarmSeverity of errorCategoriesService.cbxAlarmSeverity | async"
+                      [value]="alarmSeverity.alarmSeverityId">{{ alarmSeverity.name | truncate:40 }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="objectTypeSearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.OBJECT_TYPE' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="objectTypeSearch"
+                    id="objectTypeSearch"
+                    formControlName="objectTypeSearch"
+                    [(ngModel)]="query.objectType"
+                    (change)="eChangeObjectType()"
+            >
+              <option *ngFor="let ObjectType of listObjectType"
+                      [value]="ObjectType.CODE">{{ 'CATEGORY.ALARM_DICTIONARY.LINE_OBJECT_TYPE.' + ObjectType.NAME | translate }}</option>
+            </select>
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="objectSearch">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.OBJECT' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="objectSearch"
+                    id="objectSearch"
+                    formControlName="objectSearch"
+                    [(ngModel)]="query.objectId"
+            >
+              <option *ngFor="let object of errorCategoriesService.cbxObject | async"
+                      [value]="object.id">{{ object.name | truncate:40 }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-sm-12 text-right">
+            <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem"
+                    (click)="eReset()">
+              <i class="fas fa-redo-alt cursor-pointer"></i>
+              <span class="font-weight-bolder">{{ 'ACTION.DEFAULT' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="search()"
+                    style="margin-left: 10px; padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                search
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-green" (click)="create()"
+                    style="margin-left: 10px; padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                add_circle_outline
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.ADD' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">{{ 'COMMON.SEARCH_RESULTS' | translate }}({{ paginator.total }})</h3>
+      </div>
+    </div>
+
+    <div class="card-body pt-0">
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered">
+          <thead>
+          <td>{{ 'COMMON.INDEX' | translate }} </td>
+          <td style="min-width: 95px;">{{ 'ACTION.TITLE' | translate }}</td>
+          <td style="min-width: 170px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_TYPE' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_SEVERITY' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.OBJECT' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_PATTERN' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.PROBABLE_CAUSE' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_ACTION' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_SOLUTION' | translate }}</td>
+          <td style="min-width: 200px;">{{ 'COMMON.DESCRIPTION' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rowdata of errorCategoriesService.listDictionary | async; let i = index">
+            <td>{{ (paginator.page - 1) * paginator.pageSize + i + 1 }}</td>
+            <td style="min-width: 95px;">
+              <i class="fas fa-edit cursor-pointer blue-color" (click)="edit(rowdata.id)"></i>
+              <i class="fas fa-trash-alt cursor-pointer orange-color" (click)="delete(rowdata)"
+                 [style.color]="(rowdata.status != 'O') ? 'gray !important' : '#fe6d00 !important'"></i>
+            </td>
+            <td class="col-left">{{ rowdata.alarmCode | truncate: 20 }}</td>
+            <td class="col-left">{{ rowdata.alarmName | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.alarmType | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.alarmSeverity | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.object | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.alarmPattern | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.probableCause | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.suggestAction | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.suggestSolotion | truncate: 30 }}</td>
+            <td class="col-left">{{ rowdata.alarmDesc | truncate: 30 }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- end: Table -->
+      <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+                     [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+    </div>
+  </div>
+</div>

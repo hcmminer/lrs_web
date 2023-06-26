@@ -1,0 +1,260 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="systemManagementModel">
+        <ng-container *ngIf="systemManagementModel.systemId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.SYSTEM.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!systemManagementModel.systemId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.SYSTEM.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="systemManagementModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="systemCode">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="systemCode"
+                id="systemCode"
+                [placeholder]="'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('systemCode')"
+                [class.is-valid]="isControlValid('systemCode')"
+                formControlName="systemCode"
+                [(ngModel)]="systemManagementModel.systemCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'systemCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'systemCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="systemName">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="systemName"
+                id="systemName"
+                [placeholder]="'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('systemName')"
+                [class.is-valid]="isControlValid('systemName')"
+                formControlName="systemName"
+                [(ngModel)]="systemManagementModel.systemName"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'systemName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'systemName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_NAME' | translate, max: 100} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="systemCategory">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_CATEGORY' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="systemCategory"
+                    id="systemCategory"
+                    formControlName="systemCategory"
+                    [(ngModel)]="systemManagementModel.systemCategoryId"
+                    #systemCategory
+            >
+              <option *ngFor="let systemCategory of systemCategoriesService.cbxSystemCategory | async"  [value]="systemCategory.id">{{ systemCategory.name | truncate:40 }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="collectType">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.COLLECT_TYPE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="collectType"
+                    id="collectType"
+                    formControlName="collectType"
+                    [(ngModel)]="systemManagementModel.collectType"
+            >
+              <option *ngFor="let CollectType of listCollectType"  [value]="CollectType.CODE">{{ 'CATEGORY.SYSTEM.LINE_COLLECT_TYPE.' + CollectType.NAME | translate }}</option>
+            </select>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="systemParent">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.SYSTEM_PARENT' | translate }}</label>
+            <select class="form-control"
+                    name="systemParent"
+                    id="systemParent"
+                    formControlName="systemParent"
+                    [(ngModel)]="systemManagementModel.parentId"
+                    (change)="eChangeParent()"
+            >
+              <option *ngFor="let system of systemCategoriesService.cbxSystem | async"  [value]="system.systemId">{{ system.systemName | truncate:40 }}</option>
+            </select>
+          </div>
+          <!-- <div class="col-lg-4">
+            <label>{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+            <span class="switch switch-icon">
+            <label>
+                <input
+                    type="checkbox"
+                    name="status"
+                    (change)="changeStatus(systemManagementModel.status)"
+                    [checked]="systemManagementModel.status == 'O'"
+                />
+              <span></span>
+            </label>
+            </span>
+          </div> -->
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'COMMON.STATUS.TITLE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="status"
+                    id="status"
+                    formControlName="status"
+                    [(ngModel)]="systemManagementModel.status"
+            >
+              <option *ngFor="let status of listStatus"  [value]="status.CODE">{{ 'COMMON.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="numChildLevel">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.NUMBER_CHILD' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="numChildLevel"
+                id="numChildLevel"
+                [placeholder]="'CATEGORY.SYSTEM.TABLE_TITLE.NUMBER_CHILD' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('numChildLevel')"
+                [class.is-valid]="isControlValid('numChildLevel')"
+                formControlName="numChildLevel"
+                [(ngModel)]="systemManagementModel.numChildLevel"
+                maxlength="2"
+                (keyup)="eOnKeyUp('1')"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'numChildLevel')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.NUMBER_CHILD' | translate, max: 2} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="orderNo">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.ORDER_NO' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="orderNo"
+                id="orderNo"
+                [placeholder]="'CATEGORY.SYSTEM.TABLE_TITLE.ORDER_NO' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('orderNo')"
+                [class.is-valid]="isControlValid('orderNo')"
+                formControlName="orderNo"
+                [(ngModel)]="systemManagementModel.orderNo"
+                maxlength="2"
+                (keyup)="eOnKeyUp('2')"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'orderNo')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.ORDER_NO' | translate, max: 2} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label for="ivalidEndate" class="form-label">{{ 'CATEGORY.SYSTEM.TABLE_TITLE.END_DATE' | translate }}</label>
+            <div class="input-group">
+              <input
+                  type="text"
+                  name="ivalidEndate"
+                  id="ivalidEndate"
+                  class="form-control"
+                  autocomplete="off"
+                  placeholder="dd/mm/yyyy"
+                  ngbDatepicker
+                  #fromDate="ngbDatepicker"
+                  [class.is-invalid]="isControlInvalidDate()"
+                  formControlName="ivalidEndate"
+                  [(ngModel)]="systemManagementModel.ivalidEndate"
+                  (change)="formatDateValue()"
+              />
+              <div class="input-group-append" (click)="fromDate.toggle();">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('ivalidEndate')">
+              {{ 'VALIDATION.INCORRECT' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.END_DATE' | translate } }}
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'ivalidEndate')"
+            >
+              {{ 'VALIDATION.REQUIRE_FORMAT' | translate: { name: 'CATEGORY.SYSTEM.TABLE_TITLE.END_DATE' | translate, format: 'dd/mm/yyyy'} }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'COMMON.DESCRIPTION' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="description"
+                [placeholder]="'COMMON.DESCRIPTION' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('description')"
+                [class.is-valid]="isControlValid('description')"
+                formControlName="description"
+                [(ngModel)]="systemManagementModel.description"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'description')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'COMMON.DESCRIPTION' | translate, max: 200} }}
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="systemManagementModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

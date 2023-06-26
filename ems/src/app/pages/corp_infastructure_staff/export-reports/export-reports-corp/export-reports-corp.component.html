@@ -1,0 +1,109 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/export-reports'" class="text-muted">{{ 'REPORTS.TITLE' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted" [routerLink]="'/export-reports/progress-report-corp'">{{ 'REPORT.REPORT_PROGRESS' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'REPORTS.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div #formSearch class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">{{ 'REPORT.REPORT_PROGRESS' | translate }}</div>
+        <div class="row form-group gx-6">
+          <label class="col-md-1 mb-12 form-label col-form-label" for="provinceSearch">{{ 'CON_LIST.PROVINCE' | translate }}</label>
+          <div class="col-md-2">
+            <select class="form-control" id="provinceSearch" autocomplete="off" formControlName="provinceSearch">
+              <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( service.listProvince | async ) "
+                       [ngValue]="item.proCode">
+                {{item.proCode}}-{{item.proName}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+          
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">{{ 'CON_LIST.CON_TYPE' | translate }}</label>
+          <div class="col-md-2">
+            <select
+                    class="form-control"
+                    id="infrastructureType"
+                    autocomplete="off"
+                    formControlName="infrastructureType"
+            >
+              <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( service.listInfrastructureType | async ) "
+                       [ngValue]="item.constructionTypeId">
+                {{item.constructionTypeName}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">{{ 'LIST_CATEGORY_WORK.STATUS' | translate }}</label>
+          <div class="col-md-2">
+            <select class="form-control" id="status" autocomplete="off" formControlName="status">
+              <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( service.listConstructionStatus | async ) "
+                       [ngValue]="item.value">
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-md-12 text-center">
+            <div
+                    (click)="searchReport()"
+                    class="btn font-weight-bolder mr-3"
+                    style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px"
+            >
+              {{'ACTION.SEARCH' | translate}}
+            </div>
+            <div
+                    (click)="exportReport()"
+                    class="btn font-weight-bolder "
+                    style="background: #5fb871; color: #fff; height: 38px; padding: 7px 32px"
+            >
+              {{'ACTION.EXPORT' | translate}}
+            </div>
+
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-custom gutter-b">
+            <div [className]="(isLoading | async)?'card-body d-flex justify-content-center':'card-body'"
+                 *ngIf="(searchDataHtml | async) || (isLoading | async)">
+              <div [className]="(isLoading | async)?'spinner spinner-lg spinner-success':''">
+                <div
+                        [className]="(isLoading | async)?'sr-only spinner spinner-lg spinner-success':''"
+                        style="overflow: scroll;" [innerHTML]="searchDataHtml | async | safeHtml"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

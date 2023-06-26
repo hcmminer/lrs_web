@@ -1,0 +1,22 @@
+:host {
+  .aside {
+    height: 100%;
+
+    .aside-menu {
+      margin: 0;
+    }
+  }
+
+  // fixed text line break issue on minimized aside hover
+  .menu-text {
+    white-space: nowrap;
+  }
+}
+
+#kt_aside_menu_wrapper {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+#kt_brand {
+  border-right: 1px solid #559ED6;
+}

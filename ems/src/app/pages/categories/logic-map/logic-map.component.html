@@ -1,0 +1,145 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/categories"> {{ 'CATEGORY.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"  href="/ems/categories/logic-map"> {{ 'CATEGORY.LOGIC_MAP.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row gutter-b container">
+  <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'CATEGORY.LOGIC_MAP.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div class="row container">
+  <div class="col-xxxl-1 col-xxl-3 col-xl-4 col-lg-5 col-sm-6 ">
+    <div class="card card-custom gutter-b" #content>
+      <div class="card-body pb-0">
+        <div class="form-group table-responsive">
+          <table class="table table-vertical-center table-bordered">
+            <tbody>
+            <tr>
+              <td>
+                <div
+                    class="col-10 text-center form-label">{{ 'CATEGORY.LOGIC_MAP.TABLE_TITLE.SYSTEM' | translate }}</div>
+              </td>
+              <td>+</td>
+            </tr>
+            <tr *ngFor="let system of logicMapService.cbxSystem | async; let i = index">
+              <td class="text-left">{{ system.systemName | truncate: 25 }}</td>
+              <td class="w-15">
+                <input type="checkbox" name="options" [value]="system.systemId" [checked]="system.check"
+                       (click)="onCheckSystem(i,system.systemId)">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="form-group table-responsive">
+          <!--          <img [src]="isOpenMenu?'assets/media/logic-map/icon_close_menu.png':'assets/media/logic-map/icon_open_menu.png' "-->
+          <!--               style="width: 3rem; height: auto; position: absolute; z-index: 1; right: 5px;" #icon_menu>-->
+          <div
+              class="text-center form-label mb-4">{{ 'CATEGORY.LOGIC_MAP.TABLE_TITLE.SEVERITY_COLOR' | translate }}</div>
+          <table class="table table-vertical-center table-bordered">
+            <tbody>
+            <tr *ngFor="let rowdata of logicMapService.listAlarmColor | async; let i = index">
+              <td class="text-left">{{ rowdata.alarmSeverityName | truncate: 20 }}</td>
+              <td class="w-75px">
+                <div class="p-2 w-100"
+                     [style.background-color]="(rowdata.colorCurrentType == 'HEX')?rowdata.colorCurrent:('rgb('+rowdata.colorCurrent+')')"></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxxl-11 col-xxl-9 col-xl-8 col-lg-7 col-sm-6 ">
+    <div id="view" class="container align-items-center" *ngIf="logicMapService.listLogicMap"
+         style="justify-content: space-evenly;">
+      <div class="sub-container margin-bottom-sub-container"
+           *ngFor="let rowData of logicMapService.listLogicMap | async; let i = index">
+        <!--service gốc và note-->
+        <div>
+          <div style="display: flex;justify-content: center;"
+               *ngIf="rowData.serviceGoc.nodeMapDTOS && rowData.serviceGoc.nodeMapDTOS.length > 0">
+            <div *ngFor="let note of rowData.serviceGoc.nodeMapDTOS; let i = index"
+                 (click)="eViewDetail(note.serviceCode)">
+              <div class="text-flex " [ngClass]="note.classBorder" style="width: 100%;">
+                <div style="margin-bottom: -4rem;" class="span-flex">
+                  <div
+                      style="text-align: center;">{{note && note.serviceName ? note.serviceName : 'Service Name' | truncate: 20 }}</div>
+                  <div style="text-align: center;">{{note && note.ipPort ? note.ipPort : 'IP:Port'}}</div>
+                </div>
+                <img src="assets/media/logic-map/note_down.png">
+                <div *ngIf="note && note.alarmNorClearByServiceDTO"
+                     [class.node-tren]="note.alarmNorClearByServiceDTO.shadow && logicMapService.checkShow"
+                     [ngStyle]="{'box-shadow': note.alarmNorClearByServiceDTO.shadow }"></div>
+              </div>
+            </div>
+          </div>
+          <div class="text-flex" (click)="eViewDetail(rowData.serviceGoc.serviceCode)">
+            <img
+                [src]="rowData.serviceGoc && rowData.serviceGoc.src ? rowData.serviceGoc.src :'assets/media/logic-map/giua.png'">
+            <div *ngIf="rowData.serviceGoc.alarmNorClearByServiceDTO"
+                [class.service-goc]=" rowData.serviceGoc.alarmNorClearByServiceDTO.shadow && logicMapService.checkShow"
+                [ngStyle]="{'box-shadow': rowData.serviceGoc.alarmNorClearByServiceDTO.shadow }"></div>
+            <!--            <img-->
+            <!--                [src]="rowData.serviceGoc.nodeMapDTOS && rowData.serviceGoc.nodeMapDTOS.length > 0?'assets/media/logic-map/giua.png':'assets/media/logic-map/down_solid.png'">-->
+            <div class="span-flex" style="margin-top: -3.7rem;margin-bottom: 2.2rem;background-color: #EEF0F8; ">
+              <div style="text-align: center;">{{rowData.serviceGoc.serviceName | truncate: 20 }}</div>
+              <div
+                  style="text-align: center;">{{rowData.serviceGoc && rowData.serviceGoc.ipPort ? rowData.serviceGoc.ipPort : 'IP:Port'}}</div>
+            </div>
+          </div>
+        </div>
+        <!--service map-->
+        <div style="display: flex;justify-content: space-evenly;margin-top: -1.5rem;"
+             *ngIf="rowData.serviceMapping && rowData.serviceMapping.length > 0">
+          <div style="display: flex;flex-direction: column;width: 100%; padding: 0 1rem"
+               *ngFor="let mapping of rowData.serviceMapping; let i = index" [ngClass]="mapping.classBorder">
+            <div style="display: flex;justify-content: space-evenly;" (click)="eViewDetail(mapping.serviceCode)">
+              <div class="text-flex">
+                <img [src]="mapping.src">
+
+                <div *ngIf="mapping.alarmNorClearByServiceDTO"
+                     [class.service-goc]=" mapping.alarmNorClearByServiceDTO.shadow && logicMapService.checkShow"
+                     [ngStyle]="{'box-shadow': mapping.alarmNorClearByServiceDTO.shadow }"></div>
+
+                <div class="span-flex" style="margin-top: -3.7rem; background-color: #EEF0F8; margin-bottom: 0.7rem;">
+                  <div style="text-align: center;">{{mapping.serviceName | truncate: 20 }}</div>
+                  <div style="text-align: center;">{{mapping && mapping.ipPort ? mapping.ipPort : 'IP:Port'}}</div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex;justify-content: space-evenly;">
+              <div class=" text-flex" *ngFor="let note of mapping.nodeMapDTOS; let i = index"
+                   (click)="eViewDetail(note.serviceCode)" [ngClass]="note.classBorder" style="width: 100%;">
+                <img src="assets/media/logic-map/node_up.png">
+                <div [class.node-duoi]="note.alarmNorClearByServiceDTO && note.alarmNorClearByServiceDTO.shadow && logicMapService.checkShow"
+                     [ngStyle]="{'box-shadow': note.alarmNorClearByServiceDTO && note.alarmNorClearByServiceDTO.shadow }"></div>
+                <div class="span-flex"
+                     style="margin-top: -3.8rem;">
+                  <div style="text-align: center;">{{note.serviceName | truncate: 20 }}</div>
+                  <div style="text-align: center;">{{note && note.ipPort ? note.ipPort : 'IP:Port'}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

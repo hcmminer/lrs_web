@@ -1,0 +1,133 @@
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <form action="#" class="form form-label-right" [formGroup]="addForm">
+      <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">Thêm mới công trình</div>
+      <div class="mb-6">
+        <span class="mr-3">
+          <input class="mr-2" type="radio" value="partial" id="radio1" name="radioInput" checked
+            (click)="normalInput()">
+          <label for="radio1"> Thêm mới đơn lẻ </label>
+        </span>
+        <span>
+          <input class="mr-2" type="radio" value="file" id="radio2" name="radioInput" (click)="fileInput()">
+          <label for="radio2"> Thêm mới theo file </label>
+        </span>
+      </div>
+
+      <div class="form-wrapper" #addFormWrapper>
+        <div class="row form-group gx-6 mb-6 align-items-center">
+          <label class="col-md-1 form-label col-form-label" for="stationCode">Mã nhà trạm<span
+              class="red-color">*</span></label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="stationCode" autocomplete="off" formControlName="stationCode" [(ngModel)]="stationCode"/>
+            <div *ngIf="addForm.get('stationCode').invalid &&
+            (addForm.get('stationCode').dirty || addForm.get('stationCode').touched)">
+              <small class="form-text text-danger" *ngIf="addForm.get('stationCode').errors.required">
+                {{'VALIDATION.REQUIRED' | translate
+                : {
+                name: 'Mã trạm' | translate
+                }
+                }}
+              </small>
+            </div>
+          </div>
+
+          <label class="col-md-1 form-label col-form-label" for="contractNo">Mã hợp đồng</label>
+          <div class="col-md-2" #test>
+            {{stationCode}}/{{today | date : 'ddMMyyyy'}}
+          </div>
+
+          <label class="col-md-1 form-label col-form-label" for="Long">Long<span class="red-color">*</span></label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="Long" autocomplete="off" formControlName="Long" />
+            <div *ngIf="
+                  addForm.get('Long').invalid &&
+                  (addForm.get('Long').dirty || addForm.get('Long').touched)
+                ">
+              <small class="form-text text-danger" *ngIf="addForm.get('Long').errors.required">
+                {{'VALIDATION.REQUIRED' | translate
+                : {
+                name: 'Long' | translate
+                }
+                }}
+              </small>
+            </div>
+          </div>
+
+
+          <label class="col-md-1 form-label col-form-label" for="Lat">Lat<span class="red-color">*</span></label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="Lat" autocomplete="off" formControlName="Lat" />
+            <div *ngIf="
+                addForm.get('Lat').invalid &&
+                (addForm.get('Lat').dirty || addForm.get('Lat').touched)
+              ">
+              <small class="form-text text-danger" *ngIf="addForm.get('Lat').errors.required">
+                {{'VALIDATION.REQUIRED' | translate
+                : {
+                name: 'Lat' | translate
+                }
+                }}
+              </small>
+            </div>
+          </div>
+          <!-- <div class="form-group row pt-12 pb-0"> -->
+            <div class="col-md-12 text-center">
+              <div (click)="submitFile()" class="btn font-weight-bolder mr-3"
+                   style="background: #5fb871; color: #fff; padding: 7px 32px ; margin: 80px 0 50px 0;">
+                {{'ACTION.SAVE' | translate}}
+              </div>
+              <p></p>
+            </div>
+          <!-- </div> -->
+        </div>
+
+
+        
+      </div>
+
+      <div style="display:none" #addFileWrapper>
+        <div class="row form-group">
+          <div class="col-md-1">Công trình</div>
+          <div class="col-md-4">
+<!--            <custom-dropzone (change)="onSelect($event)" class="dropzone">-->
+<!--              <custom-dropzone-label class="select-file-button">-->
+<!--                &lt;!&ndash;                {{ 'TRANSFER_MONEY.TRANSFER_BY_BATCH.DROP_FILE' | translate }}&ndash;&gt;-->
+<!--                <span class="choose-file font-weight-bolder">-->
+<!--&lt;!&ndash;                  {{'TRANSFER_MONEY.TRANSFER_BY_BATCH.PICK_FILE' | translate}}&ndash;&gt;-->
+<!--                    Chọn file-->
+<!--                </span>-->
+<!--              </custom-dropzone-label>-->
+<!--              <custom-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)"-->
+<!--                                       style="height: 30px; border-radius: 5px; border: 1px solid; ">-->
+<!--                <custom-dropzone-label>{{ f.name }}</custom-dropzone-label>-->
+<!--              </custom-dropzone-preview>-->
+<!--            </custom-dropzone>--> 
+            <ngx-dropzone (change)="onSelect($event)" style="height: auto" class="dropzone" [multiple]="false">
+            <ngx-dropzone-label>
+              <span class="choose-file font-weight-bolder">Chọn file hoặc kéo file vào đây</span>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label style="height: 50px">{{ f.name }} </ngx-dropzone-label>
+            </ngx-dropzone-preview>
+            </ngx-dropzone>
+
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-6">
+            Tải tập tin mẫu <a download="template_construction_add_file" href="assets/template_bts_add_file.xlsx">tại đây</a>
+          </div>
+        </div>
+        <div class="form-group row pt-12 pb-0">
+          <div class="col-md-12 text-center">
+            <div (click)="submitFile()" class="btn font-weight-bolder mr-3"
+                 style="background: #5fb871; color: #fff; padding: 7px 32px; margin: 50px 0">
+              {{'ACTION.SAVE' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

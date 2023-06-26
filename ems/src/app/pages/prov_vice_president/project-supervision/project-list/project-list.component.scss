@@ -1,0 +1,69 @@
+img:hover{
+    cursor: pointer;
+}
+
+.disable{
+    text-align: center;
+    border: none;
+}
+
+img{
+    opacity: 1;
+    cursor:pointer;
+}
+
+  .inputDate{
+    margin-left: 60px;
+    border: 1px solid #D2D2D2;
+    height: 35px;
+    border-radius: 5px;
+    position: relative;;
+  }
+  
+  ::ng-deep.position-absolute{
+    position: absolute;
+    right: 105px;
+    top: 70px;
+    opacity: 0.6;
+    z-index: 10;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+
+  .view-icon{
+    font-size: 16px;
+    color: #0171bb;
+    cursor: pointer;
+   }
+  .calendar-icon{
+    font-size: 16px;
+    color: #0171bb;
+    cursor: pointer;
+   }
+
+::ng-deep.cdk-overlay-container {
+    z-index:2000;
+  }
+  ::ng-deep.cdk-overlay-pane{
+    bottom: 5px !important;
+    left: 855px !important;
+    top: 295px!important;
+  }
+
+ thead td{
+    min-width: 100px;
+  }
+
+ td:nth-child(8){
+   min-width: 250px;
+ }
+
+@media (min-width: 768px){
+  .col-md-1 {
+    flex: 0 0 8.33333333%;
+    max-width: 9.333333%;
+  }
+}
+
+

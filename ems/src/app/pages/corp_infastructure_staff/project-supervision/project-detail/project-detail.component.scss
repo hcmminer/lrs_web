@@ -1,0 +1,327 @@
+.tblView .tblDetail{
+  border:1px solid #ccc;
+  padding:10px;
+}
+.tblView{
+  border-collapse:collapse;
+  width:100%;
+  table-layout: fixed;
+  text-align:left;
+  min-width: 100px
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  width: 30px;
+}
+
+.action-icon{
+  display: flex;
+  justify-content: space-around;
+}
+
+img{
+  opacity: 1;
+  cursor:pointer;
+}
+.inputDate{
+  margin-left: 60px;
+  border: 1px solid #D2D2D2;
+  height: 35px;
+  border-radius: 5px;
+  position: relative;;
+}
+
+::ng-deep.position-absolute{
+  position: absolute;
+  right: 105px;
+  top: 70px;
+  opacity: 0.6;
+  z-index: 10;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+::ng-deep.mat-datepicker-toggle .mat-icon-button .mat-button-wrapper .mat-datepicker-toggle-default-icon{
+  width: 30px !important;
+  height: 30px !important;
+  color: black;
+}
+::ng-deep.cdk-overlay-container {
+  z-index:2000;
+}
+::ng-deep.cdk-overlay-pane{
+  //bottom: 5px !important;
+  //left: 855px !important;
+  //top: 295px!important;
+}
+
+.close-btn{
+  position: absolute;
+  right: 0;
+}
+.close-btn:hover{
+  background-color: #0171bb;
+  cursor: pointer;
+  width: 30px;
+  border-top-right-radius: 5px;
+  
+}
+
+.header-center>td{
+  text-align: center;
+}
+// .view-icon{
+//   width: 16px;
+//   height: 16px;
+//   color: #0171bb;
+//   cursor: pointer;
+//   margin-left: 10px;
+//  }
+
+ .approve-icon{
+  color: #0171bb;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  
+ }
+ .refuse-icon{
+  color: #0171bb;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+ }
+
+.linkOpenAcceptance, .linkOpenAcceptance:hover {
+  color: #004d9c;
+  text-decoration: underline;
+}
+
+ .linkOpenAcceptance:hover{
+   font-weight: bold;
+   text-decoration: underline;
+   cursor: pointer;
+ }
+
+.display-contents {
+  display: contents;
+}
+
+.btnCus {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0;
+}
+
+.mat-icon-rtl-mirror {
+  margin: 0 !important;
+}
+
+.remove-border td {
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.vertical-align {
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+ .view-icon-green {
+  width: 16px;
+  height: 16px;
+  color: #1af186;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.view-icon {
+  width: 16px;
+  height: 16px;
+  color: #0171bb;
+  cursor: pointer;
+}
+
+.view-icon-red {
+  width: 16px;
+  height: 16px;
+  color: #f11b1b;
+  cursor: pointer;
+}
+
+.imageInfo {
+  padding-bottom: 10px;
+  font-size: 18px;
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+.imageInfo_categoryName_label {
+  display: inline-block;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.imageInfo_categoryName_content {
+  color: #0171BB;
+  display: inline-block;
+}
+
+.imageInfo_statusImage_label {
+  display: inline-block;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.imageInfo_statusImage_content {
+  color: #0171BB;
+  display: inline-block;
+}
+
+.btn-image {
+  position: relative;
+  float: right;
+  right: 30px;
+  margin-bottom: 15px;
+  z-index: 1000;
+}
+
+.btn-refuseImage {
+  float: right;
+  background-color: rgb(243, 106, 106);
+  display: block;
+  padding: 10px 0;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 150px;
+  border: none;
+}
+
+.btn-refuseImage:hover {
+  background-color: rgb(245, 60, 60);
+}
+
+.btn-approvedImage {
+  float: right;
+  background-color: rgb(4, 248, 85);
+  display: block;
+  padding: 10px 0;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 150px;
+  border: none;
+}
+
+.btn-approvedImage:hover {
+  background-color: rgb(0, 216, 72);
+}
+
+.reason-label {
+  font-weight: bold;
+}
+
+.listReasonRefuse {
+  padding: 0 50px 20px;
+}
+
+.listItemRefuse {
+  display: inline;
+  padding-left: 20px;
+  padding-bottom: 15px;
+}
+
+.inputRefuse {
+  padding: 0 50px;
+}
+
+.refuse-text {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border: 1px solid #cccccc;
+  padding: 7px;
+  border-radius: 5px
+}
+
+.refuse-text:focus-visible {
+  color: #212121;
+    background-color: #ffffff;
+    border-color: #0190ee;
+    outline: 0;
+}
+
+.errorReasonNull{
+  padding: 5px 50px;
+}
+.ml-30 {
+  padding-left: 30px;
+}
+.popupImageNull{
+  height: 790px;
+  position: relative;
+
+}
+.labelImageNull{
+  text-align: center;
+  color: black;
+
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  right: 25px;
+  font-size: 20px;
+
+  border: 1px solid #474d52;
+  padding: 345px 385px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.closePopupImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  outline: none;
+  width: 60px;
+  height: 35px;
+  line-height: 12px;
+  border: none;
+  color: #606569;
+  background-color: white;
+  z-index: 1000;
+}
+
+.closePopupImage:hover {
+  background-color: red;
+  color: black;
+  cursor: pointer;
+
+}
+
+.rejectReasonInfo{
+  padding-bottom: 10px;
+  font-size: 18px;
+  position: relative;
+  top: 0px;
+  left: 20px;
+}
+
+.rejectReasonInfo-label{
+  display: inline-block;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.rejectReasonInfo-content{
+  color: red;
+  display: inline-block;
+}
+
+.rejectReasonInfo-desciption{
+  color: red;
+  display: inline-block;
+  padding-left: 5px;
+}

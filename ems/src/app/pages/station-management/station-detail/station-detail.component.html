@@ -1,0 +1,407 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/station-management'" class="text-muted">{{ 'STATION_MANAGEMENT.TITLE' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted">{{ 'CON_MANAGEMENT.CON_DETAIL' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'STATION_MANAGEMENT.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div #formSearch class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <div action="#" class="form form-label-right">
+        <div class="font-weight-bolder mb-8" style="font-size: 1.275rem">{{ 'CON_MANAGEMENT.CON_DETAIL' | translate }}</div>
+<!--        <div class="row form-group gx-6">
+          <label class="col mb-6 form-label col-form-label">Tỉnh :
+            <label>{{ (station | async).province}}</label>
+          </label>
+          <label class="col form-label col-form-label">Độ cao cột :
+            <label>{{ (station | async).pillarHeight}}</label>
+          </label>
+          <label class="col form-label col-form-label">Tilt :
+            <label>{{ (station | async).tilt}}</label>
+          </label>
+          <label class="col form-label col-form-label">Tuyến cáp:
+            <label>{{ (station | async).cableLine}}</label>
+          </label>
+          <label class="col form-label col-form-label">Khoảng cách kéo cáp (km) :
+            <label>{{ (station | async).cableDistance}}</label>
+          </label>
+        </div>
+
+        <div class="row form-group gx-6">
+          <label class="col mb-6 form-label col-form-label">Mã trạm:
+            <label>{{ (station | async).constructionCode}}</label>
+          </label>
+          <label class="col form-label col-form-label">Long:
+            <label>{{ (station | async).Long }}</label>
+          </label>
+          <label class="col form-label col-form-label">Mạng:
+            <label>{{ (station | async).network}}</label>
+          </label>
+          <label class="col form-label col-form-label">Sector :
+            <label>{{ (station | async).sector}}</label>
+          </label>
+          <label class="col form-label col-form-label">Số lượng cột betong (cột):
+            <label>{{ (station |async).concretePillarQuantity}}</label>
+          </label>
+        </div>
+
+        <div class="row form-group gx-6">
+          <label class="col mb-12 form-label col-form-label">Tên trạm :
+            <label>{{ (station | async).constructionName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Lat :
+            <label>{{ (station | async).Lat}}</label>
+          </label>
+          <label class="col form-label col-form-label">Vendor:
+            <label>{{ (station | async).vendor}}</label>
+          </label>
+          <label class="col form-label col-form-label">TRx mode 4G:
+            <label>{{ (station | async).trx4g}}</label>
+          </label>
+          <label class="col form-label col-form-label">Căn cứ Quyết định triển khai:
+            <label>{{ (station | async).decisionApplied}}</label>
+          </label>
+        </div>
+
+        <div class="row form-group gx-6">
+          <label class="col mb-12 form-label col-form-label">Loại vị trí:
+            <label>{{ (station |async).positionTypeName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Ban :
+            <label>{{ (station | async).Ban}}</label>
+          </label>
+          <label class="col form-label col-form-label">Band:
+            <label>{{ (station | async).band}}</label>
+          </label>
+          <label class="col form-label col-form-label">Điểm đầu:
+            <label>{{ (station | async).startPoint}}</label>
+          </label>
+          <label class="col form-label col-form-label">Hạng mục cần thi công:
+            <label>{{ (station | async).listItemMenu}}</label>
+          </label>
+        </div>
+
+        <div class="row form-group gx-6">
+          <label class="col mb-12 form-label col-form-label">Loại trạm:
+            <label>{{ (station | async).constructionTypeName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Mường:
+            <label>{{ (station | async).village}} </label>
+          </label>
+          <label class="col form-label col-form-label">Độ cao anten:
+            <label>{{ (station | async).antennaHeight}}</label>
+          </label>
+          <label class="col form-label col-form-label">Điểm cuối:
+            <label>{{ (station | async).endPoint}}</label>
+          </label>
+          <label class="col form-label col-form-label">Ngày bàn giao mặt bằng:
+            <label>{{ (station | async).startDateStr}}</label>
+          </label>
+        </div>
+
+        <div class="row form-group gx-6">
+          <label class="col mb-12 form-label col-form-label">Loại cột:
+            <label>{{ (station | async).columnTypeName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Loại công trình:
+            <label>{{ (station | async).constructionTypeName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Azimuth:
+            <label>{{ (station | async).azimuth}}</label>
+          </label>
+          <label class="col form-label col-form-label">Trạng thái:
+            <label>{{ (station | async).statusName}}</label>
+          </label>
+          <label class="col form-label col-form-label">Ngày hoàn thành:
+            <label>{{ (station | async).completeDateStr}}</label>
+          </label>
+        </div>-->
+        <table class = "tblView">
+          <tr>
+            <td class="tblDetail" style="font-weight: bold; width: 125px">{{ 'DETAIL_CON.PROVINCE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).province}}</td>
+            <td class="tblDetail" style="width: 125px ; font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_CODE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).constructionCode}}</td>
+            <td class="tblDetail" style=" width: 125px; font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_NAME' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).constructionName}}</td>
+            <td class="tblDetail" style="width: 125px; font-weight: bold">{{ 'DETAIL_CON.POSITION_TYPE' | translate }} :</td>
+            <td class="tblDetail">{{(station |async).positionTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.STATION_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{  (station | async).constructionTypeName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).columnTypeName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_HEIGHT' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).pillarHeight}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_LONG' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).Long }}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_LAT' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).Lat}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DISTRICT' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).Ban}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.VILLAGE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).village}}</td>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).constructionTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'CON_LIST.ITEM_TOBE_CON' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).listItemMenu}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.NETWORK' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).network}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.VENDOR' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).vendor}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.BAND' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).band}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.ANTEN_HEIGHT' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).antennaHeight}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.AZIMUTH' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).azimuth}}</td>
+            <td class="tblDetail"  style="width: 100px ; font-weight: bold">{{ 'DETAIL_CON.TILT' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).tilt}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.SECTOR' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).sector}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.TRX_MODE_4G' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).trx4g}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DECISION_DEPLOY' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).decisionApplied}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.STATUS' | translate }}:</td>
+            <td class="tblDetail" >{{  (station | async).statusName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DELIVERY_DATE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).startDateStr}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COMPLETE_DATE' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).completeDateStr}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CABLE_ROUTE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).cableLine}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DISTANCE_CABLE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).cableDistance}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_NUMBER' | translate }}:</td>
+            <td class="tblDetail" >{{ (station |async).concretePillarQuantity}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.START_POINT' | translate }}:</td>
+            <td class="tblDetail">{{  (station | async).startPoint}}</td>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.END_POINT' | translate }}:</td>
+            <td class="tblDetail">{{ (station | async).endPoint}}</td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end: Filtration form -->
+
+    </div>
+  </div>
+
+  <div class="form-group row pb-0">
+    <div class="col-md-12 text-right">
+      <div
+              *ngIf="isDisplay == true"
+              (click)="addTasks()"
+              class="btn font-weight-bolder btn-primary mr-3"
+              style="background: #5fb871; color: #fff; height: 38px; padding: 7px 32px"
+      >
+        {{ 'BUTTON.CON_ITEM' | translate }}
+      </div>
+      <div
+              *ngIf="isDisplay == true"
+              (click)="assignJob()"
+              class="btn font-weight-bolder btn-primary"
+              style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px"
+      >
+        {{ 'BUTTON.ASSIGN' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">
+          {{ 'LIST_CATEGORY_WORK.TITLE' | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="card-body pt-12">
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-bordered table-vertical-center overflow-hidden remove-border">
+          <thead class="header-center">
+          <td></td>
+          <td>{{ 'LIST_CATEGORY_WORK.CON_ITEM_NAME' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.STATUS' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_BY' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_REASON' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.CON_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.COMPLETE_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.ACCEPTANCE_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REQUIRES_ACCEPTANCE_COML_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.ACCEPTANCE_DATE_COMPLETE' | translate }}</td>
+          </thead>
+          <tbody>
+          <!--          <tr *ngFor="let item of ( listConstructMenuDTO | async ); let i = index">-->
+          <!--            <td style="text-align: center;">{{i + 1}}</td>-->
+          <!--            <td class="text-left">{{item && item.name ? item.name : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.firstRejectDateStr ? item.firstRejectDateStr : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.firstRejectBy ? item.firstRejectBy : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.firstRejectReason ? item.firstRejectReason : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.thirdApprovedDateStr ? item.thirdApprovedDateStr : ''}}</td>-->
+          <!--          </tr>-->
+          <cdk-tree [dataSource]="dataSourceT" [treeControl]="treeControlT" class="display-contents">
+            <!-- This is the tree node template for leaf nodes -->
+            <cdk-tree-node *cdkTreeNodeDef="let item"
+                           class="display-contents">
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <tr>
+                <td class="text-right" [style.padding-left.px]="item.level * 20">
+                  <button class="btnCus" mat-icon-button disabled></button>
+                </td>
+                <td class="text-left" [ngClass]="item.level === 1 ? 'ml-30' : ''">{{item && item.name ? item.name : ''}}</td>
+                <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+                <td class="text-center">{{item && item.rejectDateStr ? item.rejectDateStr : '' }}</td>
+                <td class="text-left">{{item && item.rejectBy ? item.rejectBy : ''}}</td>
+                <td class="text-left">{{item && item.rejectReason ? item.rejectReason : ''}}</td>
+                <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>
+                <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>
+                <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>
+                <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>
+                <!-- Ngày nghiệm thu hoàn thành -->
+                <td>{{showThirdApproveDateStrChild(item)}}</td>
+
+              </tr>
+            </cdk-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <cdk-tree-node *cdkTreeNodeDef="let item; when: hasChild"
+                           class="display-contents">
+              <tr>
+                <td [style.padding-left.px]="item.level * 20" class="text-right">
+                  <button class="btnCus" mat-icon-button cdkTreeNodeToggle
+                          (click)="item.isExpanded = !item.isExpanded; saveCacheExpandNode()"
+                          [style.visibility]="item.expandable ? 'visible' : 'hidden'">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{treeControlT.isExpanded(item) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                  </button>
+                </td>
+                <td class="text-left">{{item && item.name ? item.name : ''}}</td>
+                <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+                <td class="text-center">{{item && item.rejectDateStr ? item.rejectDateStr : '' }}</td>
+                <td class="text-left">{{item && item.rejectBy ? item.rejectBy : ''}}</td>
+                <td class="text-left">{{item && item.rejectReason ? item.rejectReason : ''}}</td>
+                <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>
+                <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>
+                <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>
+                <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>
+                <!-- Ngày nghiệm thu hoàn thành cha = max giai đoạn-->
+                <td class="text-center" *ngIf="item && item.status != 7">
+                  {{viewThirdApproveDateStr(item.listItemDetailDTO)}}
+                </td>
+                <!-- End Ngày nghiệm thu hoàn thành-->
+              </tr>
+            </cdk-tree-node>
+          </cdk-tree>
+          <!--              End tree-->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- begin: Paginator -->
+
+    </div>
+  </div>
+</div>
+<ng-template #tasks let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+<!--  <mat-dialog-content class="mat-typography">-->
+  <div class="card-body">
+    <h3 class="font-weight-bolder mb-12">{{ 'POPUP.CON_ITEM.ADD_LIST_WORK' | translate }}</h3>
+    <section>
+<!--      <span class="example-list-section row">-->
+<!--        <div class="col-md-12">-->
+<!--            <mat-checkbox aria-label="Select All"-->
+<!--                          [checked]="isChecked"-->
+<!--                          (change)="toggleAll($event)"-->
+<!--                          [color]="color">-->
+<!--              {{ 'POPUP.CON_ITEM.SELECT_ALL' | translate }}-->
+<!--            </mat-checkbox>-->
+<!--        </div>-->
+<!--      </span>-->
+<!--      <span class="example-list-section row">-->
+<!--        <div class="col-md-6" *ngFor="let subtask of ( listTasksGot | async )">-->
+<!--              <mat-checkbox (click)="$event.stopPropagation()"-->
+<!--                            (change)="toggle(subtask, $event)"-->
+<!--                            [(ngModel)]="subtask.chosen"-->
+<!--                            (ngModelChange)="updateAllComplete()"-->
+<!--              >-->
+<!--                {{subtask.constructionItemName}}-->
+<!--              </mat-checkbox>-->
+<!--        </div>-->
+            <!--        Change tree -->
+            <app-tree-checklist #treeCheckList
+                                [treeData] = "listTasksGot.value"
+            ></app-tree-checklist>
+            <!--        Change tree-->
+<!--      </span>-->
+    </section>
+    <div class="d-flex justify-content-center mt-5">
+      <button type="button" class="font-weight-bolder btn btn-primary text-center" (click)="addItem();"
+              style="padding: 8px 32px !important;">{{'ACTION.SAVE' | translate }}
+      </button>
+    </div>
+  </div>
+
+<!--  </mat-dialog-content>-->
+</ng-template>
+<ng-template #assignPopup let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+  <!--  <div class="bg-primary"><h3 class="font-weight-bolder m-3 ml-6">Cảnh báo</h3></div>-->
+  <div class="modal-header justify-content-center">
+    <h4 class="text-left">{{ 'POPUP.ASSIGN.CONFIRM' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="pb-10 pt-10" style="margin: auto;">
+    <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+            style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+    </button>
+    <button type="button" class=" font-weight-bolder btn btn-primary ml-2" (click)="clickAccept(); c('Close click') "
+            style="padding: 8px 32px !important;">
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+  </div>
+</ng-template>
+

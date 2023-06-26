@@ -1,0 +1,637 @@
+<div class="subheader py-2 py-lg-6 subheader-solabeld">
+  <div class="d-flex alabelgn-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex alabelgn-items-center flex-wrap mr-1">
+      <div class="d-flex alabelgn-items-baselabelne flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/project-supervision'" class="text-muted">{{ 'MONITORING_CON.TITLE' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted">{{ 'CON_MANAGEMENT.CON_DETAIL' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'CON_MANAGEMENT.CON_DETAIL' | translate }}</label>
+    </div>
+  </div>
+</div>
+
+<div #steplist class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <div action="#" class="form form-label-right">
+        <div class="font-weight-bolder mb-8" style="font-size: 1.275rem">{{ 'CON_MANAGEMENT.CON_DETAIL' | translate }}</div>
+        <table class = "tblView">
+          <tr>
+            <td class="tblDetail" style="font-weight: bold; width: 125px">{{ 'DETAIL_CON.PROVINCE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).province}}</td>
+            <td class="tblDetail" style="width: 125px ; font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_CODE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).constructionCode}}</td>
+            <td class="tblDetail" style=" width: 125px; font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_NAME' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).constructionName}}</td>
+            <td class="tblDetail" style="width: 125px; font-weight: bold">{{ 'DETAIL_CON.POSITION_TYPE' | translate }} :</td>
+            <td class="tblDetail">{{(station |async).positionTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.STATION_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{  (station | async).constructionTypeName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).columnTypeName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_HEIGHT' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).pillarHeight}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_LONG' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).Long }}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_LAT' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).Lat}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DISTRICT' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).Ban}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.VILLAGE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).village}}</td>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.CONSTRUCTION_TYPE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).constructionTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'CON_LIST.ITEM_TOBE_CON' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).listConstructionItemName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.NETWORK' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).network}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.VENDOR' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).vendor}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.BAND' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).band}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.ANTEN_HEIGHT' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).antennaHeight}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.AZIMUTH' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).azimuth}}</td>
+            <td class="tblDetail"  style="width: 100px ; font-weight: bold">{{ 'DETAIL_CON.TILT' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).tilt}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.SECTOR' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).sector}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.TRX_MODE_4G' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).trx4g}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DECISION_DEPLOY' | translate }} :</td>
+            <td class="tblDetail" >{{ (station | async).decisionApplied}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.STATUS' | translate }}:</td>
+            <td class="tblDetail" >{{  (station | async).statusName}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DELIVERY_DATE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).startDateStr}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COMPLETE_DATE' | translate }}:</td>
+            <td class="tblDetail" >{{(station | async).completeDateStr}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.CABLE_ROUTE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).cableLine}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.DISTANCE_CABLE' | translate }}:</td>
+            <td class="tblDetail" >{{ (station | async).cableDistance}}</td>
+            <td class="tblDetail"  style="font-weight: bold">{{ 'DETAIL_CON.COLUMN_NUMBER' | translate }}:</td>
+            <td class="tblDetail" >{{ (station |async).concretePillarQuantity}}</td>
+          </tr>
+          <tr>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.START_POINT' | translate }}:</td>
+            <td class="tblDetail">{{  (station | async).startPoint}}</td>
+            <td class="tblDetail" style="font-weight: bold">{{ 'DETAIL_CON.END_POINT' | translate }}:</td>
+            <td class="tblDetail">{{ (station | async).endPoint}}</td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+            <td class="tblDetail"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">
+          {{ 'LIST_CATEGORY_WORK.TITLE' | translate }}
+        </h3>
+      </div>
+    </div>
+    <ng-container *ngIf="isLoading$ == true">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+    <div class="card-body pt-0">
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="remove-border table table-head-custom table-bordered table-vertical-center overflow-hidden">
+          <thead class="header-center">
+          <td></td>
+          <td>{{ 'LIST_CATEGORY_WORK.CON_ITEM_NAME' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.STATUS' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_BY' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REJECT_REASON' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.CON_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.COMPLETE_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.ACCEPTANCE_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.REQUIRES_ACCEPTANCE_COML_DATE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.ACCEPTANCE_DATE_COMPLETE' | translate }}</td>
+          <td>{{ 'LIST_CATEGORY_WORK.ACTION' | translate }}</td>
+          </thead>
+          <tbody>
+          <!--          <tr *ngFor="let item of ( listConstructMenuDTO | async ); let i = index">-->
+          <!--            <td style="text-align: center;">{{i + 1}}</td>-->
+          <!--            <td class="text-left">{{item && item.name ? item.name : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.firstRejectDateStr ? item.firstRejectDateStr : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.firstRejectBy ? item.firstRejectBy : ''}}</td>-->
+          <!--            <td class="text-left">{{item && item.firstRejectReason ? item.firstRejectReason : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>-->
+          <!--            <td class="text-center">{{item && item.thirdApprovedDateStr ? item.thirdApprovedDateStr : ''}}</td>-->
+          <!--            <td style="padding: 0px">-->
+          <!--              <i class="far fa-eye view-icon" (click)="viewImage(item.constructionDetailId)"-->
+          <!--                 title="{{ 'MONITORING_CON.TIT.VIEW' | translate }}">-->
+          <!--              </i>-->
+          <!--              <span style="color: #0171bb"> | </span>-->
+          <!--              <i class="fas fa-check-square approve-icon" [ngClass]="item.status != 3 ? 'disabled' : ''"-->
+          <!--                 (click)="showApproveItem(item.constructionDetailId)" title="{{ 'MONITORING_CON.TIT.APPROVE' | translate }}">-->
+          <!--              </i>-->
+          <!--              <span style="color: #0171bb"> | </span>-->
+          <!--              <i class="fas fa-minus-square refuse-icon" [ngClass]="item.status != 3 ? 'disabled' : ''"-->
+          <!--                 (click)="showReasonRefusalAcceptance(item.constructionDetailId)"-->
+          <!--                 title="{{ 'MONITORING_CON.TIT.REFUSE' | translate }}">-->
+          <!--              </i>-->
+          <!--              <span style="color: #0171bb"> | </span>-->
+          <!--              <i class="far fa-calendar-alt calendar-icon" (click)="openConstructionDate(item.constructionDetailId)"-->
+          <!--                 title="{{ 'MONITORING_CON.TIT.CALENDAR' | translate }}">-->
+          <!--              </i>-->
+          <!--          </tr>-->
+          <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl" class="display-contents remore-border">
+            <!-- This is the tree node template for leaf nodes -->
+            <cdk-tree-node *cdkTreeNodeDef="let item"
+                           [style.display]="shouldRender(item) ? 'contents' : 'none'"
+                           class="display-contents">
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <tr>
+                <td class="text-right" [style.padding-left.px]="item.level * 20">
+                  <button class="btnCus" mat-icon-button disabled></button>
+                </td>
+                <td class="text-left" [ngClass]="item.level === 1 ? 'ml-30' : ''">{{item && item.name ? item.name : ''}}</td>
+                <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+                <td class="text-center">{{item && item.rejectDateStr ? item.rejectDateStr : '' }}</td>
+                <td class="text-left">{{item && item.rejectBy ? item.rejectBy : ''}}</td>
+                <td class="text-left">{{item && item.rejectReason ? item.rejectReason : ''}}</td>
+                <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>
+                <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>
+                <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>
+                <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>
+                <!-- Ng�y nghi?m thu ho�n th�nh -->
+<!--                <td class="text-center" *ngIf="showButtonApproveDate(item)">-->
+<!--                  <button type="submit" class="btn font-weight-bolder"-->
+<!--                          style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin: 1.5rem auto"-->
+<!--                          (click)="updateThirdApprovedDateStr(item.constructionDetailId)">-->
+<!--                    {{ 'LIST_CATEGORY_WORK.APPROVE_DATE' | translate }}-->
+<!--                  </button>-->
+<!--                </td>-->
+                <td class="text-center">{{showThirdApproveDateStrChild(item)}}</td>
+                <!-- Action -->
+                <td style="padding:0px;">
+                  <!-- <i class="far fa-eye view-icon-green" [ngClass]="!showIconGreen(item) ? 'disabled' : ''"
+                     (click)="viewImageApproved(item.constructionDetailId, item.name)"
+                     title="{{ 'IMAGE.TIT.VIEW_IMAGE_APPROVE' | translate }}">
+                  </i>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span> -->
+                  <span title="{{ 'MONITORING_CON.TIT.VIEW' | translate }}">
+                    <i class="far fa-eye view-icon"
+                       (click)="HandleGetListImage(item)">
+                    </i>
+                  </span>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span>
+                  <!-- <i [ngClass]="!showIconRed(item) ? 'disabled' : ''" class="far fa-eye view-icon-red"
+                     (click)="viewImageRefused(item.constructionDetailId, item.name)"
+                     title="{{ 'IMAGE.TIT.VIEW_IMAGE_REFUSE' | translate }}">
+                  </i>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span> -->
+                  <span title="{{ item.level === 0 ? ('MONITORING_CON.TIT.APPROVE' | translate) : ('MONITORING_CON.TIT.APPROVE_STAGE' | translate) }}">
+                    <i class="fas fa-check-square approve-icon" [ngClass]="item.status != 3 ? 'disabled' : ''"
+                       (click)="showApproveItem(item)"></i>
+                  </span>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span>
+                  <span title="{{ item.level === 0 ? ('MONITORING_CON.TIT.REFUSE'| translate) : ('MONITORING_CON.TIT.REFUSE_STAGE'| translate) }}">
+                    <i class="fas fa-minus-square refuse-icon" [ngClass]="item.status != 3 ? 'disabled' : ''"
+                       (click)="showReasonRefusalAcceptance(item.constructionDetailId)">
+                    </i>
+                  </span>
+                  <span style="color: #0171bb"> | </span>
+                  <span title="{{ 'MONITORING_CON.TIT.CALENDAR' | translate }}">
+                    <i class="far fa-calendar-alt calendar-icon" (click)="openConstructionDate(item.constructionDetailId)">
+                    </i>
+                  </span>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span>
+                  <span title="{{ 'MONITORING_CON.TIT.HISTORY' | translate }}">
+                    <i class="fas fa-history approve-icon"
+                       (click)="viewHistoryAction(item.constructionDetailId)">
+                    </i>
+                  </span>
+                </td>
+                <!--                    <td style="padding:0px" *ngIf="item && item.level !== 0"></td>-->
+              </tr>
+            </cdk-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <cdk-tree-node *cdkTreeNodeDef="let item; when: hasChild"
+                           [style.display]="shouldRender(item) ? 'contents' : 'none'"
+                           class="display-contents">
+              <tr>
+                <td [style.padding-left.px]="item.level * 20" class="text-right">
+                  <button class="btnCus" mat-icon-button cdkTreeNodeToggle
+                          (click)="item.isExpanded = !item.isExpanded; saveCacheExpandNode()"
+                          [style.visibility]="item.expandable ? 'visible' : 'hidden'">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{treeControl.isExpanded(item) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                  </button>
+                </td>
+                <td class="text-left">{{item && item.name ? item.name : ''}}</td>
+                <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+                <td class="text-center">{{item && item.rejectDateStr ? item.rejectDateStr : '' }}</td>
+                <td class="text-left">{{item && item.rejectBy ? item.rejectBy : ''}}</td>
+                <td class="text-left">{{item && item.rejectReason ? item.rejectReason : ''}}</td>
+                <td class="text-center">{{item && item.startDateStr ? item.startDateStr : ''}}</td>
+                <td class="text-center">{{item && item.acceptanceDateStr ? item.acceptanceDateStr : ''}}</td>
+                <td class="text-center">{{item && item.firstApprovedDateStr ? item.firstApprovedDateStr : ''}}</td>
+                <td class="text-center">{{item && item.secondApprovedDateStr ? item.secondApprovedDateStr : ''}}</td>
+                <!-- Ng�y nghi?m thu ho�n th�nh cha = max giai do?n-->
+                <td class="text-center" *ngIf="item && item.status != 7">
+                  {{viewThirdApproveDateStr(item.listItemDetailDTO)}}
+                </td>
+                <!-- End Ng�y nghi?m thu ho�n th�nh-->
+                <td style="padding:0px">
+                  <!--                      <i class="far fa-eye view-icon" (click)="viewImage(item.constructionDetailId)"-->
+                  <!--                         title="{{ 'MONITORING_CON.TIT.VIEW' | translate }}">-->
+                  <!--                      </i>-->
+                  <!--                      <span style="color: #0171bb; margin: 0 5px;">|</span>-->
+                  <!-- <span title="{{ 'MONITORING_CON.TIT.APPROVE' | translate }}">
+                    <i class="fas fa-check-square approve-icon" [ngClass]="'disabled'"
+                       (click)="showApproveItem(item)"></i>
+                  </span>
+                  <span style="color: #0171bb; margin: 0 5px;">|</span>
+                  <span title="{{ 'MONITORING_CON.TIT.REFUSE' | translate }}">
+                    <i class="fas fa-minus-square refuse-icon" [ngClass]="'disabled'"
+                       (click)="showReasonRefusalAcceptance(item.constructionDetailId)">
+                    </i>
+                  </span>
+                  <span style="color: #0171bb"> | </span> -->
+                  <span title="{{ 'MONITORING_CON.TIT.CALENDAR' | translate }}">
+                    <i class="far fa-calendar-alt calendar-icon" (click)="openConstructionDate(item.constructionDetailId)">
+                    </i>
+                  </span>
+                  <!-- <span style="color: #0171bb; margin: 0 5px;">|</span>
+                  <span title="{{ 'MONITORING_CON.TIT.HISTORY' | translate }}">
+                    <i class="fas fa-history approve-icon"
+                       (click)="viewHistoryAction(item.constructionDetailId)">
+                    </i>
+                  </span> -->
+                </td>
+              </tr>
+            </cdk-tree-node>
+          </cdk-tree>
+          <!--              End tree-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #refusal let-c="close">
+    <button class="closePopupImage" (click)="c('Close click')">X</button>
+    <div class="vh-75">
+      <div class="font-weight-bolder m-3 mb-12" style="font-size: 1.275rem">{{ 'POPUP.REJECT.TITLE' | translate }}</div>
+      <form action="#" class="form form-label-right" [formGroup]="refuseForm">
+        <label class="form-label ml-12">{{ 'POPUP.REJECT.REASON' | translate }} <span class="red-color">*</span></label>
+        <div class="mt-3 mx-12">
+          <textarea placeholder="{{ 'POPUP.REJECT.INSERT_RESON' | translate }}" name="{{ 'POPUP.REJECT.REASON' | translate }}" formControlName="inputRefuse"
+                    style="width:100% ; height: 100px; resize:none ; border: 1px solid #cccccc; padding: 7px;  border-radius: 5px">
+      </textarea>
+        </div>
+
+        <div class="mt-3 mx-12"
+             *ngIf="(refuseForm.get('inputRefuse').invalid &&refuseForm.get('inputRefuse').dirty )|| refuseForm.get('inputRefuse').touched">
+          <div *ngIf="refuseForm.get('inputRefuse').errors" style="color: red;">
+            {{ 'POPUP.REJECT.VALIDATE_NULL' | translate }}
+          </div>
+        </div>
+        <div class="d-flex alabelgn-items-center">
+          <button type="submit" class="btn font-weight-bolder"
+                  style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin: 1.5rem auto"
+                  (click)="clickAcceptRefusal()">
+            {{ 'POPUP.REJECT.REJECT' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #initPopup let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+    <div class="modal-header justify-content-center">
+      <h4 class="text-left">{{ 'POPUP.REJECT.CONFIRM' | translate }} </h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="pb-10 pt-10" style="margin: auto;">
+      <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+              style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+      </button>
+      <button type="button" class=" font-weight-bolder btn btn-primary ml-2"
+              (click)="rejectItem(); c('Close click') ; c('Close click')" style="padding: 8px 32px !important;">
+        {{ 'BUTTON.YES' | translate }}
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #approve let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+    <div class="modal-header justify-content-center">
+      <h4 class="text-left">{{ 'POPUP.APPROVE.CONFIRM' | translate }} </h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="pb-10 pt-10" style="margin: auto;">
+      <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+              style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+      </button>
+      <button type="button" class=" font-weight-bolder btn btn-primary ml-2" (click)="approveItem(); c('Close click') "
+              style="padding: 8px 32px !important;">
+        {{ 'BUTTON.YES' | translate }}
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template let-c="close" #importConstructionDate>
+    <div class="vh-75">
+      <div class="font-weight-bolder m-6 mb-12" style="font-size: 1.275rem">{{ 'MONITORING_CON.TIT.CALENDAR' | translate }}
+      </div>
+      <form [formGroup]="dateInputForm">
+        <div class="input-group w-75 m-auto">
+          <input
+                  type="text"
+                  name="iValidConstructionDetailDate"
+                  id="iValidConstructionDetailDate"
+                  class="form-control"
+                  autocomplete="off"
+                  placeholder="dd/mm/yyyy"
+                  ngbDatepicker
+                  #fromDate="ngbDatepicker"
+                  formControlName="iValidConstructionDetailDate"
+                  [(ngModel)]="query.iValidConstructionDetailDate"
+                  [class.is-invalid]="isControlInvalid('iValidConstructionDetailDate')"
+                  [maxlength]="20"
+          />
+          <div class="input-group-append" (click)="resetError('iValidConstructionDetailDate');fromDate.toggle();">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+          </div>
+        </div>
+        <div class="m-auto p-6" *ngIf="startDateErrorMsg && startDateErrorMsg.length > 0">
+          <div style="color: red;">
+            {{startDateErrorMsg | translate}}
+          </div>
+        </div>
+
+
+        <!-- </div> -->
+        <div class="d-flex align-items-center">
+          <button type="submit" class="btn font-weight-bolder"
+                  style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin: 3.5rem auto"
+                  (click)="saveContructionDate()">
+            {{ 'BUTTON.SAVE' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template let-c="close" #Image>
+    <button class="closePopupImage" (click)="c('Close click') ; closeModal()">X</button>
+    <div class="vh-75">
+      <div class="imageInfo">
+        <div class="imageInfo_categoryName">
+          <div class="imageInfo_categoryName_label">{{ 'IMAGE.LABEL.CATEGORY_NAME' | translate }}</div>
+          <div class="imageInfo_categoryName_content">{{name}}</div>
+        </div>
+      </div>
+      <mat-tab-group>
+        <mat-tab label="{{'IMAGE.TITLE.LIST_ACTIVE_IMAGE'|translate}}">
+          <ngb-carousel *ngIf="imageSrc.value.length > 0" #carousel [interval]="0">
+            <ng-template ngbSlide *ngFor="let item of ( imageSrc | async )">
+              <div class="picsum-img-wrapper" style="height: 750px">
+                  <div class="btn-image">
+                    <button type="submit" class="btn font-weight-bolder" 
+                    style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin-right: 15px;" (click)="showInitPopupApproveImage(item.imageId)">                         
+                      {{ 'IMAGE.BUTTON.APPROVE' | translate }}
+                    </button>
+                    <button type="submit" class="btn font-weight-bolder" 
+                    style="background: red; color: #fff; height: 38px; padding: 7px 32px;" (click)="showReasonRefuseImage(item.imageId)">
+                      {{ 'IMAGE.BUTTON.REFUSE' | translate }}
+                    </button>
+                  </div>
+                <img [src]="CONSTANT_HTTP + item.fileContent" style="width: 100% ; height: 90% ; object-fit: contain">
+              </div>
+            </ng-template>
+          </ngb-carousel>
+
+          <div class="popupImageNull" *ngIf="imageSrc.value.length == 0">
+            <div class="labelImageNull">{{'IMAGE.TITLE.LIST_IMAGE_NULL' | translate}}</div>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="{{'IMAGE.TITLE.LIST_APPROVE_IMAGE'|translate}}">
+          <ngb-carousel *ngIf="imageApproveSrc.value.length > 0" #carousel 	[interval]="0">
+            <ng-template ngbSlide *ngFor="let item of ( imageApproveSrc | async )">
+              <div class="picsum-img-wrapper" style="height: 790px">
+                <div class="btn-image">
+                  <button type="submit" class="btn font-weight-bolder" 
+                  style="background: red; color: #fff; height: 38px; padding: 7px 32px;" (click)="showReasonRefuseImage(item.imageId)">
+                    {{ 'IMAGE.BUTTON.REFUSE' | translate }}
+                  </button>
+                </div>
+                <img [src]="CONSTANT_HTTP + item.fileContent" style="width: 100% ; height: 90% ; object-fit: contain">
+              </div>
+            </ng-template>
+          </ngb-carousel>
+
+          <div class="popupImageNull" *ngIf="imageApproveSrc.value.length == 0">
+            <div class="labelImageNull">{{'IMAGE.TITLE.LIST_IMAGE_NULL' | translate}}</div>
+          </div>
+        </mat-tab>
+
+
+        <mat-tab label="{{'IMAGE.TITLE.LIST_REFUSE_IMAGE'|translate}}">
+          <ngb-carousel *ngIf="imageRefuseSrc.value.length > 0" #carousel 	[interval]="0">
+            <ng-template ngbSlide *ngFor="let item of ( imageRefuseSrc | async )">
+              <div class="picsum-img-wrapper" style="height: 790px">
+                <div class="rejectReasonInfo">
+                  <div class="rejectReasonInfo-label">{{'IMAGE.LABEL.REFUSE_REASON'|translate}}</div>
+                  <div class="rejectReasonInfo-content">{{item.rejectReason + '.'}}</div>
+                  <div class="rejectReasonInfo-desciption">{{item.description}}</div>
+                </div>
+                <img [src]="CONSTANT_HTTP + item.fileContent" style="width: 100% ; height: 90% ; object-fit: contain">
+              </div>
+            </ng-template>
+          </ngb-carousel>
+
+          <div class="popupImageNull" *ngIf="imageRefuseSrc.value.length == 0">
+            <div class="labelImageNull">{{'IMAGE.TITLE.LIST_IMAGE_NULL' | translate}}</div>
+          </div>
+
+        </mat-tab>
+      </mat-tab-group>
+      
+    </div>
+  </ng-template>
+
+  <!--      <ng-template let-c="close" #acceptanceDate>-->
+<!--        <div class="vh-75">-->
+<!--          <div class="font-weight-bolder m-3 mb-12" style="font-size: 1.275rem">{{ 'MONITORING_CON.TITLE' | translate }}-->
+<!--            / {{ 'MONITORING_CON.TIT.ACCEPTANCE_CALENDAR' | translate }}-->
+<!--          </div>-->
+<!--          <div align="center">-->
+<!--            <mat-form-field>-->
+<!--              <input matInput [ngxMatDatetimePicker]="picker"-->
+<!--                     [(ngModel)]="acceptanceDateUpdate.thirdApprovedDate"-->
+<!--                     placeholder="{{ 'LIST_CATEGORY_WORK.ACCEPTANCE_DATE_COMPLETE' | translate }}"-->
+<!--              >-->
+<!--              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--              <ngx-mat-datetime-picker [showSeconds]="true" #picker></ngx-mat-datetime-picker>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            <button type="submit" class="btn font-weight-bolder"-->
+<!--                    style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin: 3.5rem auto"-->
+<!--                    (click)="updateAcceptanceDate(acceptanceDateUpdate); c('Close click')">-->
+<!--              {{ 'BUTTON.SAVE' | translate }}-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+
+<!--      L?ch s? h�nh d?ng-->
+<ng-template let-c="close" #viewActionHis>
+  <div class="card-title text-center">
+    <h3 class="card-label vertical-align">
+      {{ 'ACTION_HISTORY.TITLE' | translate }}
+    </h3>
+  </div>
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="remore-border table table-head-custom table-bordered table-vertical-center overflow-hidden">
+        <thead class="header-center">
+        <td>{{ 'ACTION_HISTORY.STT' | translate }}</td>
+        <td>{{ 'ACTION_HISTORY.ACTION_LOG_NAME' | translate }}</td>
+        <td>{{ 'ACTION_HISTORY.ACTION_DATE' | translate }}</td>
+        <td>{{ 'ACTION_HISTORY.ACTION_BY' | translate }}</td>
+<!--              <td>{{ 'ACTION_HISTORY.DESCRIPTION' | translate }}</td>-->
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let item of ( lstAction | async ); let i = index">
+          <td class="text-center">{{i + 1}}</td>
+          <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+          <td class="text-left">{{item && item.createDatetimeStr ? item.createDatetimeStr : ''}}</td>
+          <td class="text-left">{{item && item.createBy ? item.createBy : ''}}</td>
+<!--                <td class="text-center">{{item && item.description ? item.description : ''}}</td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
+<ng-template #reasonRefuseImage let-c="close">
+  <button class="closePopupImage" (click)="c('Close click')">X</button>
+  <div class="vh-75">
+    <div class="font-weight-bolder" style="font-size: 1.275rem; padding: 15px 0 0 15px; margin-bottom: 25px">{{
+      'IMAGE.TITLE.REASON_REFUSE' |
+      translate }}
+    </div>
+    <form action="#" class="form form-label-right" [formGroup]="refuseImageForm">
+      <div class="listReasonRefuse">
+        <label class="reason-label">{{ 'POPUP.REJECT.REASON' | translate }} <span class="red-color">*</span>
+        </label>
+
+        <div class="listItemRefuse">
+          <select class="form-control" autocomplete="off" formControlName="valueRefuseImage"
+            (change)='onChangeValueRefuseImage()'>
+            <option class="" value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+            <option *ngFor="let item of ( listReasonRefuseImage | async ) " [ngValue]="item.value">
+              {{item.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="inputRefuse" *ngIf="valueRefuseImage.value === '4'">
+        <textarea class="refuse-text" placeholder="{{ 'POPUP.REJECT.INSERT_RESON' | translate }}"
+          name="{{ 'POPUP.REJECT.REASON' | translate }}" formControlName="inputRefuseImage">
+           </textarea>
+
+        <!-- <div *ngIf="errorValueRefuseImage.value === 2">
+          <div style="color: red;">
+            {{ 'IMAGE.ERROR.REASON_NULL' | translate }}
+          </div>
+        </div> -->
+      </div>
+
+      <div class="errorReasonNull" *ngIf="errorValueRefuseImage.value === 1 || errorValueRefuseImage.value === 2">
+        <div style="color: red;">
+          {{ 'IMAGE.ERROR.REASON_NULL' | translate }}
+        </div>
+      </div>
+
+
+
+      <div class="d-flex alabelgn-items-center">
+        <button type="submit" class="btn font-weight-bolder"
+          style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin: 1.5rem auto"
+          (click)="clickAcceptRefuseImage()">
+          {{ 'POPUP.REJECT.REJECT' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #initPopupImage let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+  <div class="modal-header justify-content-center">
+    <h4 *ngIf="actionImage.value === 'REFUSE'" class="text-left">{{ 'IMAGE.TITLE.REFUSE' | translate }} </h4>
+    <h4 *ngIf="actionImage.value === 'APPROVE'" class="text-left">{{ 'IMAGE.TITLE.APPROVE' | translate }} </h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="pb-10 pt-10" style="margin: auto;">
+    <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click');"
+      style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+    </button>
+    <button *ngIf="actionImage.value === 'REFUSE'" type="button" class=" font-weight-bolder btn btn-primary ml-2"
+      (click)="rejectItemImage(); c('Close click') ; " style="padding: 8px 32px !important;">
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+    <button *ngIf="actionImage.value === 'APPROVE'" type="button" class=" font-weight-bolder btn btn-primary ml-2"
+      (click)="clickAcceptApproveImage(); c('Close click') ;" style="padding: 8px 32px !important;">
+      {{ 'IMAGE.BUTTON.YES_APPROVE' | translate }}
+    </button>
+  </div>
+</ng-template>
+</div>

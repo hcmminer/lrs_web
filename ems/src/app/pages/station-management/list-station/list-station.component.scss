@@ -1,0 +1,35 @@
+img:hover{
+  cursor:pointer;
+}
+
+img{
+  margin-right: 10px;
+}
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.view-icon{
+  font-size: 16px;
+  color: #0171bb;
+  cursor: pointer;
+ }
+ .edit-icon{
+  font-size: 16px;
+  color: #0171bb;
+  cursor: pointer;
+
+ }
+.delete-icon{
+  font-size: 16px;
+  color: #0171bb;
+  cursor: pointer;
+}
+
+@media (min-width: 768px){
+  .col-md-1 {
+    flex: 0 0 8.33333333%;
+    max-width: 9.333333%;
+  }
+}

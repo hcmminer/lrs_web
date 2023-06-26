@@ -1,0 +1,107 @@
+<!-- <div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/export-reports'" class="text-muted">Quản lý công trình</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">Quản lý công trình</label>
+    </div>
+  </div>
+</div>
+<div #formSearch class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">Tìm kiếm công trình</div>
+        <div class="row form-group gx-6">
+          <label class="col-md-1 mb-12 form-label col-form-label" for="provinceSearch">Tỉnh</label>
+          <div class="col-md-2">
+            <select class="form-control" id="provinceSearch" autocomplete="off" formControlName="provinceSearch">
+              <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( stationManagementService.listProvince | async ) "
+                       [ngValue]="item.proCode">
+                {{item.proCode}}-{{item.proName}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+
+          <label class="col-md-1 form-label col-form-label" for="stationCode">Mã trạm</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="stationCode" autocomplete="off" formControlName="stationCode" />
+          </div>
+          <div class="col-1"></div>
+
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">Tên trạm</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="stationName" autocomplete="off" formControlName="stationName" />
+          </div>
+          <div class="col-1"></div>
+
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">Loại công trình</label>
+          <div class="col-md-2">
+            <select
+                    class="form-control"
+                    id="infrastructureType"
+                    autocomplete="off"
+                    formControlName="infrastructureType"
+            >
+              <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( stationManagementService.listInfrastructureType | async ) "
+                       [ngValue]="item.constructionTypeId">
+                {{item.constructionTypeName}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">Trạng thái</label>
+          <div class="col-md-2">
+            <select class="form-control" id="status" autocomplete="off" formControlName="status">
+              <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option  *ngFor="let item of ( stationManagementService.listConstructionStatus | async ) "
+                       [ngValue]="item.value">
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-md-12 text-center">
+            <div
+                    (click)="eSearch()"
+                    class="btn font-weight-bolder mr-3"
+                    style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px"
+            >
+              {{'ACTION.SEARCH' | translate}}
+            </div>
+            <div
+                    (click)="eCreate()"
+                    class="btn font-weight-bolder "
+                    style="background: #5fb871; color: #fff; height: 38px; padding: 7px 32px"
+            >
+              {{'ACTION.ADD' | translate}}
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+ 
+</div> -->
+
+<p>
+  Export Reports Corp worked !
+</p>

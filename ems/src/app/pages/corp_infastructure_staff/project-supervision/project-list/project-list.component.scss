@@ -1,0 +1,64 @@
+img:hover{
+    cursor: pointer;
+}
+
+.disable{
+    text-align: center;
+    border: none;
+}
+.action-icon{
+    display: flex;
+    justify-content: space-around;
+}
+
+img{
+    opacity: 1;
+    cursor:pointer;
+}
+
+  .inputDate{
+    margin-left: 60px;
+    border: 1px solid #D2D2D2;
+    height: 35px;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .view-icon{
+    font-size: 16px;
+    color: #0171BB;
+    cursor: pointer;
+   }
+  
+  ::ng-deep.position-absolute{
+    position: absolute;
+    right: 105px;
+    top: 70px;
+    opacity: 0.6;
+    z-index: 10;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+
+::ng-deep.mat-datepicker-toggle .mat-icon-button .mat-button-wrapper .mat-datepicker-toggle-default-icon{
+    width: 30px !important;
+    height: 30px !important;   
+    color: black;
+}
+
+::ng-deep.cdk-overlay-container {
+    z-index:2000;
+  }
+  ::ng-deep.cdk-overlay-pane{
+    bottom: 5px !important;
+    left: 855px !important;
+    top: 295px!important;
+  }
+
+@media (min-width: 768px){
+  .col-md-1 {
+    flex: 0 0 8.33333333%;
+    max-width: 9.333333%;
+  }
+}

@@ -1,0 +1,140 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/project-supervision'" class="text-muted">{{ 'MONITORING_CON.TITLE' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted">{{ 'MONITORING_CON.SEARCH_CON' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'MONITORING_CON.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+
+<div #stepList class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">{{ 'MONITORING_CON.TITLE' | translate }}</div>
+        <div class="row form-group gx-6">
+          <label class="col-md-1 mb-12 form-label col-form-label" for="provinceSearch">{{ 'CON_LIST.PROVINCE' | translate }}</label>
+          <div class="col-md-2">
+            <select class="form-control" id="provinceSearch" autocomplete="off" formControlName="provinceSearch" disabled>
+              <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option *ngFor="let item of ( projectSupervisionService.listProvince | async ) " [ngValue]="item.proCode">
+                {{item.proCode}}-{{item.proName}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+
+          <label class="col-md-1 form-label col-form-label" for="stationCode">{{ 'CON_LIST.CONSTRUCTION_CODE' | translate }}</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="stationCode" autocomplete="off" formControlName="stationCode"/>
+          </div>
+          <div class="col-1"></div>
+
+          <label class="col-md-1 form-label col-form-label" for="provinceSearch">{{ 'CON_LIST.STATUS_CON' | translate }}</label>
+          <div class="col-md-2">
+            <select class="form-control" id="status" autocomplete="off" formControlName="status">
+              <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+              <option *ngFor="let item of ( projectSupervisionService.listConstructionStatus | async ) "
+                      [ngValue]="item.value">
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-1"></div>
+
+
+        </div>
+
+        <div class="form-group row pb-0">
+          <div (click)="eSearch()" class="btn font-weight-bolder"
+               style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px; margin:auto">
+            {{'ACTION.SEARCH' | translate}}
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">
+          {{ 'CON_LIST.TITLE' | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="card-body pt-0">
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-bordered table-head-custom table-vertical-center overflow-hidden">
+          <thead>
+          <td>{{ 'CON_LIST.STT' | translate }}</td>
+          <td>{{ 'CON_LIST.PROVINCE' | translate }}</td>
+          <td>{{ 'CON_LIST.CONSTRUCTION_CODE' | translate }}</td>
+          <td>{{ 'CON_LIST.CONSTRUCTION_NAME' | translate }}</td>
+          <td>{{ 'CON_LIST.STATION_TYPE' | translate }}</td>
+          <td>{{ 'CON_LIST.COLUMN_TYPE' | translate }}</td>
+          <td>{{ 'CON_LIST.CON_TYPE' | translate }}</td>
+          <td>{{ 'CON_LIST.ITEM_TOBE_CON' | translate }}</td>
+          <td>{{ 'CON_LIST.HAND_OVER_DATE' | translate }}</td>
+          <td>{{ 'CON_LIST.STATUS_CON' | translate }}</td>
+          <td>{{ 'CON_LIST.CATE_NEED_APPRPVAL' | translate }}</td>
+          <td>{{ 'CON_LIST.ACTION' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rowData of (stations | async); let i = index">
+            <td>{{(paginator.page - 1) * paginator.pageSize + i + 1}}</td>
+            <td class="text-left">{{rowData && rowData.province ? rowData.province : ''}}</td>
+            <td class="text-left">{{rowData && rowData.constructionCode ? rowData.constructionCode : ''}}</td>
+            <td class="text-left">{{rowData && rowData.constructionName ? rowData.constructionName : ''}}</td>
+            <td class="text-left">{{rowData && rowData.stationTypeName ? rowData.stationTypeName : ''}}</td>
+            <td class="text-left">{{rowData && rowData.columnTypeName ? rowData.columnTypeName : ''}}</td>
+            <td class="text-left">{{rowData && rowData.constructionTypeName ? rowData.constructionTypeName : ''}}</td>
+            <td class="text-left">{{rowData && rowData.listConstructionItemName ? rowData.listConstructionItemName : ''}}</td>
+            <td>{{rowData && rowData.startDateStr ? rowData.startDateStr : ''}}</td>
+            <td class="text-left">{{rowData && rowData.statusName ? rowData.statusName : ''}}</td>
+            <td class="text-right">{{rowData && rowData.itemCount ? rowData && rowData.itemCount : '0' }}</td>
+            <td>
+              <a [routerLink]="['/project-supervision/project-detail', rowData.constructionId]">
+                <i class="far fa-eye view-icon"
+                   title="{{ 'BUTTON.DETAIL' | translate }}"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-end align-items-center ">
+        <div class="mr-auto">{{ 'PAGINATOR.RECORD' | translate }} {{firstIndex + 1 }}-{{lastIndex}} {{ 'PAGINATOR.OF' | translate }} {{ paginator.total }} {{ 'PAGINATOR.RECORD' | translate }}</div>
+        <div class="mr-5">
+          <span>{{ 'PAGINATOR.DISPLAY' | translate }}
+            <select (change)="changeNumberOfRecord($event)">
+              <option *ngFor="let record of records" [ngValue]="record">{{record.value}}</option>
+            </select>
+            {{ 'PAGINATOR.RECORD' | translate }}/{{ 'PAGINATOR.PAGE' | translate }}
+          </span>
+        </div>
+        <ng-pagination [collectionSize]="paginator.total" [rotate]="true" [boundaryLinks]="true"
+                       [pageSize]="paginator.pageSize" [(page)]="paginator.page"
+                       (pageChange)="pageChange($event)"></ng-pagination>
+      </div>
+    </div>
+  </div>
+</div>

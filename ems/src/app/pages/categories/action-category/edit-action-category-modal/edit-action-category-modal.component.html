@@ -1,0 +1,123 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="actionCategoriesModel">
+        <ng-container *ngIf="actionCategoriesModel.categoryId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.ACTION_CATEGORY.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!actionCategoriesModel.categoryId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.ACTION_CATEGORY.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="actionCategoriesModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="actionCategoryCode">{{ 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionCategoryCode"
+                id="actionCategoryCode"
+                [placeholder]="'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('actionCategoryCode')"
+                [class.is-valid]="isControlValid('actionCategoryCode')"
+                formControlName="actionCategoryCode"
+                [(ngModel)]="actionCategoriesModel.categoryCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'actionCategoryCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'actionCategoryCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="actionCategoryName">{{ 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionCategoryName"
+                id="actionCategoryName"
+                [placeholder]="'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('actionCategoryName')"
+                [class.is-valid]="isControlValid('actionCategoryName')"
+                formControlName="actionCategoryName"
+                [(ngModel)]="actionCategoriesModel.categoryName"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'actionCategoryName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'actionCategoryName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ACTION_CATEGORY.TABLE_TITLE.ACTION_CATEGORY_NAME' | translate, max: 100} }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <!-- <div class="col-lg-6">
+            <label>{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+            <span class="switch switch-icon">
+            <label>
+                <input
+                    type="checkbox"
+                    name="status"
+                    (change)="changeStatus(actionCategoriesModel.status)"
+                    [checked]="actionCategoriesModel.status == 'O'"
+                />
+              <span></span>
+            </label>
+            </span>
+          </div> -->
+          <div class="col-lg-6">
+            <label class="form-label">{{ 'COMMON.STATUS.TITLE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="status"
+                    id="status"
+                    formControlName="status"
+                    [(ngModel)]="actionCategoriesModel.status"
+            >
+              <option *ngFor="let status of listStatus"  [value]="status.CODE">{{ 'COMMON.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="actionCategoriesModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

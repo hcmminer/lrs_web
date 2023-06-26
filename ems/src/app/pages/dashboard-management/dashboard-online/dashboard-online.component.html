@@ -1,0 +1,419 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/dashboard-management"> {{ 'ALARM_DASHBOARD.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/dashboard-management/dashboard-group"> {{ 'ALARM_DASHBOARD.ALARM_DASHBOARD.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<div class="row gutter-b">
+  <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label
+          class="form-label title-screen text-uppercase">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xxxl-1 col-xxl-3 col-xl-4 col-lg-5 col-sm-6 ">
+    <div class="card card-custom gutter-b">
+      <div class="card-body">
+        <!-- begin: Filtration form -->
+        <form action="#" id="formSearch" class="form form-label-right" [formGroup]="searchForm">
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="system">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM' | translate }}</label>
+            <div class="col-md-8">
+              <select class="form-control"
+                      name="system"
+                      id="system"
+                      formControlName="system"
+                      [(ngModel)]="query.systemCode"
+                      (change)="eSearch()"
+              >
+                <option *ngFor="let system of dashboardOnlineService.cbxSystem | async"
+                        [value]="system.systemCode">{{ system.systemName | truncate : 30 }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="service">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE' | translate }}</label>
+            <div class="col-md-8">
+              <select class="form-control"
+                      name="service"
+                      id="service"
+                      formControlName="service"
+                      [(ngModel)]="query.serviceCode"
+                      (change)="eSearch()"
+              >
+                <option *ngFor="let service of dashboardOnlineService.cbxService | async"
+                        [value]="service.serviceCode">{{ service.serviceName | truncate : 30 }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="actionCategory">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_CATEGORY' | translate }}</label>
+            <div class="col-md-8">
+              <select class="form-control"
+                      name="actionCategory"
+                      id="actionCategory"
+                      formControlName="actionCategory"
+                      [(ngModel)]="query.actionCategoryId"
+                      (change)="eSearch()"
+              >
+                <option *ngFor="let category of dashboardOnlineService.cbxCategory | async"
+                        [value]="category.categoryId">{{ category.categoryName | truncate : 30}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="iValidStartDate">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.START_DATETIME' | translate }}</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <input
+                    type="text"
+                    name="iValidStartDate"
+                    id="iValidStartDate"
+                    class="form-control"
+                    autocomplete="off"
+                    placeholder="dd/mm/yyyy"
+                    ngbDatepicker
+                    #fromDate="ngbDatepicker"
+                    formControlName="iValidStartDate"
+                    [(ngModel)]="query.iValidStartDate"
+                    [class.is-invalid]="isControlInvalid('iValidStartDate')"
+                    (change)="eSearch()"
+                />
+                <div class="input-group-append" (click)="resetError('iValidStartDate');fromDate.toggle();">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+                </div>
+              </div>
+              <div class="mb-1" *ngIf="startDateErrorMsg && startDateErrorMsg.length > 0">
+                <div style="color: red;">
+                  {{startDateErrorMsg | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="iValidEndDate">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.END_DATETIME' | translate }}</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <input
+                    type="text"
+                    name="iValidEndDate"
+                    id="iValidEndDate"
+                    class="form-control"
+                    autocomplete="off"
+                    placeholder="dd/mm/yyyy"
+                    ngbDatepicker
+                    #toDate="ngbDatepicker"
+                    formControlName="iValidEndDate"
+                    [(ngModel)]="query.iValidEndDate"
+                    (change)="eSearch()"
+                />
+                <div class="input-group-append" (click)="resetError('iValidEndDate');toDate.toggle();">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+                </div>
+              </div>
+              <div class="mb-1" *ngIf="endDateErrorMsg && endDateErrorMsg.length > 0">
+                <div style="color: red;">
+                  {{endDateErrorMsg | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="action">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION' | translate }}</label>
+            <div class="col-md-8">
+              <input
+                  type="text"
+                  class="form-control"
+                  name="action"
+                  id="action"
+                  [placeholder]="'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION' | translate"
+                  autocomplete="off"
+                  formControlName="action"
+                  [(ngModel)]="query.action"
+                  #action
+              />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="numberRecord">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.NUMBER_RECORD' | translate }}</label>
+            <div class="col-md-8">
+              <input
+                  type="text"
+                  class="form-control"
+                  name="numberRecord"
+                  id="numberRecord"
+                  [placeholder]="'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.NUMBER_RECORD' | translate"
+                  autocomplete="off"
+                  formControlName="numberRecord"
+                  [(ngModel)]="query.numberRecord"
+                  maxlength="4"
+                  (keyup)="eOnKeyUp()"
+                  #numberRecord
+              />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4 form-label col-form-label"
+                   for="statusCLR">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.CLR_STATUS' | translate }}</label>
+            <div class="col-md-8">
+              <select class="form-control"
+                      name="statusCLR"
+                      id="statusCLR"
+                      formControlName="statusCLR"
+                      [(ngModel)]="query.statusCLR"
+                      (change)="eSearch()"
+              >
+                <option *ngFor="let statusCLR of listCLRStatus"
+                        [value]="statusCLR.CODE">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.LINE_CLR_STATUS.' + statusCLR.NAME | translate }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row pb-3">
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%" (click)="eDisconnect()">
+                <i class="far fa-pause-circle cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.PAUSE' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%" (click)="ePlay()">
+                <i class="fab fa-mixcloud cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.SOUND' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%"
+                      (click)="eReset()">
+                <i class="fas fa-redo-alt cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.DEFAULT' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%"
+                      (click)="ePerform()">
+                <i class="far fa-play-circle cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.PERFORM' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%"
+                      (click)="eSearch()">
+                <i class="fas fa-search cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%"
+                      (click)="eExport()">
+                <i class="far fa-file-excel cursor-pointer"></i>
+                <span class="font-weight-bolder">{{ 'ACTION.EXCEL' | translate }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group table-responsive">
+            <table class="table table-vertical-center table-bordered">
+              <tbody>
+              <tr>
+                <td class="text-center form-label">
+                  {{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_TYPE' | translate }}
+                </td>
+                <td>+</td>
+              </tr>
+              <tr *ngFor="let alarmType of dashboardOnlineService.cbxAlarmType | async; let i = index">
+                <td class="text-left">{{ alarmType.name | truncate: 25 }}</td>
+                <td class="w-15">
+                  <input type="checkbox" name="options" [value]="alarmType.code" [checked]="alarmType.checked"
+                         (click)="onCheckType(i,alarmType.code)">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+<!--          <div class="form-group">-->
+<!--            <div class="row pb-0" style="border: 1px solid;">-->
+<!--              <div-->
+<!--                  class="col-10 text-center form-label">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_TYPE' | translate }}</div>-->
+<!--              <div class="col-2 text-center form-label" style="border-left: 1px solid;">+</div>-->
+<!--            </div>-->
+<!--            <div class="row pb-0" style="border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;"-->
+<!--                 *ngFor="let alarmType of dashboardOnlineService.cbxAlarmType | async; let i = index">-->
+<!--              <div-->
+<!--                  class="col-10 text-left form-label">{{ alarmType.name }}</div>-->
+<!--              <div class="col-2 text-center form-label" style="border-left: 1px solid;">-->
+<!--                <input type="checkbox" name="options" [value]="alarmType.code" [checked]="alarmType.checked"-->
+<!--                       (click)="onCheckType(i,alarmType.code)">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div class="form-group table-responsive">
+            <table class="table table-vertical-center table-bordered">
+              <tbody>
+              <tr>
+                <td class="text-center form-label">
+                  {{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_SEVERITY' | translate }}
+                </td>
+                <td class="text-center form-label">
+                  {{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.TOTAL' | translate }}
+                </td>
+                <td>+</td>
+              </tr>
+              <tr *ngFor="let alarmSeverity of dashboardOnlineService.cbxAlarmSeverity | async; let i = index">
+                <td [style.background-color]="(alarmSeverity.colorCurrentType == 'HEX')?alarmSeverity.colorCurrent:('rgb('+alarmSeverity.colorCurrent+')')"
+                    class="text-left" >{{ alarmSeverity.name | truncate: 20 }}</td>
+                <td [style.background-color]="(alarmSeverity.colorCurrentType == 'HEX')?alarmSeverity.colorCurrent:('rgb('+alarmSeverity.colorCurrent+')')"
+                    class="text-right" >{{ alarmSeverity.totalError }}</td>
+                <td class="w-15">
+                  <input type="checkbox" name="options" [value]="alarmSeverity.alarmSeverityId"
+                         [checked]="alarmSeverity.checked" (click)="onCheckSeverity(i,alarmSeverity.alarmSeverityId)">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+<!--          <div class="form-group">-->
+<!--            <div class="row pb-0" style="border: 1px solid;">-->
+<!--              <div-->
+<!--                  class="col-7 text-center form-label">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_SEVERITY' | translate }}</div>-->
+<!--              <div class="col-3 text-center form-label"-->
+<!--                   style="border-left: 1px solid;">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.TOTAL' | translate }}</div>-->
+<!--              <div class="col-2 text-center form-label" style="border-left: 1px solid;">+</div>-->
+<!--            </div>-->
+<!--            <div class="row pb-0" style="border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;"-->
+<!--                 *ngFor="let alarmSeverity of dashboardOnlineService.cbxAlarmSeverity | async; let i = index">-->
+<!--              <div [style.background-color]="(alarmSeverity.colorCurrentType == 'HEX')?alarmSeverity.colorCurrent:('rgb('+alarmSeverity.colorCurrent+')')" class="col-7 text-left form-label">{{ alarmSeverity.name }}</div>-->
+<!--              <div [style.background-color]="(alarmSeverity.colorCurrentType == 'HEX')?alarmSeverity.colorCurrent:('rgb('+alarmSeverity.colorCurrent+')')" class="col-3 text-right form-label" style="border-left: 1px solid;">{{alarmSeverity.totalError}}</div>-->
+<!--              <div class="col-2 text-center form-label" style="border-left: 1px solid;">-->
+<!--                <input type="checkbox" name="options" [value]="alarmSeverity.alarmSeverityId"-->
+<!--                       [checked]="alarmSeverity.checked"-->
+<!--                       (click)="onCheckSeverity(i,alarmSeverity.alarmSeverityId)">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        </form>
+        <!-- end: Filtration form -->
+      </div>
+    </div>
+  </div>
+  <div class="col-xxxl-11 col-xxl-9 col-xl-8 col-lg-7 col-sm-6 ">
+
+    <div class="card card-custom gutter-b">
+      <div class="card-header border-bottom-0">
+        <div class="card-title">
+          <h3 class="card-label">{{ 'COMMON.SEARCH_RESULTS' | translate }}({{ paginator.total }})</h3>
+        </div>
+      </div>
+
+      <div class="card-body pt-0">
+        <!-- begin:Table -->
+        <div class="table-responsive angular-bootstrap-table">
+          <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered table-hover">
+            <thead>
+            <td>{{ 'COMMON.INDEX' | translate }} </td>
+            <td style="min-width: 70px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.FAULT_ID' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_CODE' | translate }}</td>
+            <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_NAME' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_CODE' | translate }}</td>
+            <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_NAME' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_TYPE' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_CATEGORY' | translate }}</td>
+            <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_NAME' | translate }}</td>
+            <td style="min-width: 75px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_ID' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_CODE' | translate }}</td>
+            <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_NAME' | translate }}</td>
+            <td style="min-width: 400px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_DETAIL' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.CLASS_NAME' | translate }}</td>
+            <td style="min-width: 50px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.FUNCTION' | translate }}</td>
+            <td style="min-width: 105px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ROOT_FUNCTION' | translate }}</td>
+            <td style="min-width: 125px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_DESTINATION' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_SEVERITY' | translate }}</td>
+            <td style="min-width: 120px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.CLEAR_STATUS' | translate }}</td>
+            <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_TYPE' | translate }}</td>
+            <td style="min-width: 150px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.EVENT_DATETIME' | translate }}</td>
+            <td style="min-width: 150px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.START_DATETIME' | translate }}</td>
+            <td style="min-width: 150px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.END_DATETIME' | translate }}</td>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rowdata of dashboardOnlineService.listDashboard | async; let i = index" (click)="eViewDetail(rowdata.faultId)"
+                [style.background-color]="(rowdata.colorCurrentType == 'HEX')?rowdata.colorCurrent:('rgb('+rowdata.colorCurrent+')')">
+              <td>{{ (paginator.page - 1) * paginator.pageSize + i + 1 }}</td>
+              <td>{{ rowdata.faultId }}</td>
+              <td class="text-left">{{ rowdata.systemCode | truncate: 20 }}</td>
+              <td class="text-left">{{ rowdata.systemName | truncate: 30 }}</td>
+              <td class="text-left">{{ rowdata.serviceCode | truncate: 20 }}</td>
+              <td class="text-left">{{ rowdata.serviceName | truncate: 30 }}</td>
+              <td class="text-left">
+                                    <span>
+                    <ng-container
+                        *ngIf="rowdata.actionType === actionTypeProduct">Product</ng-container>
+                    <ng-container
+                        *ngIf="rowdata.actionType === actionTypeAction">Action</ng-container>
+                </span>
+              </td>
+              <td class="text-left">{{ rowdata.actionCategory | truncate: 30 }}</td>
+              <td class="text-left">{{ rowdata.actionName | truncate: 30 }}</td>
+              <td>{{ rowdata.alarmId }}</td>
+              <td class="text-left">{{ rowdata.alarmCode | truncate: 20 }}</td>
+              <td class="text-left">{{ rowdata.alarmName | truncate: 30 }}</td>
+              <td class="text-left">{{ rowdata.alarmDetail | truncate: 50 }}</td>
+              <td class="text-left"></td>
+              <td class="text-left">{{ rowdata.functionName | truncate: 30 }}</td>
+              <td class="text-left"></td>
+              <td class="text-left"></td>
+              <td class="text-left">{{ rowdata.alarmSeverity | truncate: 30 }}</td>
+              <td>
+                <span class="font-weight-bolder" [class.red-color]="rowdata.clearStatus === clearStatus"
+                      [class.green-color]="rowdata.clearStatus === notClearStatus">
+                  <ng-container
+                      *ngIf="rowdata.clearStatus === clearStatus">CLEAR</ng-container>
+                  <ng-container
+                      *ngIf="rowdata.clearStatus === notClearStatus">NOT CLEAR</ng-container>
+                </span>
+              </td>
+              <td class="text-left">{{ rowdata.typeName | truncate: 30 }}</td>
+              <td>{{ rowdata.receiveTime | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
+              <td>{{ rowdata.eventTime | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
+              <td>{{ rowdata.clearTime | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- end: Table -->
+        <!--        <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"-->
+        <!--                       [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>-->
+      </div>
+    </div>
+  </div>
+</div>
+</div>

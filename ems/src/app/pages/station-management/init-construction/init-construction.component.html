@@ -1,0 +1,580 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/station-management'" class="text-muted">{{ 'STATION_MANAGEMENT.TITLE' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted" [routerLink]="'/station-management/init-station'">{{ 'CON_MANAGEMENT.ADD_CON' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'STATION_MANAGEMENT.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="addForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">{{ 'CON_MANAGEMENT.ADD_CON' | translate }}</div>
+        <div class="mb-6">
+      <span class="mr-3">
+        <input class="mr-2" type="radio" value="partial" id="radio1" name="radioInput" checked (click)="normalInput()">
+        <label for="radio1"> {{ 'CON_MANAGEMENT.SINGLE_ADD' | translate }} </label>
+      </span>
+          <span>
+        <input class="mr-2" type="radio" value="file" id="radio2" name="radioInput" (click)="fileInput()">
+        <label for="radio2"> {{ 'CON_MANAGEMENT.ADD_FILE' | translate }} </label>
+      </span>
+        </div>
+        <div class="form-wrapper" #addFormWrapper>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="provinceSearch">{{ 'CON_LIST.PROVINCE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select class="form-control" id="provinceSearch" autocomplete="off" formControlName="provinceSearch">
+                <option *ngFor="let item of ( stationManagementService.listProvince | async ) "
+                        [ngValue]="item.proCode">
+                  {{item.proCode}}-{{item.proName}}
+                </option>
+              </select>
+
+              <div
+                      *ngIf="
+                  addForm.get('provinceSearch').invalid &&
+                  (addForm.get('provinceSearch').dirty || addForm.get('provinceSearch').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('provinceSearch').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'CON_LIST.PROVINCE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+
+            <label class="col-md-1 form-label col-form-label" for="stationCode">{{ 'DETAIL_CON.CONSTRUCTION_CODE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="stationCode" autocomplete="off"
+                     formControlName="stationCode"/>
+              <div
+                      *ngIf="
+                  addForm.get('stationCode').invalid &&
+                  (addForm.get('stationCode').dirty || addForm.get('stationCode').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('stationCode').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.CONSTRUCTION_CODE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="stationName">{{ 'DETAIL_CON.CONSTRUCTION_NAME' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="stationName" autocomplete="off"
+                     formControlName="stationName"/>
+              <div
+                      *ngIf="
+                  addForm.get('stationName').invalid &&
+                  (addForm.get('stationName').dirty || addForm.get('stationName').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('stationName').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.CONSTRUCTION_NAME' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+
+            <label class="col-md-1 form-label col-form-label" for="positionType">{{ 'DETAIL_CON.POSITION_TYPE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select
+                      class="form-control"
+                      id="positionType"
+                      autocomplete="off"
+                      formControlName="positionType"
+              >
+                <option *ngFor="let item of (stationManagementService.listPositionType | async )"
+                        [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+              <div
+                      *ngIf="
+                  addForm.get('positionType').invalid &&
+                  (addForm.get('positionType').dirty || addForm.get('positionType').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('positionType').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.POSITION_TYPE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="stationType">{{ 'DETAIL_CON.STATION_TYPE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select class="form-control" id="stationType" autocomplete="off" formControlName="stationType">
+                <option *ngFor="let item of (stationManagementService.listStationType | async )"
+                        [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+              <div
+                      *ngIf="
+                  addForm.get('stationType').invalid &&
+                  (addForm.get('stationType').dirty || addForm.get('stationType').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('stationType').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.STATION_TYPE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="pillarType">{{ 'DETAIL_CON.COLUMN_TYPE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select class="form-control" id="pillarType" autocomplete="off" formControlName="pillarType">
+                <option *ngFor="let item of (stationManagementService.listPillarType | async )"
+                        [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+              <div
+                      *ngIf="
+                  addForm.get('pillarType').invalid &&
+                  (addForm.get('pillarType').dirty || addForm.get('pillarType').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('pillarType').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.COLUMN_TYPE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="pillarHeight">{{ 'DETAIL_CON.COLUMN_HEIGHT' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="pillarHeight" autocomplete="off"
+                     formControlName="pillarHeight"/>
+              <div
+                      *ngIf="
+                  addForm.get('pillarHeight').invalid &&
+                  (addForm.get('pillarHeight').dirty || addForm.get('pillarHeight').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('pillarHeight').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.COLUMN_HEIGHT' | translate
+                  }
+                  }}
+                </small>
+                <small class="form-text text-danger" *ngIf=" addForm.get('pillarHeight').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.COLUMN_HEIGHT' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}</small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="Long">{{ 'DETAIL_CON.CONSTRUCTION_LONG' | translate }}<span class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="Long" autocomplete="off" formControlName="Long"/>
+              <div
+                      *ngIf="
+                  addForm.get('Long').invalid &&
+                  (addForm.get('Long').dirty || addForm.get('Long').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('Long').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.CONSTRUCTION_LONG' | translate
+                  }
+                  }}
+                </small>
+                <small class="form-text text-danger" *ngIf=" addForm.get('Long').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.CONSTRUCTION_LONG' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}</small>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="Lat">{{ 'DETAIL_CON.CONSTRUCTION_LAT' | translate }}<span class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="Lat" autocomplete="off" formControlName="Lat"/>
+              <div
+                      *ngIf="
+                  addForm.get('Lat').invalid &&
+                  (addForm.get('Lat').dirty || addForm.get('Lat').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('Lat').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.CONSTRUCTION_LAT' | translate
+                  }
+                  }}
+                </small>
+                <small class="form-text text-danger" *ngIf=" addForm.get('Lat').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.CONSTRUCTION_LAT' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}</small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="Ban">{{ 'DETAIL_CON.DISTRICT' | translate }}<span class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select class="form-control" id="Ban" autocomplete="off" formControlName="Ban">
+                <option value=""></option>
+                <option *ngFor="let item of ( stationManagementService.listDistrict | async ) "
+                        [ngValue]="item.distId">
+                  {{item.distName}}
+                </option>
+              </select>
+              <div
+                      *ngIf="
+                  addForm.get('Ban').invalid &&
+                  (addForm.get('Ban').dirty || addForm.get('Ban').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('Ban').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.DISTRICT' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="village">{{ 'DETAIL_CON.VILLAGE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="village" autocomplete="off" formControlName="village"/>
+              <div
+                      *ngIf="
+                  addForm.get('village').invalid &&
+                  (addForm.get('village').dirty || addForm.get('village').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('village').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.VILLAGE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="infrastructureType">{{ 'DETAIL_CON.CONSTRUCTION_TYPE' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <select class="form-control" id="infrastructureType" autocomplete="off"
+                      formControlName="infrastructureType">
+                <option *ngFor="let item of ( stationManagementService.listInfrastructureType | async ) "
+                        [ngValue]="item.constructionTypeId">
+                  {{item.constructionTypeName}}
+                </option>
+              </select>
+              <div
+                      *ngIf="
+                  addForm.get('infrastructureType').invalid &&
+                  (addForm.get('infrastructureType').dirty || addForm.get('infrastructureType').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('infrastructureType').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.CONSTRUCTION_TYPE' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="network">{{ 'DETAIL_CON.NETWORK' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="network" autocomplete="off" formControlName="network"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="vendor">{{ 'DETAIL_CON.VENDOR' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="vendor" autocomplete="off" formControlName="vendor"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="band">{{ 'DETAIL_CON.BAND' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="band" autocomplete="off" formControlName="band"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="antennaHeight">{{ 'DETAIL_CON.ANTEN_HEIGHT' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="antennaHeight" autocomplete="off"
+                     formControlName="antennaHeight"/>
+              <div
+                      *ngIf="
+                  addForm.get('antennaHeight').invalid &&
+                  (addForm.get('antennaHeight').dirty || addForm.get('antennaHeight').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf=" addForm.get('antennaHeight').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.ANTEN_HEIGHT' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="azimuth">{{ 'DETAIL_CON.AZIMUTH' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="azimuth" autocomplete="off" formControlName="azimuth"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="tilt">{{ 'DETAIL_CON.TILT' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="tilt" autocomplete="off" formControlName="tilt"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="sector">{{ 'DETAIL_CON.SECTOR' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="sector" autocomplete="off" formControlName="sector"/>
+              <div
+                      *ngIf="
+                  addForm.get('sector').invalid &&
+                  (addForm.get('sector').dirty || addForm.get('sector').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf=" addForm.get('sector').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.SECTOR' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}
+                </small>
+              </div>
+
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="trx4g">{{ 'DETAIL_CON.TRX_MODE_4G' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="trx4g" autocomplete="off" formControlName="trx4g"/>
+            </div>
+          </div>
+          <div class="row form-group gx-6 mb-6 align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="startPoint">{{ 'DETAIL_CON.START_POINT' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="startPoint" autocomplete="off" formControlName="startPoint"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="endPoint">{{ 'DETAIL_CON.END_POINT' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="endPoint" autocomplete="off" formControlName="endPoint"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="cableLine">{{ 'DETAIL_CON.CABLE_ROUTE' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="cableLine" autocomplete="off" formControlName="cableLine"/>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="cableDistance">{{ 'DETAIL_CON.DISTANCE_CABLE' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="cableDistance" autocomplete="off"
+                     formControlName="cableDistance"/>
+              <div
+                      *ngIf="
+                  addForm.get('cableDistance').invalid &&
+                  (addForm.get('cableDistance').dirty || addForm.get('cableDistance').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf=" addForm.get('cableDistance').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.DISTANCE_CABLE' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}</small>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group gx-6  align-items-center">
+            <label class="col-md-1 form-label col-form-label" for="concretePillarQuantity">{{ 'DETAIL_CON.COLUMN_NUMBER' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="concretePillarQuantity" autocomplete="off"
+                     formControlName="concretePillarQuantity"/>
+              <div
+                      *ngIf="
+                  addForm.get('concretePillarQuantity').invalid &&
+                  (addForm.get('concretePillarQuantity').dirty || addForm.get('concretePillarQuantity').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf=" addForm.get('concretePillarQuantity').errors.pattern">
+                  {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                  name: 'DETAIL_CON.COLUMN_NUMBER' | translate,
+                  format: 'DETAIL_CON.NUM' | translate
+                } }}</small>
+              </div>
+
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="decisionApplied">{{ 'DETAIL_CON.DECISION_DEPLOY' | translate }}<span
+                    class="red-color">*</span></label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="decisionApplied" autocomplete="off"
+                     formControlName="decisionApplied"/>
+              <div
+                      *ngIf="
+                  addForm.get('decisionApplied').invalid &&
+                  (addForm.get('decisionApplied').dirty || addForm.get('decisionApplied').touched)
+                "
+              >
+                <small class="form-text text-danger" *ngIf="addForm.get('decisionApplied').errors.required">
+                  {{'VALIDATION.REQUIRED' | translate
+                  : {
+                    name: 'DETAIL_CON.DECISION' | translate
+                  }
+                  }}
+                </small>
+              </div>
+            </div>
+
+            <label class="col-md-1 form-label col-form-label" for="note">{{ 'DETAIL_CON.NOTE' | translate }}</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="note" autocomplete="off" formControlName="note"/>
+            </div>
+          </div>
+          <div class="form-group row pb-0">
+            <div class="col-md-12 text-right">
+              <div
+                      (click)="redirectToListStation()"
+                      class="btn font-weight-bolder mr-3"
+                      style="background: #0171bb; color: #fff; padding: 7px 32px"
+              >
+
+                {{'ACTION.CANCEL' | translate}}
+              </div>
+              <div
+                      (click)="clickAccept()"
+                      class="btn font-weight-bolder mr-3"
+                      style="background: #5fb871; color: #fff; padding: 7px 32px"
+              >
+
+                {{'ACTION.SAVE' | translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:none" #addFileWrapper>
+          <div class="row form-group">
+            <div class="col-md-1">{{ 'CON_MANAGEMENT.CONTRUCTION' | translate }}</div>
+            <div class="col-md-4">
+              <ngx-dropzone (change)="onSelect($event)" style="height: auto" class="dropzone" [multiple]="false">
+                <ngx-dropzone-label>
+                  <span class="choose-file font-weight-bolder">{{ 'CON_MANAGEMENT.SELECT_OR_PULL_FILE' | translate }}</span>
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label style="height: 50px">{{ f.name }} </ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+              {{'CON_MANAGEMENT.DOWN_FILE'| translate }} <a download="template_construction_add_file"
+                                 href="assets/template_construction_add_file.xlsx">{{ 'CON_MANAGEMENT.HERE' | translate }}</a>
+            </div>
+          </div>
+          <div class="form-group row pt-12 pb-0">
+            <div class="col-md-12 text-center">
+              <div (click)="clickAccept2()" class="btn font-weight-bolder mr-3"
+                   style="background: #5fb871; color: #fff; padding: 7px 32px">
+                {{'ACTION.SAVE' | translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+</div>
+<ng-template #initPopup let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+  <div class="modal-header justify-content-center">
+    <h4 class="text-left">{{ 'POPUP.INIT.CONFIRM' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="pb-10 pt-10" style="margin: auto;">
+    <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+            style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+    </button>
+    <button type="button" class=" font-weight-bolder btn btn-primary ml-2" (click)="submitForm(); c('Close click') "
+            style="padding: 8px 32px !important;">
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+  </div>
+</ng-template>
+<ng-template #initPopup2 let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+  <div class="modal-header justify-content-center">
+    <h4 class="text-left">{{ 'POPUP.INIT_FILE.CONFIRM' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="pb-10 pt-10" style="margin: auto;">
+    <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+            style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+    </button>
+    <button type="button" class=" font-weight-bolder btn btn-primary ml-2" (click)="submitFile(); c('Close click') "
+            style="padding: 8px 32px !important;">
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+  </div>
+</ng-template>
+

@@ -1,0 +1,196 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="functionCategory">
+        <ng-container *ngIf="functionCategory.categoryId">{{ 'ACTION.EDIT' | translate }}</ng-container>
+        <ng-container *ngIf="!functionCategory.categoryId">{{ 'ACTION.ADD' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="functionCategory">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="categoryCode">{{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate }}*</label>
+            <input
+              type="text"
+              class="form-control"
+              name="categoryCode"
+              id="categoryCode"
+              [placeholder]="'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('categoryCode')"
+              [class.is-valid]="isControlValid('categoryCode')"
+              formControlName="categoryCode"
+              [(ngModel)]="functionCategory.categoryCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'categoryCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate } }}
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxlength', 'categoryCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label for="validFrom" class="form-label">{{ 'COMMON.VALID_FROM_FATE' | translate }}</label>
+            <div class="input-group">
+              <input
+                type="text"
+                name="validFrom"
+                id="validFrom"
+                class="form-control"
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker
+                #fromDate="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('validFrom')"
+                [class.is-valid]="isControlValid('validFrom')"
+                formControlName="validFrom"
+                readonly="true"
+                value="2012-02-02"
+                [(ngModel)]="functionCategory.validFrom"
+              />
+              <div class="input-group-append" (click)="fromDate.toggle()">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('validFrom')">
+              Date of Birth was entered correct
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'validFrom')"
+            >
+              Please enter <b>Date of Birth</b> in 'mm/dd/yyyy' format
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label" for="categoryName">{{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate }}*</label>
+            <input
+              type="text"
+              class="form-control"
+              name="categoryName"
+              id="categoryName"
+              [placeholder]="'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('categoryName')"
+              [class.is-valid]="isControlValid('categoryName')"
+              formControlName="categoryName"
+              [(ngModel)]="functionCategory.categoryName"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'categoryName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate } }}
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxlength', 'categoryName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label" for="validTo">{{ 'COMMON.VALID_TO_FATE' | translate }}</label>
+            <div class="input-group">
+              <input
+                type="text"
+                name="validTo"
+                id="validTo"
+                class="form-control"
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker
+                #toDate="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('validTo')"
+                [class.is-valid]="isControlValid('validTo')"
+                formControlName="validTo"
+                readonly="true"
+                [(ngModel)]="functionCategory.validTo"
+              />
+              <div class="input-group-append" (click)="toDate.toggle()">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('validTo')">
+              Date of Birth was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'validTo')"
+            >
+              Please enter <b>Date of Birth</b> in 'mm/dd/yyyy' format
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label>{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+            <span class="switch switch-icon">
+            <label>
+                <input
+                  type="checkbox"
+                  name="status"
+                  (change)="changeStatus(functionCategory.status)"
+                  [checked]="functionCategory.status == 'O'"
+                />
+              <span></span>
+            </label>
+            </span>
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label">{{ 'COMMON.DESCRIPTION' | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              [placeholder]="'COMMON.DESCRIPTION' | translate"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('description')"
+              [class.is-valid]="isControlValid('description')"
+              formControlName="description"
+              [(ngModel)]="functionCategory.description"
+            />
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+      type="button"
+      class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+      (click)="modal.close()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="functionCategory">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate font-weight-bolder"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,291 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/bts-management'" class="text-muted">{{ 'BTS_STATION.BTS_MANAGEMENT' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted" [routerLink]="'/bts-management/list-bts'">{{ 'BTS_STATION.LIST_STATION_BTS' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'BTS_STATION.BTS_MANAGEMENT' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div #formSearch class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">{{ 'BTS_STATION.BTS_SEARCH' | translate }}</div>
+        <div class="row form-group gx-6">
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 form-label col-form-label" for="stationCode">{{ 'BTS_STATION.STATION_CODE' | translate }}</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="stationCode" autocomplete="off" formControlName="stationCode"/>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="provinceSearch">{{ 'BTS_STATION.STATION_NAME' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <input type="text" class="form-control" id="stationName" autocomplete="off" formControlName="stationName"/>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="provinceSearch">{{ 'BTS_STATION.APPROVE_STATUS' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" id="approveStatus" autocomplete="off" formControlName="approveStatus">
+                <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listApprovedStatus | async ) " [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="provinceSearch">{{ 'DETAIL_CON.PROVINCE' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" id="provinceSearch" autocomplete="off" formControlName="provinceSearch">
+                <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listProvince | async )" [ngValue]="item.proCode">
+                  {{item.proName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="districtSearch">{{ 'BTS_STATION.DISTRICT' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" id="districtSearch" autocomplete="off" formControlName="districtSearch">
+                <option value="">--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listDistrict | async ) " [ngValue]="item.distId">
+                  {{item.distName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 form-label col-form-label"
+                   for="stationStatus">{{ 'BTS_STATION.STATION_STATUS' | translate }}</label>
+            <div class="col-md-8">
+              <select class="form-control" id="stationStatus" autocomplete="off" formControlName="stationStatus">
+                <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listStationStatus | async )" [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="contractedStation">{{ 'BTS_STATION.STATION_HAVE_CONTRACT_FILE' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" id="contractedStation" autocomplete="off" formControlName="contractedStation">
+                <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listYesOrNo | async )" [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 row mb-8 min-width-350">
+            <label class="col-md-4 col-sm-12 form-label col-form-label" for="CRStation">{{ 'BTS_STATION.STATION_HAVE_CR_FILE' | translate }}</label>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" id="CRStation" autocomplete="off" formControlName="CRStation">
+                <option [ngValue]=null>--- {{'ACTION.SELECT' | translate}} ---</option>
+                <option *ngFor="let item of ( btsManagementService.listYesOrNo | async )" [ngValue]="item.value">
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-md-12 text-center">
+            <div (click)="eSearch()" class="btn font-weight-bolder mr-6"
+                 style="background: #0171bb; color: #fff; height: 38px; padding: 7px 32px">
+              {{'ACTION.SEARCH' | translate}}
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">
+          {{ 'BTS_STATION.STATION_LIST' | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="card-body pt-0">
+      <!--      <ng-container *ngIf="isLoading$">-->
+      <!--        <div class="overlay-layer bg-transparent">-->
+      <!--          <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>-->
+      <!--        </div>-->
+      <!--      </ng-container>-->
+
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-bordered table-vertical-center overflow-hidden">
+          <thead>
+          <td></td>
+          <td>{{ 'BTS_STATION.STATION_CODE' | translate }}</td>
+          <td>{{ 'DETAIL_CON.CONSTRUCTION_LAT' | translate }}</td>
+          <td>{{ 'DETAIL_CON.CONSTRUCTION_LONG' | translate }}</td>
+          <td>{{ 'BTS_STATION.CONTRACT_CODE' | translate }}</td>
+          <td>{{ 'BTS_STATION.STATION_NAME' | translate }}</td>
+          <td>{{ 'BTS_STATION.PROVINCE_OR_CITY' | translate }}</td>
+          <td>{{ 'BTS_STATION.DISTRICT' | translate }}</td>
+          <td>{{ 'DETAIL_CON.VILLAGE' | translate }}</td>
+          <td>{{ 'BTS_STATION.SDT' | translate }}</td>
+          <td>{{ 'BTS_STATION.PAYMENT_START_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.PAYMENT_END_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.RENTAL_FEE' | translate }}</td>
+          <td>{{ 'BTS_STATION.PAYMENT_TIME' | translate }}</td>
+          <td>{{ 'BTS_STATION.CONTRACT_FILE' | translate }}</td>
+          <td>{{ 'BTS_STATION.ELECTRIC' | translate }}</td>
+          <td>{{ 'BTS_STATION.LEASE_TERM' | translate }}</td>
+          <td>{{ 'BTS_STATION.CONTRACT_START_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.CONTRACT_END_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.CONTRACT_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.RENTAL_UNIT_PRICE' | translate }}</td>
+          <td>{{ 'BTS_STATION.APPROVE_STATUS' | translate }}</td>
+          <td>{{ 'BTS_STATION.STATION_STATUS' | translate }}</td>
+          <td>{{ 'DETAIL_CON.NOTE' | translate }}</td>
+          <td>{{ 'BTS_STATION.BROADCAST_DATE' | translate }}</td>
+          <td>{{ 'BTS_STATION.STATION_OFF_TIME' | translate }}</td>
+          <td>{{ 'BTS_STATION.FILE_CR' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of (stations | async )">
+            <ng-container *ngIf="!item.edit; else editTemplate">
+              <td><input type="checkbox" [disabled]=" ( item.status == '0') ||(item.approvedStatus != '1' && item.status == '1') " (click)="startEdit(item)"></td>
+              <td class="text-left">{{item && item.siteOnNims ? item.siteOnNims : ''}}</td>
+              <td class="text-left">{{item && item.latitude ? item.latitude : ''}}</td>
+              <td class="text-left">{{item && item.longitude ? item.longitude : ''}}</td>
+              <td class="text-left">{{item && item.contractNo ? item.contractNo : ''}}</td>
+              <td class="text-left">{{item && item.name ? item.name : ''}}</td>
+              <td class="text-left">{{item && item.provinceName ? item.provinceName : ''}}</td>
+              <td class="text-left">{{item && item.districtName ? item.districtName : ''}}</td>
+              <td class="text-left">{{item && item.address ? item.address : ''}}</td>
+              <td class="text-left">{{item && item.telephone ? item.telephone : ''}}</td>
+              <td>{{item && item.startDatePayment ? item.startDatePayment : ''}}</td>
+              <td>{{item && item.endDatePayment ? item.endDatePayment : ''}}</td>
+              <td class="text-left">{{item && item.amount ? btsManagementService.numberWithCommas(item.amount) : '0'}}</td>
+              <td class="text-left">{{item && item.paymentTime ? item.paymentTime : ''}}</td>
+              <td class="text-left">
+                <a *ngIf="item.fileContractName" (click)="getFile(item.fileContractPath)">{{item.fileContractName}}</a>
+              </td>
+              <td class="text-left">{{item && item.hasElectricityStr ? item && item.hasElectricityStr : ''}}</td>
+              <td class="text-left">{{item && item.periodOfRent ? item.periodOfRent : ''}}</td>
+              <td>{{item && item.startDateContract ? item.startDateContract : ''}}</td>
+              <td>{{item && item.endDateContract ? item.endDateContract : ''}}</td>
+              <td>{{item && item.signDateContract ? item.signDateContract : ''}}</td>
+              <td class="text-left">{{item && item.rentalFee ? btsManagementService.numberWithCommas(item.rentalFee) : ''}}</td>
+              <td class="text-left">{{item && item.approvedStatusName ? item.approvedStatusName : ''}}</td>
+              <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+              <td class="text-left">{{item && item.notes ? item.notes : ''}}</td>
+              <td>{{item && item.btsAiredDate ? item.btsAiredDate : ''}}</td>
+              <td>{{item && item.turnOffDate ? item.turnOffDate : ''}}</td>
+              <td class="text-left">
+                <a *ngIf="item.fileCRName" (click)="getFile(item.fileCRPath)">{{item.fileCRName}}</a>
+              </td>
+            </ng-container>
+            <ng-template #editTemplate>
+              <td><input type="checkbox" [checked]="item.edit"  (click)="stopEdit(item)"/></td>
+              <td class="text-left">{{item && item.siteOnNims ? item.siteOnNims : ''}}</td>
+              <td class="text-left">{{item && item.latitude ? item.latitude : ''}}</td>
+              <td class="text-left">{{item && item.longitude ? item.longitude : ''}}</td>
+              <td class="text-left">{{item && item.contractNo ? item.contractNo : ''}}</td>
+              <td class="text-left">{{item && item.name ? item.name : ''}}</td>
+              <td class="text-left">{{item && item.provinceName ? item.provinceName : ''}}</td>
+              <td class="text-left">{{item && item.districtName ? item.districtName : ''}}</td>
+              <td class="text-left">{{item && item.address ? item.address : ''}}</td>
+              <td class="text-left">{{item && item.telephone ? item.telephone : ''}}</td>
+              <td>{{item && item.startDatePayment ? item.startDatePayment : ''}}</td>
+              <td>{{item && item.endDatePayment ? item.endDatePayment : ''}}</td>
+              <td class="text-left">{{item && item.amount ? btsManagementService.numberWithCommas(item.amount) : '0'}}</td>
+              <td class="text-left">{{item && item.paymentTime ? item.paymentTime : ''}}</td>
+              <td class="text-left">
+                <a *ngIf="item.fileContractName" (click)="getFile(item.fileContractPath)">{{item.fileContractName}}</a>
+              </td>
+              <td class="text-left">{{item && item.hasElectricityStr ? item && item.hasElectricityStr : ''}}</td>
+              <td class="text-left">{{item && item.periodOfRent ? item.periodOfRent : ''}}</td>
+              <td>{{item && item.startDateContract ? item.startDateContract : ''}}</td>
+              <td>{{item && item.endDateContract ? item.endDateContract : ''}}</td>
+              <td>{{item && item.signDateContract ? item.signDateContract : ''}}</td>
+              <td class="text-left">{{item && item.rentalFee ? btsManagementService.numberWithCommas(item.rentalFee) : ''}}</td>
+              <td class="text-left">{{item && item.approvedStatusName ? item.approvedStatusName : ''}}</td>
+              <td class="text-left">{{item && item.statusName ? item.statusName : ''}}</td>
+              <td class="text-left">{{item && item.notes ? item.notes : ''}}</td>
+              <td>{{item && item.btsAiredDate ? item.btsAiredDate : ''}}</td>
+              <td>{{item && item.turnOffDate ? item.turnOffDate : ''}}</td>
+              <td class="text-left">
+                <span style="border-radius: 0.42rem ; border: 1px solid black; padding: 4px 2px" (click)="fileCon.click()">{{'COMMON.CHOOSE_FILE' | translate}}</span>
+                <a style="margin-left: 10px" *ngIf="item.fileCRName && item.fileCREdited == false" (click)="getFile(item.fileCRPath)">{{item.fileCRName}}</a>
+                <a style="margin-left: 10px" *ngIf="item.fileCREdited == true" (click)="getFile(item.fileCRPathTemp)">{{item.fileCRNameTemp}}</a>
+                <input #fileCon style="display: none" type="file" accept="application/pdf"
+                       (change)="onSelectFile($event, item, 2)"/>
+              </td>
+            </ng-template>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- begin: Paginator -->
+      <div class="d-flex justify-content-end align-items-center ">
+        <div class="mr-auto">{{ 'PAGINATOR.RECORD' | translate }} {{firstIndex + 1 }}-{{lastIndex}} {{ 'PAGINATOR.OF' | translate }} {{ paginator.total }} {{ 'PAGINATOR.RECORD' | translate }}</div>
+        <div class="mr-5">
+          <span>{{ 'PAGINATOR.DISPLAY' | translate }}
+            <select (change)="changeNumberOfRecord($event)">
+              <option *ngFor="let record of records" [ngValue]="record">{{record.value}}</option>
+            </select>
+            {{ 'PAGINATOR.RECORD' | translate }}/{{ 'PAGINATOR.PAGE' | translate }}
+          </span>
+        </div>
+        <ng-pagination [maxSize]="5" [collectionSize]="paginator.total" [rotate]="true" [boundaryLinks]="true"
+          [pageSize]="paginator.pageSize" [(page)]="paginator.page" (pageChange)="pageChange($event)"></ng-pagination>
+      </div>
+
+      <div  class="form-group row mt-12 mb-0">
+        <div class="col-md-12 text-center">
+          <div (click)="openShowOffStation()" *ngIf="(isShowOffStation | async)" class="btn font-weight-bolder mr-24"
+               style="background: #4674EB; color: #fff; height: 38px; padding: 7px 32px">
+            {{ 'BTS_STATION.CLOSE_STATION' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss" style="display:none; position: absolute !important;">
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title font-weight-bolder text-center">{{ 'BTS_STATION.CLOSE_CONFIRM' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="pb-10 pt-10" style="margin: auto;">
+    <button type="button" class="font-weight-bolder btn blue-color btn-light mr-3" (click)="c('Close click')"
+            style="padding: 8px 32px !important;">{{ 'BUTTON.CANCEL2' | translate }}
+    </button>
+    <button type="button" class=" font-weight-bolder btn btn-primary ml-2" (click)="clickAccept() ;"
+            style="padding: 8px 32px !important;">
+      {{ 'BUTTON.YES' | translate }}
+    </button>
+  </div>
+</ng-template>

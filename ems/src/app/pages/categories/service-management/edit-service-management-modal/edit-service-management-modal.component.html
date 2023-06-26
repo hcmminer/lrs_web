@@ -1,0 +1,250 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="serviceModel">
+        <ng-container *ngIf="serviceModel.serviceId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.SERVICE.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!serviceModel.serviceId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.SERVICE.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="serviceModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="serviceCode">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceCode"
+                id="serviceCode"
+                [placeholder]="'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('serviceCode')"
+                [class.is-valid]="isControlValid('serviceCode')"
+                formControlName="serviceCode"
+                [(ngModel)]="serviceModel.serviceCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'serviceCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'serviceCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="serviceName">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName"
+                id="serviceName"
+                [placeholder]="'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('serviceName')"
+                [class.is-valid]="isControlValid('serviceName')"
+                formControlName="serviceName"
+                [(ngModel)]="serviceModel.serviceName"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'serviceName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'serviceName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_NAME' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="serviceType">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_TYPE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="serviceType"
+                    id="serviceType"
+                    formControlName="serviceType"
+                    [(ngModel)]="serviceModel.serviceType"
+            >
+              <option *ngFor="let serviceType of listServiceType"  [value]="serviceType.CODE">{{ 'CATEGORY.SERVICE.LINE_SERVICE_TYPE.' + serviceType.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="systemId">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SYSTEM' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="systemId"
+                    id="systemId"
+                    formControlName="systemId"
+                    [(ngModel)]="serviceModel.systemId"
+            >
+              <option *ngFor="let systemId of serviceManagementService.cbxSystem | async"  [value]="systemId.systemId.valueOf()">{{ systemId.systemName }}</option>
+            </select>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="parentId">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_PARENT' | translate }}</label>
+            <select class="form-control"
+                    name="parentId"
+                    id="parentId"
+                    formControlName="parentId"
+                    [(ngModel)]="serviceModel.parentId"
+            >
+              <option *ngFor="let parent of serviceManagementService.cbxService | async"  [value]="parent.serviceId">{{ parent.serviceName }}</option>
+            </select>
+          </div>
+          <!-- <div class="col-lg-4">
+            <label>{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+            <span class="switch switch-icon">
+            <label>
+                <input
+                    type="checkbox"
+                    name="status"
+                    (change)="changeStatus(serviceModel.status)"
+                    [checked]="serviceModel.status == 'O'"
+                />
+              <span></span>
+            </label>
+            </span>
+          </div> -->
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'COMMON.STATUS.TITLE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="status"
+                    id="status"
+                    formControlName="status"
+                    [(ngModel)]="serviceModel.status"
+            >
+              <option *ngFor="let status of listStatus"  [value]="status.CODE">{{ 'COMMON.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label for="ivalidEndate" class="form-label">{{ 'CATEGORY.SERVICE.TABLE_TITLE.END_DATE' | translate }}</label>
+            <div class="input-group">
+              <input
+                  type="text"
+                  name="ivalidEndate"
+                  id="ivalidEndate"
+                  class="form-control"
+                  autocomplete="off"
+                  placeholder="dd/mm/yyyy"
+                  ngbDatepicker
+                  #fromDate="ngbDatepicker"
+                  [class.is-invalid]="isControlInvalidDate()"
+                  formControlName="ivalidEndate"
+                  [(ngModel)]="serviceModel.ivalidEndate"
+                  (change)="formatDateValue()"
+              />
+              <div class="input-group-append" (click)="fromDate.toggle()">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('ivalidEndate')">
+              {{ 'VALIDATION.INCORRECT' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.END_DATE' | translate } }}
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'ivalidEndate')"
+            >
+              {{ 'VALIDATION.REQUIRE_FORMAT' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.END_DATE' | translate, format: 'dd/mm/yyyy'} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_URL' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceURL"
+                [placeholder]="'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_URL' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('serviceURL')"
+                [class.is-valid]="isControlValid('serviceURL')"
+                formControlName="serviceURL"
+                [(ngModel)]="serviceModel.serviceURL"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'serviceURL')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.SERVICE_URL' | translate, max: 100} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.SERVICE.TABLE_TITLE.IP_PORT' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="ipPort"
+                [placeholder]="'CATEGORY.SERVICE.TABLE_TITLE.IP_PORT' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('ipPort')"
+                [class.is-valid]="isControlValid('ipPort')"
+                formControlName="ipPort"
+                [(ngModel)]="serviceModel.ipPort"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'ipPort')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.SERVICE.TABLE_TITLE.IP_PORT' | translate, max: 100} }}
+            </div>
+          </div>
+<!--          <div class="col-lg-4">-->
+<!--            <label class="form-label">{{ 'COMMON.DESCRIPTION' | translate }}</label>-->
+<!--            <input-->
+<!--                type="text"-->
+<!--                class="form-control"-->
+<!--                name="description"-->
+<!--                [placeholder]="'COMMON.DESCRIPTION' | translate"-->
+<!--                autocomplete="off"-->
+<!--                [class.is-invalid]="isControlInvalid('description')"-->
+<!--                [class.is-valid]="isControlValid('description')"-->
+<!--                formControlName="description"-->
+<!--                [(ngModel)]="serviceModel.description"-->
+<!--            />-->
+<!--            <div-->
+<!--                class="invalid-feedback"-->
+<!--                *ngIf="controlHasError('maxlength', 'description')"-->
+<!--            >-->
+<!--              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'COMMON.DESCRIPTION' | translate, max: 200} }}-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="serviceModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/export-reports'" class="text-muted">{{ 'REPORTS.TITLE' | translate }}</a>
+          </li>
+          <!--          <li class="breadcrumb-item">-->
+          <!--            <a class="text-muted" [routerLink]="'/station-management/edit-station'">Chỉnh sửa công trình</a>-->
+          <!--          </li>-->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'REPORTS.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <form action="#" class="form" [ngSwitch]="rpService.chooseReportType | async">
+        <div class="form-group row" style="padding-left: 24px">
+          <div class="col-md-1">
+            <label class="form-label col-form-label">{{ 'BTS_STATION.REPORT_TYPE' | translate }}</label>
+          </div>
+          <div class="col-md-4">
+            <select name="account" class="form-control" [ngModel]="isSelectService"
+                    (ngModelChange)="changeService($event)">
+              <option value="MONTHLY_REPORT">{{ 'BTS_STATION.MONTHLY_REPORT' | translate }}</option>
+              <option value="PROV_REPORT">{{ 'BTS_STATION.PROV_REPORT' | translate }}</option>
+              <option value="ANNUAL_REPORT">{{ 'BTS_STATION.ANNUAL_REPORT' | translate }}</option>
+              <option value="ACCUM_REPORT">{{ 'BTS_STATION.ACCUM_REPORT' | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div *ngSwitchCase="rpService.reportTypes[0].CODE ">
+          <app-monthly-report></app-monthly-report>
+        </div>
+        <div *ngSwitchCase="rpService.reportTypes[1].CODE ">
+          <app-province-report></app-province-report>
+        </div>
+        <div *ngSwitchCase="rpService.reportTypes[2].CODE ">
+          <app-annual-report></app-annual-report>
+        </div>
+        <div *ngSwitchCase="rpService.reportTypes[3].CODE ">
+          <app-accumul-report></app-accumul-report>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <form action="#" class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <label class="form-label">{{ 'CATEGORY.LOGIC_MAP.TABLE_TITLE.ALARM_SEVERITY' | translate }}:</label>
+        </div>
+        <div class="col-lg-6">
+          <label class="form-label">{{serviceCode | truncate: 50 }}</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card card-custom gutter-b">
+    <div class="card-body pt-0">
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered table-hover">
+          <thead>
+          <td>{{ 'CATEGORY.LOGIC_MAP.TABLE_TITLE.ALARM_SEVERITY' | translate }}</td>
+          <td>{{ 'CATEGORY.LOGIC_MAP.TABLE_TITLE.TOTAL' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rowdata of logicMapService.listTotalSeverity | async; let i = index">
+            <td class="text-left">{{ rowdata.severityName | truncate: 40 }}</td>
+            <td class="text-right">{{ rowdata.total }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem; width: 100%"
+              (click)="eDetail()">
+        <i class="fas fa-street-view"></i>
+        <span class="font-weight-bolder">{{ 'ACTION.VIEW_DETAIL' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</div>

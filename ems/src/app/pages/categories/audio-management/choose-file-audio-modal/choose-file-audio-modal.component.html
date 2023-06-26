@@ -1,0 +1,40 @@
+<ng-container *ngIf="isLoading">
+  <div class="progress progress-modal">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+         style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</ng-container>
+
+<div class="modal-header pb-0 border-bottom-0">
+  <div class="modal-title h4">{{ 'ACTION.CHOOSE' | translate }}</div>
+</div>
+<div class="modal-body" style="overflow: scroll;">
+  <table class="table table-head-custom table-vertical-center table-bordered">
+    <thead>
+      <td></td>
+      <td>{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.FILE_NAME' | translate }}</td>
+      <td>{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.FILE_TYPE' | translate }}</td>
+      <td>{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.PATH' | translate }}</td>
+    </thead>
+    <tbody>
+      <tr *ngIf="isLoading"><td colspan="5"><div class="d-flex justify-content-center"><div class="spinner spinner-lg spinner-success my-5"></div></div></td></tr>
+      <tr *ngFor="let rowdata of errorCategoriesService.listAlarmAudioServer | async; let i = index">
+        <td><input type="radio" name="alarmAudioServer" [value]="rowdata.fileName" (change)="changeFile(rowdata)"/></td>
+        <td class="text-left">{{rowdata.fileName}}</td>
+        <td>{{rowdata.fileType}}</td>
+        <td class="text-left">{{rowdata.filePath}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-footer pt-0 border-top-0">
+  <div>
+    <button type="button" class="btn btn-cancel btn-elevate mr-1 font-weight-bolder" (click)="modal.close()">
+      {{ 'ACTION.CANCEL' | translate }}
+    </button>&nbsp;
+    <button type="button" class="btn btn-primary btn-elevate font-weight-bolder" (click)="choose()">
+      {{ 'ACTION.CHOOSE' | translate }}
+    </button>
+  </div>
+</div>

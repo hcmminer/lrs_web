@@ -1,0 +1,73 @@
+<div class="search-hero">
+    <input  #keySearch
+            class="form-control" type="text" name="search" placeholder="Search"
+            (input)="searchTree($event)"
+    >
+</div>
+<div class="mb-12 row">
+    <div class="mb-6 checkbox-tree">
+        <mat-tree class="example-section" [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node
+                    *matTreeNodeDef="let node"
+                    [style.display]=" filterLeafNode(node) ? 'none' : 'block' "
+                    matTreeNodeToggle
+                    matTreeNodePadding
+            >
+                <button mat-icon-button2 disabled></button>
+                <mat-checkbox
+                        class="checklist-leaf-node"
+                        [checked]="checklistSelection.isSelected(node)"
+                        (change)="todoChildSelectionToggle(node)"
+                        [value]="node.constructionItemId"
+                >{{node.constructionItemName}}</mat-checkbox
+                >
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild"
+                           [style.display]="filterParentNode(node) ? 'none' : 'block'"
+                           matTreeNodePadding>
+                <button
+                        mat-icon-button2
+                        matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.constructionItemName"
+                >
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                </button>
+                <mat-checkbox
+                        [checked]="checklistSelection.isSelected(node)"
+                        [indeterminate]="descendantsPartiallySelected(node)"
+                        (change)="todoItemSelectionToggle(node)"
+                        [value]="node.constructionItemId"
+                >{{node.constructionItemName}}</mat-checkbox>
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+
+    <div class="mb-6 preview-tree">
+        <mat-tree class="example-section" [dataSource]="dataSourceP" [treeControl]="treeControlP">
+            <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node"
+                               matTreeNodePadding
+                               [style.display]=" filterLeafNode(node) ? 'none' : 'block' "
+                >
+
+                 <button mat-icon-button disabled></button>
+                    {{node.constructionItemName}}
+                </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+                           [style.display]="filterParentNodeP(node) ? 'none' : 'block'"
+                           matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.constructionItemName">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControlP.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                </button>
+                {{node.constructionItemName}}
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+</div>

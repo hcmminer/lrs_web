@@ -1,0 +1,45 @@
+img:hover{
+  cursor:pointer;
+}
+
+img{
+  margin-right: 10px;
+}
+
+.labelUpload{
+  text-decoration: underline;
+  cursor: pointer;
+  color:blue;
+}
+.form-select{
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #0171BB;
+}
+.form-input{
+  border: none !important;
+}
+
+thead {
+  td {
+    min-width: 150px;
+  }
+
+  td:nth-child(1){
+    min-width: 50px;
+  }
+
+  td:nth-child(6),  td:nth-child(9) {
+    min-width: 150px;
+    max-width: 250px;
+  }
+}
+
+a:hover{
+  cursor:pointer;
+}
+
+.min-width-350{
+  min-width: 350px;
+}
+

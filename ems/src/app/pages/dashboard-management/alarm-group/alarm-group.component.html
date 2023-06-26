@@ -1,0 +1,41 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header border-bottom-0">
+    <div class="card-title">
+      <h3 class="card-label">{{ 'COMMON.SEARCH_RESULTS' | translate }}({{ total }})</h3>
+    </div>
+  </div>
+
+  <div class="card-body pt-0">
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered table-hover">
+        <thead>
+        <td style="min-width: 70px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.FAULT_ID' | translate }}</td>
+        <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_CODE' | translate }}</td>
+        <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_NAME' | translate }}</td>
+        <td style="min-width: 100px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_CODE' | translate }}</td>
+        <td style="min-width: 200px">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_NAME' | translate }}</td>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rowdata of dashboardOnlineService.listDashboardGroup | async; let i = index" (click)="eViewDetail(rowdata)"
+            [style.background-color]="(rowdata.colorCurrentType == 'HEX')?rowdata.colorCurrent:('rgb('+rowdata.colorCurrent+')')">
+          <td>{{ rowdata.faultId }}</td>
+          <td class="text-left">{{ rowdata.systemCode }}</td>
+          <td class="text-left">{{ rowdata.systemName }}</td>
+          <td class="text-left">{{ rowdata.serviceCode }}</td>
+          <td class="text-left">{{ rowdata.serviceName }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="modal.close()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+  </div>
+</div>

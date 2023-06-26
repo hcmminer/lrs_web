@@ -1,0 +1,103 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/categories"> {{ 'CATEGORY.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/categories/audio-management"> {{ 'CATEGORY.AUDIO_MANAGEMENT.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row gutter-b">
+    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+      <div class="label-card">
+        <label
+            class="form-label title-screen text-uppercase">{{ 'CATEGORY.AUDIO_MANAGEMENT.TITLE' | translate }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center table-bordered">
+          <thead>
+          <td style="min-width: 250px">{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.ALARM_SEVERITY' | translate }}</td>
+          <td>{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.SYSTEM' | translate }}</td>
+          <td style="min-width: 500px">{{ 'CATEGORY.AUDIO_MANAGEMENT.TABLE_TITLE.PATH' | translate }}</td>
+          <td>{{ 'ACTION.CHOOSE' | translate }}</td>
+          <td>{{ 'ACTION.PLAY' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngIf="isLoading">
+            <td colspan="5">
+              <div class="d-flex justify-content-center">
+                <div class="spinner spinner-lg spinner-success my-5"></div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngFor="let rowdata of errorCategoriesService.listAlarmAudio | async; let i = index">
+            <td class="col-left">{{ rowdata.alarmSeverityName | truncate: 50 }}</td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" name="locationSelect" [(ngModel)]="rowdata.locationSelected"
+                        (change)="changeLocationType(rowdata)">
+                  <option value="1" [selected]="rowdata.locationSelected == 1">SERVER</option>
+                  <option value="2" [selected]="rowdata.locationSelected == 2">LOCAL</option>
+                </select>
+              </div>
+            </td>
+            <td>{{ rowdata.audioCurrent }}</td>
+            <td>
+              <button *ngIf="rowdata.locationSelected == 1" class="btn btn-primary" type="button"
+                      (click)="chooseFileServer(rowdata)">
+                <i class="fa fa-file-import mb-1 ml-1" aria-hidden="true"></i>
+                {{(rowdata.fileName != null && rowdata.fileType != null) ? rowdata.fileName + "." + rowdata.fileType : ""}}
+              </button>
+              <input *ngIf="rowdata.locationSelected == 2" id="audio_file" class="btn btn-primary" type="file"
+                     accept="audio/*" (change)="chooseFileLocal(rowdata, $event)"/>
+            </td>
+            <td>
+              <button class="btn btn-primary" type="button" (click)="playAudio(rowdata)"><i class="fa fa-play mb-1 ml-1"
+                                                                                            aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class=" row mt-5">
+        <div class="col-3"></div>
+        <div class="col-6 row">
+          <div class="col-4 d-flex justify-content-center">
+            <button class="btn btn-warning btn-block" (click)="loadLastAudio()"><i
+                class="fas fa-undo-alt cursor-pointer white-color mb-1"></i><b>{{'CATEGORY.AUDIO_MANAGEMENT.LABEL.BACK' | translate}}</b>
+            </button>
+          </div>
+          <div class="col-4 d-flex justify-content-center">
+            <button class="btn btn-primary btn-block" (click)="loadDefaultAudio()"><i
+                class="far fa-window-restore cursor-pointer white-color mb-1"></i><b>{{'CATEGORY.AUDIO_MANAGEMENT.LABEL.DEFAULT' | translate}}</b>
+            </button>
+          </div>
+          <div class="col-4 d-flex justify-content-center">
+            <button class="btn btn-success btn-block" (click)="updateAudio()"><i
+                class="fas fa-edit cursor-pointer white-color mb-1"></i><b>{{'CATEGORY.AUDIO_MANAGEMENT.LABEL.UPDATE' | translate}}</b>
+            </button>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+  </div>
+</div>

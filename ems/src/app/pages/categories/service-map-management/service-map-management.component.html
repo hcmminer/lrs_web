@@ -1,0 +1,197 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/categories"> {{ 'CATEGORY.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/categories/service-map"> {{ 'CATEGORY.SERVICE_MAP.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row gutter-b">
+    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+      <div class="label-card">
+        <label class="form-label title-screen text-uppercase">{{ 'CATEGORY.SERVICE_MAP.TITLE' | translate }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="service1">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_1' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="service1"
+                    id="service1"
+                    formControlName="service1"
+                    [(ngModel)]="query.serviceId"
+                    (change)="onChangeService(1)"
+            >
+              <option *ngFor="let service of serviceManagementService.cbxService | async"
+                      [value]="service.serviceId">{{ service.serviceCode }}</option>
+            </select>
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="serviceName1">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_1' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName1"
+                id="serviceName1"
+                [placeholder]="'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_1' | translate"
+                autocomplete="off"
+                disabled
+                formControlName="serviceName1"
+                [(ngModel)]="serviceName.serviceName1"
+            />
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="service2">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_2' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="service2"
+                    id="service2"
+                    formControlName="service2"
+                    [(ngModel)]="query.secondServiceId"
+                    (change)="onChangeService(2)"
+            >
+              <option *ngFor="let service of serviceManagementService.cbxService | async"
+                      [value]="service.serviceId">{{ service.serviceCode }}</option>
+            </select>
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="serviceName2">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_2' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName2"
+                id="serviceName2"
+                [placeholder]="'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_2' | translate"
+                autocomplete="off"
+                disabled
+                formControlName="serviceName2"
+                [(ngModel)]="serviceName.serviceName2"
+            />
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="statusSearch">{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="statusSearch"
+                    id="statusSearch"
+                    formControlName="statusSearch"
+                    [(ngModel)]="query.status"
+            >
+              <option *ngFor="let status of listServiceMapStatus"
+                      [value]="status.CODE">{{ 'CATEGORY.SERVICE_MAP.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-sm-12 text-right">
+            <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem"
+                    (click)="eReset()">
+              <i class="fas fa-redo-alt cursor-pointer"></i>
+              <span class="font-weight-bolder">{{ 'ACTION.DEFAULT' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="search()"
+                    style="margin-left: 10px; padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                search
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-green" (click)="create()"
+                    style="margin-left: 10px; padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                add_circle_outline
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.ADD' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">{{ 'COMMON.SEARCH_RESULTS' | translate }}({{ paginator.total }})</h3>
+      </div>
+    </div>
+
+    <div class="card-body pt-0">
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered">
+          <thead>
+          <td>{{ 'COMMON.INDEX' | translate }} </td>
+          <td style="min-width: 95px;">{{ 'ACTION.TITLE' | translate }}</td>
+          <td style="min-width: 115px;">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_1' | translate }}</td>
+          <td style="min-width: 220px;">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_1' | translate }}</td>
+          <td style="min-width: 115px;">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_CODE_2' | translate }}</td>
+          <td style="min-width: 220px;">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.SERVICE_NAME_2' | translate }}</td>
+          <td style="min-width: 95px;">{{ 'CATEGORY.SERVICE_MAP.TABLE_TITLE.ORDER_NO' | translate }}</td>
+          <td style="min-width: 150px;">{{ 'COMMON.STATUS.TITLE' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rowdata of serviceManagementService.itemServiceMap | async; let i = index">
+            <td>{{ (paginator.page - 1) * paginator.pageSize + i + 1 }}</td>
+            <td style="min-width: 95px;">
+              <i class="fas fa-edit cursor-pointer blue-color" (click)="edit(rowdata.mapId)"></i>
+              <i class="fas fa-trash-alt cursor-pointer orange-color" (click)="delete(rowdata)"
+                 [style.color]="(rowdata.status == 'C') ? 'gray !important' : '#fe6d00 !important'"></i>
+            </td>
+            <td class="text-left">{{ rowdata.serviceCode | truncate: 50 }}</td>
+            <td class="text-left">{{ rowdata.serviceName | truncate: 50 }}</td>
+            <td class="text-left">{{ rowdata.secondServiceCode | truncate: 50 }}</td>
+            <td class="text-left">{{ rowdata.secondServiceName | truncate: 50 }}</td>
+            <td class="text-right">{{ rowdata.orderNo }}</td>
+            <td>
+            <span class="font-weight-bolder" [class.red-color]="rowdata.status === inactiveStatus"
+                  [class.green-color]="rowdata.status === activeStatus"
+                  [class.blue-color]="rowdata.status === disconnectStatus">
+                <ng-container
+                    *ngIf="rowdata.status === activeStatus">{{ 'CATEGORY.SERVICE_MAP.STATUS.ACTIVE' | translate }}</ng-container>
+                <ng-container
+                    *ngIf="rowdata.status === inactiveStatus">{{ 'CATEGORY.SERVICE_MAP.STATUS.INACTIVE' | translate }}</ng-container>
+                <ng-container
+                    *ngIf="rowdata.status === disconnectStatus">{{ 'CATEGORY.SERVICE_MAP.STATUS.DISCONNECT' | translate }}</ng-container>
+            </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- end: Table -->
+      <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+                     [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+    </div>
+  </div>
+</div>

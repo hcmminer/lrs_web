@@ -1,0 +1,292 @@
+<div class="row gutter-b">
+  <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'FUNCTION_CATEGORY.TITLE' | translate }}</label>
+    </div>
+  </div>
+</div>
+
+<div class="card card-custom gutter-b">
+<!--  <div class="card-header border-0">-->
+<!--    <div class="card-title">-->
+<!--      <h3 class="card-label">{{ 'FUNCTION_CATEGORY.TITLE' | translate }}</h3>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <form action="#" class="form form-label-right" [formGroup]="searchForm">
+      <div class="row form-group">
+        <label  class="col-md-2 form-label col-form-label" for="categoryCodeSearch">{{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate }}</label>
+        <div class="col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            name="categoryCodeSearch"
+            id="categoryCodeSearch"
+            [placeholder]="'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate"
+            autocomplete="off"
+            formControlName="categoryCodeSearch"
+            [(ngModel)]="query.categoryCode"
+          />
+        </div>
+        <label  class="col-md-2 form-label col-form-label" for="validFromSearch">{{ 'COMMON.VALID_FROM_FATE' | translate }}</label>
+        <div class="col-md-4 input-group">
+          <input
+            type="text"
+            name="validFromSearch"
+            id="validFromSearch"
+            class="form-control"
+            autocomplete="off"
+            placeholder="dd/mm/yyyy"
+            ngbDatepicker
+            #fromDate="ngbDatepicker"
+            formControlName="validFromSearch"
+          />
+          <div class="input-group-append" (click)="fromDate.toggle()">
+            <span class="input-group-text">
+              <i class="text-dark-50 flaticon-calendar"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <label  class="col-md-2 form-label col-form-label" for="categoryNameSearch">{{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate }}</label>
+        <div class="col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            name="categoryNameSearch"
+            id="categoryNameSearch"
+            [placeholder]="'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate"
+            autocomplete="off"
+            formControlName="categoryNameSearch"
+            [(ngModel)]="query.categoryName"
+          />
+        </div>
+        <label  class="col-md-2 form-label col-form-label" for="validToSearch">{{ 'COMMON.VALID_TO_FATE' | translate }}</label>
+        <div class="col-md-4 input-group">
+          <input
+            type="text"
+            name="validToSearch"
+            id="validToSearch"
+            class="form-control"
+            autocomplete="off"
+            placeholder="dd/mm/yyyy"
+            ngbDatepicker
+            #toDate="ngbDatepicker"
+            formControlName="validToSearch"
+          />
+          <div class="input-group-append" (click)="toDate.toggle()">
+            <span class="input-group-text">
+              <i class="text-dark-50 flaticon-calendar"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <label  class="col-md-2 form-label col-form-label" for="statusSearch">{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+        <div class="col-md-4">
+          <select class="form-control"
+                  name="statusSearch"
+                  id="statusSearch"
+                  formControlName="statusSearch"
+                  [(ngModel)]="query.status"
+          >
+            <option *ngFor="let status of listStatus"  [value]="status.CODE">{{ 'LIST_STATUS.' + status.NAME | translate }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row pb-0">
+        <div class="col-sm-12 text-right">
+          <button type="button" class="btn btn-primary" (click)="search()" style="padding: 0.45rem 1rem">
+            <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+              search
+            </mat-icon>
+            <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+          </button>
+
+          <button type="button" class="btn btn-green" (click)="create()" style="margin-left: 10px; padding: 0.45rem 1rem">
+            <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+              add_circle_outline
+            </mat-icon>
+            <span class="font-weight-bolder">{{ 'ACTION.ADD' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- end: Filtration form -->
+  </div>
+</div>
+
+<!--    <div class="form form-label-right">-->
+<!--      <div class="form-group row">-->
+<!--        <div class="col-lg-4">-->
+<!--          <div class="row" [formGroup]="filterGroup">-->
+<!--            <div class="col-lg-6">-->
+<!--              <select class="form-control" name="status" placeholder="Filter by Status" formControlName="status">-->
+<!--                <option value="">All</option>-->
+<!--                <option value="1">Susspended</option>-->
+<!--                <option value="2">Active</option>-->
+<!--                <option value="3">Pending</option>-->
+<!--              </select><small class="form-text text-muted"><b>Filter</b> by Status</small>-->
+<!--            </div>-->
+<!--            <div class="col-lg-6">-->
+<!--              <select class="form-control" placeholder="Filter by Type" name="type" formControlName="type">-->
+<!--                <option value="">All</option>-->
+<!--                <option value="1">Business</option>-->
+<!--                <option value="2">Individual</option>-->
+<!--              </select><small class="form-text text-muted"><b>Filter</b> by Type</small>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-2" [formGroup]="searchGroup">-->
+<!--          <input type="text" class="form-control" name="searchText" placeholder="Search" value=""-->
+<!--                 formControlName="searchTerm"/><small class="form-text text-muted"><b>Search</b> in all fields</small>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <!-- end: Filtration form -->
+
+<!--    &lt;!&ndash; begin: Grouping &ndash;&gt;-->
+<!--    <ng-container *ngIf="grouping.getSelectedRowsCount()">-->
+<!--      <div class="form">-->
+<!--        <div class="row align-items-center form-group-actions margin-top-20 margin-bottom-20">-->
+<!--          <div class="col-xl-12">-->
+<!--            <div class="form-group form-group-inline">-->
+<!--              <div class="form-label form-label-no-wrap">-->
+<!--                <label class="font-bold font-danger"><span>Selected records count:-->
+<!--                    <b>{{ grouping.getSelectedRowsCount() }}</b></span></label>-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <button type="button" class="btn btn-danger font-weight-bolder font-size-sm mr-1"-->
+<!--                        (click)="deleteSelected()">-->
+<!--                  <i class="fa fa-trash"></i> Delete All-->
+<!--                </button>&nbsp;-->
+<!--                <button type="button" class="btn btn-light-primary font-weight-bolder font-size-sm mr-1"-->
+<!--                        (click)="fetchSelected()">-->
+<!--                  <i class="fa fa-stream"></i> Fetch Selected-->
+<!--                </button>&nbsp;-->
+<!--                <button type="button" class="btn btn-light-primary font-weight-bolder font-size-sm mr-1"-->
+<!--                        (click)="updateStatusForSelected()">-->
+<!--                  <i class="fa fa-sync-alt"></i> Update Status-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+    <!-- end: Grouping -->
+
+<div class="card card-custom gutter-b">
+  <div class="card-header border-bottom-0">
+    <div class="card-title">
+      <h3 class="card-label">Kết quả tìm kiếm({{ paginator.total }})</h3>
+    </div>
+  </div>
+
+  <div class="card-body pt-0">
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+        <!--                <th class="selection-cell-header" data-row-selection="true">-->
+        <!--                    <label class="checkbox checkbox-single">-->
+        <!--&lt;!&ndash;                        <input type="checkbox" (click)="grouping.selectAllRows()" &ndash;&gt;-->
+        <!--&lt;!&ndash;                               [checked]="grouping.checkAreAllRowsSelected()" /><span></span>&ndash;&gt;-->
+        <!--                    </label>-->
+        <!--                </th>-->
+        <td>
+          {{ 'COMMON.INDEX' | translate }}
+          <!--                    <app-sort-icon column="id" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>
+          {{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_CODE' | translate }}
+          <!--                    <app-sort-icon column="firstName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>
+          {{ 'FUNCTION_CATEGORY.TABLE_TITLE.CATEGORY_NAME' | translate }}
+          <!--                    <app-sort-icon column="lastName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>
+          {{ 'COMMON.VALID_FROM_FATE' | translate }}
+          <!--                    <app-sort-icon column="email" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>
+          {{ 'COMMON.VALID_TO_FATE' | translate }}
+          <!--                    <app-sort-icon column="gender" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>
+          {{ 'COMMON.STATUS.TITLE' | translate }}
+          <!--                    <app-sort-icon column="status" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"-->
+          <!--                                   (sort)="sort($event)"></app-sort-icon>-->
+        </td>
+        <td>{{ 'ACTION.TITLE' | translate }}</td>
+        </thead>
+        <tbody>
+        <tr *ngFor="let functionCategory of functionCategoriesService.items | async; let i = index">
+          <!--                    <td class="selection-cell">-->
+          <!--                        <label class="checkbox checkbox-single"><input type="checkbox" (click)="grouping.selectRow(customer.id)"-->
+          <!--                                                                       [checked]="grouping.isRowSelected(customer.id)" />-->
+          <!--                            <span></span>-->
+          <!--                        </label>-->
+          <!--                    </td>-->
+          <td>{{ (paginator.page - 1) * paginator.pageSize + i + 1 }}</td>
+          <td>{{ functionCategory.categoryCode }}</td>
+          <td>{{ functionCategory.categoryName }}</td>
+          <td>{{ functionCategory.validFromDate | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ functionCategory.validToDate | date: 'dd-MM-yyyy' }}</td>
+          <td>
+<!--                        <span class="label label-lg label-inline"-->
+<!--                              [class.label-light-danger]="functionCategory.status === inactiveStatus"-->
+<!--                              [class.label-light-success]="functionCategory.status === activeStatus">-->
+<!--                            <ng-container-->
+<!--                              *ngIf="functionCategory.status === activeStatus">{{ 'COMMON.STATUS.ACTIVE' | translate }}</ng-container>-->
+<!--                            <ng-container-->
+<!--                              *ngIf="functionCategory.status === inactiveStatus">{{ 'COMMON.STATUS.INACTIVE' | translate }}</ng-container>-->
+<!--                        </span>-->
+            <span class="font-weight-bolder" [class.red-color]="functionCategory.status === inactiveStatus"
+                  [class.green-color]="functionCategory.status === activeStatus">
+                <ng-container
+                  *ngIf="functionCategory.status === activeStatus">{{ 'COMMON.STATUS.ACTIVE' | translate }}</ng-container>
+                <ng-container
+                  *ngIf="functionCategory.status === inactiveStatus">{{ 'COMMON.STATUS.INACTIVE' | translate }}</ng-container>
+            </span>
+          </td>
+<!--          <td>-->
+<!--            <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"-->
+<!--               (click)="edit(functionCategory.categoryId)">-->
+<!--                 <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"-->
+<!--                    class="svg-icon svg-icon-md svg-icon-primary">-->
+<!--                 </span>-->
+<!--            </a>-->
+
+<!--            <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm"-->
+<!--               (click)="delete(functionCategory.categoryId)">-->
+<!--                            <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"-->
+<!--                                  class="svg-icon svg-icon-md svg-icon-danger">-->
+<!--                            </span>-->
+<!--            </a>-->
+<!--          </td>-->
+          <td style="min-width: 90px;">
+            <i class="fas fa-edit cursor-pointer blue-color" (click)="edit(functionCategory.categoryId)"></i>
+            <i class="fas fa-trash-alt cursor-pointer orange-color" (click)="delete(functionCategory.categoryId)"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+                   [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+  </div>
+</div>

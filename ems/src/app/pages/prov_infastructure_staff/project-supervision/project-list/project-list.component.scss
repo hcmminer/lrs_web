@@ -1,0 +1,15 @@
+img:hover{
+    cursor: pointer;
+}
+
+.view-icon{
+    font-size: 16px;
+    color: #0171bb;
+}
+
+@media (min-width: 768px){
+    .col-md-1 {
+        flex: 0 0 8.33333333%;
+        max-width: 9.333333%;
+    }
+}

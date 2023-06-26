@@ -1,0 +1,247 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="alarmDictionaryModel">
+        <ng-container *ngIf="alarmDictionaryModel.id">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.ALARM_DICTIONARY.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!alarmDictionaryModel.id">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.ALARM_DICTIONARY.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="alarmDictionaryModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmCode">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmCode"
+                id="alarmCode"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmCode')"
+                [class.is-valid]="isControlValid('alarmCode')"
+                formControlName="alarmCode"
+                [(ngModel)]="alarmDictionaryModel.alarmCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'alarmCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmName">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmName"
+                id="alarmName"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmName')"
+                [class.is-valid]="isControlValid('alarmName')"
+                formControlName="alarmName"
+                [(ngModel)]="alarmDictionaryModel.alarmName"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'alarmName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_NAME' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmType">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_TYPE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="alarmType"
+                    id="alarmType"
+                    formControlName="alarmType"
+                    [(ngModel)]="alarmDictionaryModel.alarmTypeCode"
+            >
+              <option *ngFor="let alarmType of errorCategoriesService.cbxAlarmType | async"  [value]="alarmType.code">{{ alarmType.name | truncate:40 }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmSeverity">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_SEVERITY' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="alarmSeverity"
+                    id="alarmSeverity"
+                    formControlName="alarmSeverity"
+                    [(ngModel)]="alarmDictionaryModel.alarmSeverityId"
+            >
+              <option *ngFor="let alarmSeverity of errorCategoriesService.cbxAlarmSeverity | async"  [value]="alarmSeverity.alarmSeverityId">{{ alarmSeverity.name | truncate:40 }}</option>
+            </select>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="objectType">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.OBJECT_TYPE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="objectType"
+                    id="objectType"
+                    formControlName="objectType"
+                    [(ngModel)]="alarmDictionaryModel.objectType"
+                    (change)="eChangeObjectType()"
+            >
+              <option *ngFor="let ObjectType of listObjectType"  [value]="ObjectType.CODE">{{ 'CATEGORY.ALARM_DICTIONARY.LINE_OBJECT_TYPE.' + ObjectType.NAME | translate }}</option>
+            </select>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="object">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.OBJECT' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="object"
+                    id="object"
+                    formControlName="object"
+                    [(ngModel)]="alarmDictionaryModel.objectId"
+            >
+              <option *ngFor="let object of errorCategoriesService.cbxObject | async"  [value]="object.id">{{ object.name | truncate:40 }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.PROBABLE_CAUSE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="probableCause"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.PROBABLE_CAUSE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('probableCause')"
+                [class.is-valid]="isControlValid('probableCause')"
+                formControlName="probableCause"
+                [(ngModel)]="alarmDictionaryModel.probableCause"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'probableCause')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.PROBABLE_CAUSE' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_ACTION' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="suggestAction"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_ACTION' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('suggestAction')"
+                [class.is-valid]="isControlValid('suggestAction')"
+                formControlName="suggestAction"
+                [(ngModel)]="alarmDictionaryModel.suggestAction"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'suggestAction')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_ACTION' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_SOLUTION' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="suggestSolotion"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_SOLUTION' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('suggestSolotion')"
+                [class.is-valid]="isControlValid('suggestSolotion')"
+                formControlName="suggestSolotion"
+                [(ngModel)]="alarmDictionaryModel.suggestSolotion"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'suggestSolotion')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.SUGGEST_SOLUTION' | translate, max: 200} }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_PATTERN' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmPattern"
+                [placeholder]="'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_PATTERN' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmPattern')"
+                [class.is-valid]="isControlValid('alarmPattern')"
+                formControlName="alarmPattern"
+                [(ngModel)]="alarmDictionaryModel.alarmPattern"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmPattern')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ALARM_DICTIONARY.TABLE_TITLE.ALARM_PATTERN' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'COMMON.DESCRIPTION' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmDesc"
+                [placeholder]="'COMMON.DESCRIPTION' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('alarmDesc')"
+                [class.is-valid]="isControlValid('alarmDesc')"
+                formControlName="alarmDesc"
+                [(ngModel)]="alarmDictionaryModel.alarmDesc"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'alarmDesc')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'COMMON.DESCRIPTION' | translate, max: 200} }}
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="alarmDictionaryModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

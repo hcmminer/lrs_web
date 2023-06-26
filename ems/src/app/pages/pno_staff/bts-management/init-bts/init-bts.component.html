@@ -1,0 +1,185 @@
+<div class="subheader py-2 py-lg-6 subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/bts-management'" class="text-muted">{{ 'BTS_STATION.BTS_MANAGEMENT' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-muted" [routerLink]="'/bts-management/init-bts'">{{ 'BTS_STATION.ADD_BTS' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gutter-b padding-left-right-24 padding-top-24">
+  <div class="col-md-2 col-sm-12 col-12 col-lg-12">
+    <div class="label-card">
+      <label class="form-label title-screen text-uppercase">{{ 'BTS_STATION.BTS_MANAGEMENT' | translate }}</label>
+    </div>
+  </div>
+</div>
+<div class="px-6">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="addForm">
+        <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">{{ 'BTS_STATION.ADD_BTS' | translate }}</div>
+        <div class="mb-6">
+        <span class="mr-3">
+          <input class="mr-2" type="radio" value="partial" id="radio1" name="radioInput" checked
+                 (click)="normalInput()">
+          <label for="radio1"> {{ 'CON_MANAGEMENT.SINGLE_ADD' | translate }} </label>
+        </span>
+          <span>
+          <input class="mr-2" type="radio" value="file" id="radio2" name="radioInput" (click)="fileInput()">
+          <label for="radio2"> {{ 'CON_MANAGEMENT.ADD_FILE' | translate }} </label>
+        </span>
+        </div>
+
+        <div class="form-wrapper" #addFormWrapper>
+          <div class="row form-group gx-6">
+            <div class="col-md-4 col-sm-12 min-width-350 mb-8 row">
+              <label class="col-md-4 col-sm-12 form-label col-form-label"
+                     for="stationCode">{{ 'BTS_STATION.STATION_CODE' | translate }}<span
+                      class="red-color">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="stationCode" autocomplete="off"
+                       formControlName="stationCode"
+                       [(ngModel)]="stationCode"/>
+                <div *ngIf="addForm.get('stationCode').invalid &&
+            (addForm.get('stationCode').dirty || addForm.get('stationCode').touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('stationCode').errors.required">
+                    {{'VALIDATION.REQUIRED' | translate
+                    : {
+                      name: 'DETAIL_CON.CONSTRUCTION_CODE' | translate
+                    }
+                    }}
+                  </small>
+                  <small class="form-text text-danger" *ngIf="addForm.get('stationCode').errors.maxlength">
+                    {{'VALIDATION.MAX_LENGTH' | translate
+                    : {
+                      name: 'BTS_STATION.STATION_CODE' | translate,
+                      max: 30
+                    }
+                    }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12 min-width-350 mb-8 row">
+              <label class="col-md-4 col-sm-12 form-label col-form-label"
+                     for="Long">{{ 'DETAIL_CON.CONSTRUCTION_LONG' | translate }}<span class="red-color">*</span></label>
+              <div class="col-md-8 col-sm-12">
+                <input type="text" class="form-control" id="Long" autocomplete="off" formControlName="Long"/>
+                <div *ngIf="
+                  addForm.get('Long').invalid &&
+                  (addForm.get('Long').dirty || addForm.get('Long').touched)
+                ">
+                  <small class="form-text text-danger" *ngIf="addForm.get('Long').errors.required">
+                    {{'VALIDATION.REQUIRED' | translate
+                    : {
+                      name: 'DETAIL_CON.CONSTRUCTION_LONG' | translate
+                    }
+                    }}
+                  </small>
+                  <small class="form-text text-danger" *ngIf="addForm.get('Long').errors.maxlength">
+                    {{'VALIDATION.MAX_LENGTH' | translate
+                    : {
+                      name: 'DETAIL_CON.CONSTRUCTION_LONG' | translate,
+                      max: 10
+                    }
+                    }}
+                  </small>
+                  <small class="form-text text-danger" *ngIf=" addForm.get('Long').errors.pattern">
+                    {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                    name: 'DETAIL_CON.CONSTRUCTION_LONG' | translate,
+                    format: 'DETAIL_CON.NUM' | translate
+                  } }}</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12 min-width-350 mb-8 row">
+              <label class="col-md-4 col-sm-12 form-label col-form-label"
+                     for="Lat">{{ 'DETAIL_CON.CONSTRUCTION_LAT' | translate }}<span class="red-color">*</span></label>
+              <div class="col-md-8 col-sm-12">
+                <input type="text" class="form-control" id="Lat" autocomplete="off" formControlName="Lat"/>
+                <div *ngIf="
+                addForm.get('Lat').invalid &&
+                (addForm.get('Lat').dirty || addForm.get('Lat').touched)
+              ">
+                  <small class="form-text text-danger" *ngIf="addForm.get('Lat').errors.required">
+                    {{'VALIDATION.REQUIRED' | translate
+                    : {
+                      name: 'DETAIL_CON.CONSTRUCTION_LAT' | translate
+                    }
+                    }}
+                  </small>
+                  <small class="form-text text-danger" *ngIf="addForm.get('Lat').errors?.maxlength">
+                    {{'VALIDATION.MAX_LENGTH' | translate
+                    : {
+                      name: 'DETAIL_CON.CONSTRUCTION_LAT' | translate,
+                      max: 10
+                    }
+                    }}
+                  </small>
+                  <small class="form-text text-danger" *ngIf=" addForm.get('Lat').errors.pattern">
+                    {{'VALIDATION.REQUIRE_FORMAT' | translate : {
+                    name: 'DETAIL_CON.CONSTRUCTION_LAT' | translate,
+                    format: 'DETAIL_CON.NUM' | translate
+                  } }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row pt-12 pb-0">
+            <div class="col-md-12 text-center">
+              <div [routerLink]="'/bts-management'" class="btn btn-light font-weight-bolder mr-3"
+                   style="color: #000000; padding: 7px 32px ; margin: 80px 0 50px 0;">
+                {{'ACTION.CANCEL' | translate}}
+              </div>
+              <div (click)="submitBTSStation()" class="btn font-weight-bolder mr-3"
+                   style="background: #5fb871; color: #fff; padding: 7px 32px ; margin: 80px 0 50px 0;">
+                {{'ACTION.SAVE' | translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:none" #addFileWrapper>
+          <div class="row form-group">
+            <div class="col-md-1 col-sm-12 mb-8">{{ 'BTS_STATION.TITLE' | translate }}</div>
+            <div class="col-md-4 col-sm-12">
+              <ngx-dropzone (change)="onSelect($event)" style="height: auto" class="dropzone" [multiple]="false">
+                <ngx-dropzone-label>
+                  <span class="choose-file font-weight-bolder">{{ 'CON_MANAGEMENT.SELECT_OR_PULL_FILE' | translate }}</span>
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label style="height: 50px">{{ f.name }} </ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+
+            </div>
+            <div class="col-md-1 col-sm-12"></div>
+            <div class="col-md-6 col-sm-12">
+              {{ 'CON_MANAGEMENT.DOWN_FILE' | translate }} <a download="template_construction_add_file"
+                                                              href="assets/template_bts_add_file.xlsx">{{ 'CON_MANAGEMENT.HERE' | translate }}</a>
+            </div>
+          </div>
+          <div class="form-group row pt-12 pb-0">
+            <div class="col-md-12 text-center">
+              <div (click)="submitFile()" class="btn font-weight-bolder mr-3"
+                   style="background: #5fb871; color: #fff; padding: 7px 32px; margin: 50px 0">
+                {{'ACTION.SAVE' | translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

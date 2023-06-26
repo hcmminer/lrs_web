@@ -1,0 +1,35 @@
+.mat-form-field {
+    margin-right: 4px;
+}
+
+.mat-icon-button2,.cdk-tree-node.mat-tree-node > button{
+    border: none;
+    background-color: transparent;
+}
+
+.example-section {
+    overflow: scroll;
+    height: 400px;
+}
+
+.search-hero {
+    max-width: 500px;
+    padding-bottom: 20px;
+    margin:auto;
+}
+
+.form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+    font-family: FontAwesome;
+}
+
+.preview-tree{
+    width: 40%;
+    margin-left: 40px;
+}
+
+.checkbox-tree{
+    width: 50%;
+}

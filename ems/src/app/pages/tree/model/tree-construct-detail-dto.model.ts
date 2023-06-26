@@ -1,0 +1,103 @@
+export class TreeItemDetailDto {
+    constructionDetailId?: number;
+    constructionId?: number;
+    constructionItemId?: number;
+    startDate?: string;
+    startBy?: string;
+    acceptanceDate?: string;
+    acceptanceBy?: string;
+    createdDate?: string;
+    createdBy?: string;
+    status?: number;
+    listImageDTO?: any;
+    name?: string;
+    statusName?: string;
+    startDateStr?: string;
+    acceptanceDateStr?: string;
+    createdDateStr?: string;
+    statusNameSuper?: string;
+}
+
+export class TreeConstructDetailDTO {
+    constructionDetailId?: number;
+    constructionId?: number;
+    constructionItemId?: number;
+    startDate?: string;
+    startDateStr?: string;
+    createdBy?: string;
+    status?: number;
+    name?: string;
+    statusName?: string;
+    acceptanceDate?: string;
+    acceptanceDateStr?: string;
+    acceptanceBy?: string;
+    firstApprovedDate?: string;
+    firstApprovedDateStr?: string;
+    firstApprovedBy?: string;
+    firstRejectDateStr?: string;
+    firstRejectBy?: string;
+    firstRejectReason?: string;
+    secondApprovedDate?: string;
+    secondApprovedDateStr?: string;
+    secondApprovedBy?: string;
+    secondRejectDate?: string;
+    secondRejectBy?: string;
+    secondRejectReason?: string;
+    thirdApprovedDate?: string;
+    thirdApprovedDateStr?: string;
+    thirdApprovedBy?: string;
+    thirdRejectDate?: string;
+    thirdRejectBy?: string;
+    thirdRejectReason?: string;
+    listImageDTO?: any[];
+    listItemDetailDTO?: TreeItemDetailDto[];
+    completeDate?: string;
+    completeDateStr?: string;
+    rejectDateStr?: string;
+    rejectBy?: string;
+    rejectReason?: string;
+}
+
+export class TreeConstructDetailDTOFlat {
+    constructionDetailId?: number;
+    constructionId?: number;
+    constructionItemId?: number;
+    startDate?: string;
+    startDateStr?: string;
+    createdBy?: string;
+    status?: number;
+    name?: string;
+    statusName?: string;
+    acceptanceDate?: string;
+    acceptanceDateStr?: string;
+    acceptanceBy?: string;
+    firstApprovedDate?: string;
+    firstApprovedDateStr?: string;
+    firstApprovedBy?: string;
+    firstRejectDateStr?: string;
+    firstRejectBy?: string;
+    firstRejectReason?: string;
+    secondApprovedDate?: string;
+    secondApprovedDateStr?: string;
+    secondApprovedBy?: string;
+    secondRejectDate?: string;
+    secondRejectBy?: string;
+    secondRejectReason?: string;
+    thirdApprovedDate?: string;
+    thirdApprovedDateStr?: string;
+    thirdApprovedBy?: string;
+    thirdRejectDate?: string;
+    thirdRejectBy?: string;
+    thirdRejectReason?: string;
+    listImageDTO?: any[];
+    listItemDetailDTO?: TreeItemDetailDto[];
+    completeDate?: string;
+    completeDateStr?: string;
+    rejectDateStr?: string;
+    rejectBy?: string;
+    rejectReason?: string;
+
+    public expandable: boolean;
+    public level: number;
+    public isExpanded: boolean;
+}

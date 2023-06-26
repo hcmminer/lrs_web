@@ -1,0 +1,243 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="dashboardDetailModel">
+        <ng-container>{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.LABEL_VIEW_DETAIL' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="dashboardDetailModel">
+      <form action="#" class="form form-label-right">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="systemCode">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_CODE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="systemCode"
+                id="systemCode"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.systemCode"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="systemName">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SYSTEM_NAME' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="systemName"
+                id="systemName"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.systemName"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="serviceCode">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_CODE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceCode"
+                id="serviceCode"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.serviceCode"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="serviceName">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.SERVICE_NAME' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="serviceName"
+                id="serviceName"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.serviceName"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="actionType">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_TYPE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionType"
+                id="actionType"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="actionTypeName"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="actionCode">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ACTION_CODE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionCode"
+                id="actionCode"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.actionCode"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="ipPort">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.IP_PORT' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="ipPort"
+                id="ipPort"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.ipPort"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="functionName">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.FUNCTION' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="functionName"
+                id="functionName"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.functionName"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmId">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_ID' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmId"
+                id="alarmId"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.alarmId"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmCode">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_CODE' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmCode"
+                id="alarmCode"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.alarmCode"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmSeverity">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_SEVERITY' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmSeverity"
+                id="alarmSeverity"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.alarmSeverity"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="clearStatus">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.CLEAR_STATUS' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="clearStatus"
+                id="clearStatus"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="clearStatusName"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="rootAlarmId">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ROOT_ALARM' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="rootAlarmId"
+                id="rootAlarmId"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.rootAlarmId"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="eventTime">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.EVENT_DATETIME' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="eventTime"
+                id="eventTime"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="eventTimeFormat"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="alarmName">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_NAME' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="alarmName"
+                id="alarmName"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.alarmName"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label" for="extendInfo">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.EXTEND_INFO' | translate }}</label>
+            <input
+                type="text"
+                class="form-control"
+                name="extendInfo"
+                id="extendInfo"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.extendInfo"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label" for="alarmDetail">{{ 'ALARM_DASHBOARD.ALARM_DASHBOARD_DETAIL.TABLE_TITLE.ALARM_DETAIL' | translate }}</label>
+            <textarea
+                type="text"
+                class="form-control"
+                name="alarmDetail"
+                id="alarmDetail"
+                autocomplete="off"
+                disabled
+                [(ngModel)]="dashboardDetailModel.alarmDetail"
+                rows="3"
+            ></textarea>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="modal.close()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+  </div>
+</div>

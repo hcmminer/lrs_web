@@ -1,0 +1,158 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/categories"> {{ 'CATEGORY.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/categories/error-type"> {{ 'CATEGORY.ERROR_TYPE_CATEGORY.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row gutter-b">
+    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+      <div class="label-card">
+        <label
+            class="form-label title-screen text-uppercase">{{ 'CATEGORY.ERROR_TYPE_CATEGORY.TITLE' | translate }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <form action="#" class="form form-label-right" [formGroup]="searchForm">
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="errorTypeCodeSearch">{{ 'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_CODE' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="errorTypeCodeSearch"
+                id="errorTypeCodeSearch"
+                [placeholder]="'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_CODE' | translate"
+                autocomplete="off"
+                formControlName="errorTypeCodeSearch"
+                [(ngModel)]="query.code"
+            />
+          </div>
+          <label class="col-md-2 form-label col-form-label"
+                 for="errorTypeNameSearch">{{ 'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_NAME' | translate }}</label>
+          <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="errorTypeNameSearch"
+                id="errorTypeNameSearch"
+                [placeholder]="'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_NAME' | translate"
+                autocomplete="off"
+                formControlName="errorTypeNameSearch"
+                [(ngModel)]="query.name"
+            />
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label class="col-md-2 form-label col-form-label"
+                 for="statusSearch">{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+          <div class="col-md-4">
+            <select class="form-control"
+                    name="statusSearch"
+                    id="statusSearch"
+                    formControlName="statusSearch"
+                    [(ngModel)]="query.status"
+            >
+              <option *ngFor="let status of listStatus"
+                      [value]="status.CODE">{{ 'LIST_STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row pb-0">
+          <div class="col-sm-12 text-right">
+            <button type="button" class="btn btn-secondary" style="padding: 0.45rem 1rem"
+                    (click)="eReset()">
+              <i class="fas fa-redo-alt cursor-pointer"></i>
+              <span class="font-weight-bolder">{{ 'ACTION.DEFAULT' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="search()"
+                    style="margin-left: 10px;padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                search
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-green" (click)="create()"
+                    style="margin-left: 10px; padding: 0.45rem 1rem">
+              <mat-icon style="display: initial; text-align: center;vertical-align: middle; margin-right: 5px">
+                add_circle_outline
+              </mat-icon>
+              <span class="font-weight-bolder">{{ 'ACTION.ADD' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+
+
+  <div class="card card-custom gutter-b">
+    <div class="card-header border-bottom-0">
+      <div class="card-title">
+        <h3 class="card-label">{{ 'COMMON.SEARCH_RESULTS' | translate }}({{ paginator.total }})</h3>
+      </div>
+    </div>
+
+    <div class="card-body pt-0">
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered">
+          <thead>
+          <td>{{ 'COMMON.INDEX' | translate }} </td>
+          <td style="min-width: 95px;">{{ 'ACTION.TITLE' | translate }}</td>
+          <td>{{ 'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_CODE' | translate }}</td>
+          <td>{{ 'CATEGORY.ERROR_TYPE_CATEGORY.TABLE_TITLE.ERROR_TYPE_NAME' | translate }}</td>
+          <td style="min-width: 150px;">{{ 'COMMON.STATUS.TITLE' | translate }}</td>
+          <td>{{ 'COMMON.DESCRIPTION' | translate }}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rowdata of errorCategoriesService.items | async; let i = index">
+            <td>{{ (paginator.page - 1) * paginator.pageSize + i + 1 }}</td>
+            <td style="min-width: 95px;">
+              <i class="fas fa-edit cursor-pointer blue-color" (click)="edit(rowdata.id)"></i>
+              <i class="fas fa-trash-alt cursor-pointer orange-color" (click)="delete(rowdata)"
+                 [style.color]="(rowdata.status != 'O') ? 'gray !important' : '#fe6d00 !important'"></i>
+            </td>
+            <td class="col-left">{{ rowdata.code | truncate: 40 }}</td>
+            <td class="col-left">{{ rowdata.name | truncate: 50 }}</td>
+            <td>
+            <span class="font-weight-bolder" [class.red-color]="rowdata.status === inactiveStatus"
+                  [class.green-color]="rowdata.status === activeStatus">
+                <ng-container
+                    *ngIf="rowdata.status === activeStatus">{{ 'COMMON.STATUS.ACTIVE' | translate }}</ng-container>
+                <ng-container
+                    *ngIf="rowdata.status === inactiveStatus">{{ 'COMMON.STATUS.INACTIVE' | translate }}</ng-container>
+            </span>
+            </td>
+            <td class="col-left">{{ rowdata.description | truncate: 50 }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- end: Table -->
+      <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+                     [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+    </div>
+  </div>
+</div>

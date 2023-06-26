@@ -1,0 +1,171 @@
+<div class="modal-content">
+  <div class="modal-header border-bottom-0 pb-0">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="actionModel">
+        <ng-container *ngIf="actionModel.actionId">{{ 'ACTION.EDIT' | translate }} {{ 'CATEGORY.ACTION.TITLE' | translate }}</ng-container>
+        <ng-container *ngIf="!actionModel.actionId">{{ 'ACTION.ADD' | translate }} {{ 'CATEGORY.ACTION.TITLE' | translate }}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success" style="z-index: 1"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="actionModel">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="actionCode">{{ 'CATEGORY.ACTION.TABLE_TITLE.ACTION_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionCode"
+                id="actionCode"
+                [placeholder]="'CATEGORY.ACTION.TABLE_TITLE.ACTION_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('actionCode')"
+                [class.is-valid]="isControlValid('actionCode')"
+                formControlName="actionCode"
+                [(ngModel)]="actionModel.actionCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'actionCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.ACTION_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'actionCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.ACTION_CODE' | translate, max: 50} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="actionName">{{ 'CATEGORY.ACTION.TABLE_TITLE.ACTION_NAME' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="actionName"
+                id="actionName"
+                [placeholder]="'CATEGORY.ACTION.TABLE_TITLE.ACTION_NAME' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('actionName')"
+                [class.is-valid]="isControlValid('actionName')"
+                formControlName="actionName"
+                [(ngModel)]="actionModel.actionName"
+            />
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'actionName')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.ACTION_NAME' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'actionName')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.ACTION_NAME' | translate, max: 200} }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="categoryId">{{ 'CATEGORY.ACTION.TABLE_TITLE.ACTION_CATEGORY' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="categoryId"
+                    id="categoryId"
+                    formControlName="categoryId"
+                    [(ngModel)]="actionModel.categoryId "
+            >
+              <option *ngFor="let category of actionCategoriesService.cbxCategory | async"  [value]="category.categoryId">{{ category.categoryName }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label" for="actionType">{{ 'CATEGORY.ACTION.TABLE_TITLE.ACTION_TYPE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="actionType"
+                    id="actionType"
+                    formControlName="actionType"
+                    [(ngModel)]="actionModel.actionType"
+            >
+              <option *ngFor="let actionType of listActionType"  [value]="actionType.CODE">{{ 'CATEGORY.ACTION.LINE_ACTION_TYPE.' + actionType.NAME | translate }}</option>
+            </select>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label" for="referActionCode">{{ 'CATEGORY.ACTION.TABLE_TITLE.REFER_ACTION_CODE' | translate }}<span style="color: red;">*</span></label>
+            <input
+                type="text"
+                class="form-control"
+                name="referActionCode"
+                id="referActionCode"
+                [placeholder]="'CATEGORY.ACTION.TABLE_TITLE.REFER_ACTION_CODE' | translate"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('referActionCode')"
+                [class.is-valid]="isControlValid('referActionCode')"
+                formControlName="referActionCode"
+                [(ngModel)]="actionModel.referActionCode"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="controlHasError('required', 'referActionCode')"
+            >
+              {{ 'VALIDATION.REQUIRED' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.REFER_ACTION_CODE' | translate } }}
+            </div>
+            <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxlength', 'referActionCode')"
+            >
+              {{ 'VALIDATION.MAX_LENGTH' | translate: { name: 'CATEGORY.ACTION.TABLE_TITLE.REFER_ACTION_CODE' | translate, max: 200} }}
+            </div>
+          </div>
+          <!-- <div class="col-lg-4">
+            <label>{{ 'COMMON.STATUS.TITLE' | translate }}</label>
+            <span class="switch switch-icon">
+            <label>
+                <input
+                    type="checkbox"
+                    name="status"
+                    (change)="changeStatus(actionModel.status)"
+                    [checked]="actionModel.status == 'O'"
+                />
+              <span></span>
+            </label>
+            </span>
+          </div> -->
+          <div class="col-lg-4">
+            <label class="form-label">{{ 'COMMON.STATUS.TITLE' | translate }}<span style="color: red;">*</span></label>
+            <select class="form-control"
+                    name="status"
+                    id="status"
+                    formControlName="status"
+                    [(ngModel)]="actionModel.status"
+            >
+              <option *ngFor="let status of listStatus"  [value]="status.CODE">{{ 'COMMON.STATUS.' + status.NAME | translate }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer border-top-0 pt-0">
+    <button
+        type="button"
+        class="btn btn-cancel btn-elevate mr-2 font-weight-bolder"
+        (click)="eConfirmClose()"
+    >
+      {{ 'ACTION.CLOSE' | translate }}
+    </button>
+    <ng-container *ngIf="actionModel">
+      <button
+          type="submit"
+          class="btn btn-primary btn-elevate font-weight-bolder"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+      >
+        {{ 'ACTION.SAVE' | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

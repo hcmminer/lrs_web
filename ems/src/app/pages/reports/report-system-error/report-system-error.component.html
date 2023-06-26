@@ -1,0 +1,132 @@
+<div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+  <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+       ng-reflect-ng-class="container-fluid">
+    <div class="d-flex align-items-center flex-wrap mr-1"><!--bindings={}-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+            <a class="text-muted" href="/ems/reports"> {{ 'REPORTS.TITLE' | translate }} </a></li>
+          <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted" ng-reflect-router-link-active="active">
+            <a class="text-muted"
+               href="/ems/reports/report-system-error"> {{ 'REPORTS.REPORT_SYSTEM_ERROR.TITLE' | translate }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row gutter-b">
+    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+      <div class="label-card">
+        <label
+            class="form-label title-screen text-uppercase">{{ 'REPORTS.REPORT_SYSTEM_ERROR.TITLE' | translate }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-custom gutter-b">
+        <div class="card-body">
+          <!-- begin: Filtration form -->
+          <form action="#" id="formSearch" class="form form-label-right" [formGroup]="searchForm">
+            <div class="row form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-1 form-label col-form-label"
+                     for="iValidStartDate">{{ 'REPORTS.REPORT_ERROR_OCCURRED_RESOLVED.TABLE_TITLE.FROM_DATE' | translate }}</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                      type="text"
+                      name="iValidStartDate"
+                      id="iValidStartDate"
+                      class="form-control"
+                      autocomplete="off"
+                      placeholder="dd/mm/yyyy"
+                      ngbDatepicker
+                      #fromDate="ngbDatepicker"
+                      formControlName="iValidStartDate"
+                      [(ngModel)]="query.iValidStartDate"
+                      [class.is-invalid]="isControlInvalid('iValidStartDate')"
+                  />
+                  <div class="input-group-append" (click)="resetError('iValidStartDate');fromDate.toggle();">
+                                <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+                  </div>
+                </div>
+                <div class="mb-1" *ngIf="startDateErrorMsg && startDateErrorMsg.length > 0">
+                  <div style="color: red;">
+                    {{startDateErrorMsg | translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1"></div>
+              <label class="col-md-2 form-label col-form-label"
+                     for="iValidEndDate">{{ 'REPORTS.REPORT_ERROR_OCCURRED_RESOLVED.TABLE_TITLE.TO_DATE' | translate }}</label>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                      type="text"
+                      name="iValidEndDate"
+                      id="iValidEndDate"
+                      class="form-control"
+                      autocomplete="off"
+                      placeholder="dd/mm/yyyy"
+                      ngbDatepicker
+                      #toDate="ngbDatepicker"
+                      formControlName="iValidEndDate"
+                      [(ngModel)]="query.iValidEndDate"
+                      [class.is-invalid]="isControlInvalid('iValidEndDate')"
+                  />
+                  <div class="input-group-append" (click)="resetError('iValidEndDate');toDate.toggle();">
+                    <span class="input-group-text">
+                                  <i class="text-dark-50 flaticon-calendar"></i>
+                                </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+
+            <div class="form-group row pb-3">
+              <div class="col-md-4"></div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-green" style="padding: 0.45rem 1rem; width: 100%"
+                        (click)="searchReportSystemError()">
+                  <i class="fas fa-search cursor-pointer mb-1" style="color: white;"></i>
+                  <span class="font-weight-bolder">{{ 'ACTION.SEARCH' | translate }}</span>
+                </button>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-green" style="padding: 0.45rem 1rem; width: 100%"
+                        (click)="exportReportSystemError()">
+                  <i class="far fa-file-excel cursor-pointer mb-1" style="color: white;"></i>
+                  <span class="font-weight-bolder">{{ 'ACTION.EXPORT' | translate }}</span>
+                </button>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
+          </form>
+          <!-- end: Filtration form -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-custom gutter-b">
+        <div [className]="(isLoading | async)?'card-body d-flex justify-content-center':'card-body'"
+             *ngIf="(searchDataHtml | async) || (isLoading | async)">
+          <div [className]="(isLoading | async)?'spinner spinner-lg spinner-success':''">
+            <div
+                [className]="(isLoading | async)?'sr-only spinner spinner-lg spinner-success':''"
+                style="overflow: scroll;" [innerHTML]="searchDataHtml | async | safeHtml"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
