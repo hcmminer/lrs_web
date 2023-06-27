@@ -2,6 +2,10 @@ img:hover {
   cursor: pointer;
 }
 
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgb(163, 236, 160);
+  cursor: pointer;
+}
 
 tr.example-element-row:active {
   background: #292424;
@@ -79,7 +83,13 @@ td {
   font-weight: bold;
 }
 
-
+.ma-phieu-view {
+  background: #dbe2f3;
+  color: #4674eb;
+  padding: 4px 10px;
+  font-weight: bold;
+  border-radius: 3px;
+}
 
 ::ng-deep .big-size-model-class .modal-dialog {
   max-width: 100%;
@@ -130,6 +140,25 @@ td {
   right: -5px;
 }
 
+.mat-column-organisation {
+  text-align: left !important;
+}
+
+.mat-column-contract {
+  text-align: left !important;
+}
+
+.mat-column-assetCode {
+  text-align: left !important;
+}
+
+.mat-column-labor {
+  text-align: right !important;
+}
+
+.mat-column-material {
+  text-align: right !important;
+}
 
 .mat-column-createdDatetimeStr {
   text-align: center !important;

@@ -1,0 +1,110 @@
+<div class="position-relative rounded">
+  <div class="container">
+    <h5 class="font-weight-boldest mb-5">{{ propAction == 'update' ? ('FUNCTION.UPDATE' | translate) : ('FUNCTION.ADD' | translate) }}</h5>
+    <hr />
+    <form action="#" class="form form-label-right" [formGroup]="addEditForm">
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="typeCbx"
+          >{{ 'LABEL.typeCbx' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control"
+            id="typeCbx"
+            autocomplete="off"
+            formControlName="typeCbx"
+            [class.is-invalid]="isControlInvalid('typeCbx')"
+            maxlength="101"
+          />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'typeCbx')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'LABEL.typeCbx' | translate } }}
+          </div>
+        </div>
+        <label class="col-md-2 mb-12 form-label col-form-label" for="valueVn"
+          >{{ 'LABEL.valueVn' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control"
+            id="valueVn"
+            autocomplete="off"
+            formControlName="valueVn"
+            [class.is-invalid]="isControlInvalid('valueVn')"
+            maxlength="101"
+          />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'valueVn')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'LABEL.valueVn' | translate } }}
+          </div>
+        </div>
+      </div>
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="valueLa"
+          >{{ 'LABEL.valueLa' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control"
+            id="valueLa"
+            autocomplete="off"
+            formControlName="valueLa"
+            [class.is-invalid]="isControlInvalid('valueLa')"
+            maxlength="101"
+          />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'valueLa')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'LABEL.valueLa' | translate } }}
+          </div>
+        </div>
+        <label class="col-md-2 mb-12 form-label col-form-label" for="valueEn"
+          >{{ 'LABEL.valueEn' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control"
+            id="valueEn"
+            autocomplete="off"
+            formControlName="valueEn"
+            [class.is-invalid]="isControlInvalid('valueEn')"
+            maxlength="101"
+          />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'valueEn')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'LABEL.valueEn' | translate } }}
+          </div>
+        </div>
+      </div>
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="description"
+          >{{ 'LABEL.description' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            autocomplete="off"
+            formControlName="description"
+            [class.is-invalid]="isControlInvalid('description')"
+            maxlength="101"
+          />
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
+      </div>
+    </form>
+
+    <div class="d-flex justify-content-end mb-5">
+      <button class="btn btn-outline-primary mx-3" style="width: 150px" (click)="eCloseWithoutEdit()">{{ 'COMMON_BUTTON.CLOSE' | translate }}</button>
+      <button class="btn btn-primary mx-3" style="width: 150px" (click)="eSave()">{{ 'COMMON_BUTTON.CONFIRM' | translate }}</button>
+    </div>
+  </div>
+  <div class="pb-1"></div>
+  <ngx-spinner bdColor="rgba(0,0,0,0.6)" size="default" color="#1dc5be" type="ball-clip-rotate" [fullScreen]="true"></ngx-spinner>
+</div>

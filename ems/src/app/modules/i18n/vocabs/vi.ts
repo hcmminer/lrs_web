@@ -2,6 +2,11 @@
 export const locale = {
   lang: 'vi',
   data: {
+    CONFIG_SYSTEM: 'Quản lý hệ thống',
+    cm: {
+      systemConfig: 'Quản lý hệ thống',
+      optionSet: 'Quản lý cấu hình',
+    },
     BTS_STATION: {
       TITLE: 'Trạm BTS',
       BTS_MANAGEMENT: 'Quản lý trạm BTS',

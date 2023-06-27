@@ -25,6 +25,8 @@ import {TruncatePipe} from '../utils/TruncatePipe';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgbDateCustomParserFormatter} from '../_metronic/core/utils/ngb-date-custom-parser-formatter';
 import {SharedLanguageSelectionModule} from '../_metronic/shared/shared-language-selection/shared-language-selection.module';
+import { CommonAlertDialogComponent } from './materials/common-alert-dialog/common-alert-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -41,8 +43,10 @@ import {SharedLanguageSelectionModule} from '../_metronic/shared/shared-language
     AsideDynamicComponent,
     HeaderMenuDynamicComponent,
     TruncatePipe,
+    CommonAlertDialogComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PagesRoutingModule,
     TranslationModule,
