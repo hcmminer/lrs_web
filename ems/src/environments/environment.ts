@@ -4,21 +4,22 @@
 
 export const environment = {
   production: false,
-  appVersion: 'v01ems',
-  USERDATA_KEY: 'authf649fc9a5f55',
+  appVersion: "v01ems",
+  USERDATA_KEY: "authf649fc9a5f55",
   isMockEnabled: false,
   // apiUrl: 'http://10.120.44.68:8095/cms-gw/api/v1/redirect', // dev
   // apiUrl: 'https://183.182.118.7:8095/cms-gw/api/v1/redirect', // dev
-  apiUrl: 'https://technical.unitel.com.la:8095/cms-gw/api/v1/redirect', // dev
+  // apiUrl: 'https://technical.unitel.com.la:8095/cms-gw/api/v1/redirect', // dev
   // apiUrl: 'http://10.120.137.6:8095/cms-gw/api/v1/redirect', // dev
   // apiUrl: 'https://10.120.137.100:8095/cms-gw/api/v1/redirect/loginAuthentication',
   // apiReportUrl: 'http://10.120.44.68:8086/cms-gw/api/v1/redirect',
   // apiReportUrl: 'http://183.182.100.186:8086/report',
   // WS_BASE_URL: 'http://10.36.209.68:8889/kafka-consumer/ws-notification',
-  WS_BASE_URL: 'https://123.31.20.76:8080/kafka-consumer/ws-notification',
+  WS_BASE_URL: "https://123.31.20.76:8080/kafka-consumer/ws-notification",
   // WS_BASE_URL: 'http://localhost:8081/ws-notification',
-  defaultLanguage: 'vi',
-  siteKey: '6LfhzDscAAAAABgJweEE_WN5e6ZgtfQZGqYiQJPW'
+  defaultLanguage: "vi",
+  siteKey: "6LfhzDscAAAAABgJweEE_WN5e6ZgtfQZGqYiQJPW",
+  apiUrl: "http://10.120.44.68:8095/cms-gw/api/v1/redirect",
 };
 
 /*
