@@ -180,6 +180,11 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'config-system',
+        loadChildren: () =>
+          import('./config-system/config-system.module').then((m) => m.ConfigSystemModule),
+      },
+      {
         path: 'bts-management',
         loadChildren: () =>
           import('./pno_staff/bts-management/bts-management.module').then((m) => m.BtsManagementModule),
