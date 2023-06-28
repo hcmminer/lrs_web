@@ -22,11 +22,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CRUDTableModule } from 'src/app/_metronic/shared/crud-table';
 import { TabOptionSetComponent } from './all-tab/tab-option-set/tab-option-set.component';
-import { AddEditDataProblemComponent } from './all-tab/tab-option-set/childs/add-edit-data-problem/add-edit-data-problem.component';
+import { AddEditDataComponent } from './all-tab/tab-option-set/childs/add-edit-data/add-edit-data-problem.component';
 
 
 @NgModule({
-  declarations: [ConfigSystemComponent, TabOptionSetComponent, AddEditDataProblemComponent],
+  declarations: [ConfigSystemComponent, TabOptionSetComponent, AddEditDataComponent],
   providers: [NgbActiveModal, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   imports: [
     CommonModule,

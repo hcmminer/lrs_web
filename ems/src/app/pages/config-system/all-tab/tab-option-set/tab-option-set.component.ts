@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { CommonService } from 'src/app/pages/cm_service/common.service';
 import { ConfigSystemService } from 'src/app/pages/cm_service/config-system.service';
-import { AddEditDataProblemComponent } from './childs/add-edit-data-problem/add-edit-data-problem.component';
+import { AddEditDataComponent } from './childs/add-edit-data/add-edit-data-problem.component';
 import { RequestApiModel } from 'src/app/pages/_model_api/request-api.model';
 import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert-dialog/common-alert-dialog.component';
 import { cm } from '../../lang';
@@ -42,7 +42,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
   columnsToDisplay = ['index', 'typeCbx', 'valueVn', 'valueEn', 'valueLa', 'description', 'createdBy', 'createdDatetime', 'action'];
 
   constructor(
-    private configSystemService : ConfigSystemService,
+    public configSystemService : ConfigSystemService,
     public router: Router,
     public translate: TranslateService,
     private fb: FormBuilder,
@@ -63,7 +63,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadSearchForm();
     this.eSearch();
-    this.configSystemService.getListColumnTypeBox({ functionName: 'getCbxColumnType' }, true);
+    this.configSystemService.getListOptionSet({ functionName: 'listOptionSet' }, true);
   }
 
   announceSortChange(sortState: Sort) {
@@ -97,7 +97,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     // if (this.searchForm.get('problem').value == '') {
     //   this.searchForm.controls['problem'].setValue('COLUMN_TYPE');
     // }
-    const modalRef = this.modalService.open(AddEditDataProblemComponent, {
+    const modalRef = this.modalService.open(AddEditDataComponent, {
       centered: true,
       backdrop: false,
       size: 'xl',
@@ -144,7 +144,6 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
 
   problem = '';
 
-  // lay danh sach can van de
   conditionSearch() {
     const requestTarget = {
       functionName: 'getListRootCbx',

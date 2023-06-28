@@ -10,11 +10,11 @@ import { ConfigSystemService } from 'src/app/pages/cm_service/config-system.serv
 import { CommonService } from 'src/app/pages/cm_service/common.service';
 
 @Component({
-  selector: 'app-add-edit-data-problem',
-  templateUrl: './add-edit-data-problem.component.html',
-  styleUrls: ['./add-edit-data-problem.component.scss'],
+  selector: 'app-add-edit-data',
+  templateUrl: './add-edit-data.component.html',
+  styleUrls: ['./add-edit-data.component.scss'],
 })
-export class AddEditDataProblemComponent implements OnInit, OnDestroy {
+export class AddEditDataComponent implements OnInit, OnDestroy {
   typeCbx;
   propAction;
   propData;

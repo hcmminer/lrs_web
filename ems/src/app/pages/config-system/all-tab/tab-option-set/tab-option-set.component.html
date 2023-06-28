@@ -9,22 +9,21 @@
             {{ "cm.searchInfor" | translate }}
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <!-- typeProblem -->
-            <label class="col-md-2 form-label col-form-label" for="problem">{{
+            <label class="col-md-2 form-label col-form-label" for="optionSetId">{{
               "cm.optionCode" | translate
             }}</label>
             <div class="col-md-3">
               <select
                 class="form-control"
-                name="problem"
-                id="problem"
-                formControlName="problem"
+                name="optionSetId"
+                id="optionSetId"
+                formControlName="optionSetId"
               >
                 <option
-                  *ngFor="let item of getListTypeProblemBox | async"
-                  [value]="item.value"
+                  *ngFor="let item of configSystemService.cbxOptionSet | async"
+                  [value]="item.optionSetId"
                 >
-                  {{ item.name }}
+                  {{ item.optionSetCode }}
                 </option>
               </select>
             </div>

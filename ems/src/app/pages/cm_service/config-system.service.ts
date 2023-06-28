@@ -42,28 +42,28 @@ export class ConfigSystemService implements OnDestroy {
   }
 
   // store ...
-  cbxColumnType = new BehaviorSubject<any[]>([]);
+  cbxOptionSet = new BehaviorSubject<any[]>([]);
   // ...store
 
-  getListColumnTypeBox(query: RequestApiModel, allowDefault: boolean): void {
+  getListOptionSet(query: RequestApiModel, allowDefault: boolean): void {
     this.isLoading.next(true);
     const request = this.commonService
       .callAPICommon(query)
       .pipe(
         map((response: ResponseModel) => {
           if (response.errorCode != "0") {
-            this.cbxColumnType.next([]);
+            this.cbxOptionSet.next([]);
             throw new Error(response.message);
           }
           if (typeof response.data !== "undefined" && response.data !== null) {
-            this.cbxColumnType.next(response.data as any);
+            this.cbxOptionSet.next(response.data as any);
           } else {
-            this.cbxColumnType.next([]);
+            this.cbxOptionSet.next([]);
           }
           if (allowDefault)
-            this.cbxColumnType.value.unshift({
-              id: -1,
-              name: this.translateService.instant("LIST_STATUS.ALL"),
+            this.cbxOptionSet.value.unshift({
+              optionSetId: '',
+              optionSetCode: this.translateService.instant("LIST_STATUS.ALL"),
             });
         }),
         catchError((err) => {
