@@ -1,13 +1,4 @@
 <div class="position-relative" style="height: 100%">
-  <div class="gutter-b padding-left-right-24 padding-top-24">
-    <div class="col-md-2 col-sm-12 col-12 col-lg-12">
-      <div class="label-card">
-        <label class="form-label title-screen text-uppercase">{{
-          "LABEL.typeProblem" | translate
-        }}</label>
-      </div>
-    </div>
-  </div>
   <div #formSearch class="">
     <div class="card card-custom gutter-b">
       <div class="card-body">
@@ -15,12 +6,12 @@
         <form action="#" class="form form-label-right" [formGroup]="searchForm">
           <!-- Thông tin tìm kiếm -->
           <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">
-            {{ "LABEL.SEARCH_FORM_INFO" | translate }}
+            {{ "cm.searchInfor" | translate }}
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
             <!-- typeProblem -->
             <label class="col-md-2 form-label col-form-label" for="problem">{{
-              "LABEL.typeProblem" | translate
+              "cm.optionCode" | translate
             }}</label>
             <div class="col-md-3">
               <select
@@ -48,14 +39,14 @@
                 class="btn btn-outline-primary font-weight-bolder mx-2"
                 style="height: 38px; padding: 7px 32px; margin: auto"
               >
-                <i class="fas fa-redo"></i> {{ "LABEL.RESET" | translate }}
+                <i class="fas fa-redo"></i> {{ "cm.resset" | translate }}
               </div>
               <div
                 (click)="eSearch()"
                 class="btn btn-primary font-weight-bolder mx-2"
                 style="height: 38px; padding: 7px 32px; margin: auto"
               >
-                <i class="fas fa-search"></i> {{ "LABEL.SEARCH" | translate }}
+                <i class="fas fa-search"></i> {{ "cm.search" | translate }}
               </div>
             </div>
           </div>
@@ -70,7 +61,7 @@
         >
           <div class="">
             <h5 class="card-label" style="font-weight: 700">
-              {{ "LABEL.typeProblem" | translate }}
+              {{ cm.list | translate }}
             </h5>
           </div>
           <div class="">
@@ -88,7 +79,7 @@
           <mat-form-field appearance="standard">
             <mat-label class="font-14">
               <i class="fas fa-search"></i>
-              {{ "LABEL.SEARCH_ADVANCE" | translate }}
+              {{ "cm.searchAdvance" | translate }}
             </mat-label>
             <!-- <input class="border-bottom-danger" matInput #searchInput /> -->
             <input matInput (keyup)="applyFilter($event)" #input />

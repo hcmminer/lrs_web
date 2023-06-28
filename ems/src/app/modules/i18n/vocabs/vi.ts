@@ -4,8 +4,7 @@ export const locale = {
   data: {
     CONFIG_SYSTEM: 'Quản lý hệ thống',
     cm: {
-      systemConfig: 'Quản lý hệ thống',
-      optionSet: 'Quản lý cấu hình',
+      
     },
     BTS_STATION: {
       TITLE: 'Trạm BTS',

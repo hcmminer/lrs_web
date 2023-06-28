@@ -18,6 +18,7 @@ import { ConfigSystemService } from 'src/app/pages/cm_service/config-system.serv
 import { AddEditDataProblemComponent } from './childs/add-edit-data-problem/add-edit-data-problem.component';
 import { RequestApiModel } from 'src/app/pages/_model_api/request-api.model';
 import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert-dialog/common-alert-dialog.component';
+import { cm } from '../../lang';
 
 @Component({
   selector: 'app-tab-option-set',
@@ -25,6 +26,7 @@ import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert
   styleUrls: ['./tab-option-set.component.scss']
 })
 export class TabOptionSetComponent implements OnInit, OnDestroy {
+  cm = cm;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
