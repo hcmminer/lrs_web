@@ -5,25 +5,45 @@
         <!-- begin: Filtration form -->
         <form action="#" class="form form-label-right" [formGroup]="searchForm">
           <!-- Thông tin tìm kiếm -->
-          <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">
-            {{ "cm.searchInfor" | translate }}
+          <div
+            class="font-weight-bolder mb-12 d-flex justify-content-between"
+            style="font-size: 1.275rem"
+          >
+            <div>
+              {{ "cm.optionSetValue" | translate }}
+              <span *ngIf="optionSetCode">
+                {{ "cm.of" | translate }}
+                <span class="text-primary">
+                  {{ optionSetCode }}
+                </span>
+              </span>
+            </div>
+            <button
+              class="btn bg-black btn-outline-dark mx-3"
+              style="width: 70px; font-weight: 700"
+              (click)="eCloseWithoutEdit()"
+            >
+              {{ "cm.close" | translate }}
+            </button>
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <label class="col-md-2 form-label col-form-label" for="optionSetId">{{
-              "cm.optionSetCode" | translate
+            <label class="col-md-2 form-label col-form-label" for="value">{{
+              "cm.value" | translate
             }}</label>
             <div class="col-md-3">
               <select
                 class="form-control"
-                name="optionSetId"
-                id="optionSetId"
-                formControlName="optionSetId"
+                name="optionSetValueId"
+                id="optionSetValueId"
+                formControlName="optionSetValueId"
               >
                 <option
-                  *ngFor="let item of configSystemService.cbxOptionSet | async"
-                  [value]="item.optionSetId"
+                  *ngFor="
+                    let item of configSystemService.cbxOptionSetValue | async
+                  "
+                  [value]="item.optionSetValueId"
                 >
-                  {{ item.optionSetCode }}
+                  {{ item.value }}
                 </option>
               </select>
             </div>
@@ -101,12 +121,37 @@
                   {{ index + 1 }}
                 </td>
               </ng-container>
-              <ng-container matColumnDef="optionSetCode">
+              <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                  {{ "cm.optionSetCode" | translate }}
+                  {{ "cm.value" | translate }}
                 </th>
                 <td class="text-left" mat-cell *matCellDef="let item">
-                  {{ item.optionSetCode }}
+                  {{ item.value }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nameVi">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameVi" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameVi }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="nameEn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameEn" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameEn }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="nameLa">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameLa" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameLa }}
                 </td>
               </ng-container>
 
@@ -118,7 +163,6 @@
                   {{ item.description }}
                 </td>
               </ng-container>
-              
 
               <ng-container matColumnDef="createDatetime">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>

@@ -27,5 +27,13 @@ export const cm = {
   warning: "Cảnh báo",
   info: "Thông tin",
   description: "Mô tả",
-  action: "Hành động"
+  action: "Hành động",
+  language: "Ngôn ngữ",
+  // option-set-value...
+  value: 'Mã tham số cấu hình',
+  // ...option-set-value
+  nameVi: 'Tên(Vi)',
+  nameEn: 'Tên(En)',
+  nameLa: 'Tên(La)',
+  of: 'của'
 };

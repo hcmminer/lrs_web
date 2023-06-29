@@ -132,3 +132,10 @@
         max-width: map-get($grid-breakpoints, xl) - 100px;
     }
 }
+
+@include media-breakpoint-up(xxl) {
+    .modal-dialog.modal-xxl {
+      max-width: 95% !important;
+      min-width: 90% !important;
+    }
+}

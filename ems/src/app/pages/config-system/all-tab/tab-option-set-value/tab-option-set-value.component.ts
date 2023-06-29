@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatPaginator } from "@angular/material/paginator";
@@ -33,8 +33,10 @@ import { cm } from "../../lang";
   styleUrls: ['./tab-option-set-value.component.scss']
 })
 export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
+  propData;
+  optionSetCode;
   cm = cm;
-  optionSetId = null;
+  optionSetValueId = null;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -49,7 +51,10 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   columnsToDisplay = [
     "index",
-    "optionSetCode",
+    "value",
+    "nameVi",
+    "nameEn",
+    "nameLa",
     "description",
     "createBy",
     "createDatetime",
@@ -57,6 +62,7 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   ];
 
   constructor(
+    public activeModal : NgbActiveModal,
     public configSystemService: ConfigSystemService,
     public router: Router,
     public translate: TranslateService,
@@ -70,23 +76,29 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   ) {}
   loadSearchForm() {
     this.searchForm = this.fb.group({
-      optionSetId: [this.optionSetId],
+      optionSetValueId: [this.optionSetValueId],
     });
   }
   private subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
+    this.optionSetCode = this.propData?.optionSetCode
     this.loadSearchForm();
     this.eSearch();
-    this.configSystemService.getListOptionSet(
+    this.configSystemService.getListOptionSetValue(
       {
-        functionName: "listOptionSet",
+        functionName: "listOptionSetValue",
         searchV1DTO: {
-          optionSetId: null,
+          optionSetValueId: null,
+          optionSetId : this.propData?.optionSetId || null
         },
       },
       true
     );
+  }
+
+  eCloseWithoutEdit() {
+    this.activeModal.dismiss();
   }
 
   announceSortChange(sortState: Sort) {
@@ -131,9 +143,10 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
 
   conditionSearch() {
     const requestTarget = {
-      functionName: "listOptionSet",
+      functionName: "listOptionSetValue",
       searchV1DTO: {
-        optionSetId: this.searchForm.get("optionSetId").value,
+        optionSetValueId: this.searchForm.get("optionSetValueId").value,
+        optionSetId : this.propData?.optionSetId || null
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);
@@ -160,9 +173,9 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
     modalRef.result.then(
       (result) => {
         const requestTarget = {
-          functionName: "delOptionSet",
-          optionSetV1DTO: {
-            optionSetId: item.optionSetId,
+          functionName: "delOptionSetValue",
+          optionSetValueV1DTO: {
+            optionSetValueId: item.optionSetId,
           },
         };
         this.commonService

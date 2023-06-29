@@ -30,7 +30,10 @@ import { CommonService } from "src/app/pages/cm_service/common.service";
 export class AddEditDataComponent implements OnInit, OnDestroy {
   propAction;
   propData;
-  optionSetCode;
+  value;
+  nameVi;
+  nameEn;
+  nameLa;
   description;
   show: boolean = false;
   showHide() {
@@ -66,12 +69,18 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.propAction == "add") {
       this.addEditForm = this.fb.group({
-        optionSetCode: [this.optionSetCode, [Validators.required]],
+        value: [this.value, [Validators.required]],
+        nameVi: [this.nameVi, [Validators.required]],
+        nameEn: [this.nameEn, [Validators.required]],
+        nameLa: [this.nameLa, [Validators.required]],
         description: [this.description, [Validators.required]],
       });
     } else {
       this.addEditForm = this.fb.group({
-        optionSetCode: [this.propData.optionSetCode, [Validators.required]],
+        value: [this.propData.value, [Validators.required]],
+        nameVi: [this.propData.nameVi, [Validators.required]],
+        nameEn: [this.propData.nameEn, [Validators.required]],
+        nameLa: [this.propData.nameLa, [Validators.required]],
         description: [this.propData.description, [Validators.required]],
       });
     }
@@ -156,19 +165,23 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
 
   addEditStaff() {
     const requestTarget = {
-      optionSetV1DTO: {
-        optionSetCode: this.addEditForm.get("optionSetCode").value,
+      optionSetValueV1DTO: {
+        optionSetId : this.propData.optionSetId,
+        value: this.addEditForm.get("value").value,
+        nameVi: this.addEditForm.get("nameVi").value,
+        nameEn: this.addEditForm.get("nameEn").value,
+        nameLa: this.addEditForm.get("nameLa").value,
         description: this.addEditForm.get("description").value,
       },
     };
     if (this.propAction == "edit") {
       const requestTargetNew = {
         ...requestTarget,
-        optionSetV1DTO: {
-          ...requestTarget.optionSetV1DTO,
-          optionSetId: this.propData.optionSetId,
+        optionSetValueV1DTO: {
+          ...requestTarget.optionSetValueV1DTO,
+          optionSetValueId: this.propData.optionSetValueId,
         },
-        functionName: "editOptionSet",
+        functionName: "editOptionSetValue",
       };
       this.commonService.callAPICommon(requestTargetNew).subscribe((res) => {
         this.spinner.hide();
@@ -182,7 +195,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
     } else {
       const requestTargetNew = {
         ...requestTarget,
-        functionName: "addOptionSet",
+        functionName: "addOptionSetValue",
       };
       this.commonService.callAPICommon(requestTargetNew).subscribe((res) => {
         this.spinner.hide();

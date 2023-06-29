@@ -43,6 +43,7 @@ export class ConfigSystemService implements OnDestroy {
 
   // store ...
   cbxOptionSet = new BehaviorSubject<any[]>([]);
+  cbxOptionSetValue = new BehaviorSubject<any[]>([]);
   // ...store
 
   getListOptionSet(query: RequestApiModel, allowDefault: boolean): void {
@@ -64,6 +65,37 @@ export class ConfigSystemService implements OnDestroy {
             this.cbxOptionSet.value.unshift({
               optionSetId: null,
               optionSetCode: this.translateService.instant("LIST_STATUS.ALL"),
+            });
+        }),
+        catchError((err) => {
+          this.toastrService.error(err.error?.message || err.message, "Error");
+          return of(undefined);
+        }),
+        finalize(() => {})
+      )
+      .subscribe();
+    this.subscriptions.push(request);
+  }
+
+  getListOptionSetValue(query: RequestApiModel, allowDefault: boolean): void {
+    this.isLoading.next(true);
+    const request = this.commonService
+      .callAPICommon(query)
+      .pipe(
+        map((response: ResponseModel) => {
+          if (response.errorCode != "0") {
+            this.cbxOptionSetValue.next([]);
+            throw new Error(response.message);
+          }
+          if (typeof response.data !== "undefined" && response.data !== null) {
+            this.cbxOptionSetValue.next(response.data as any);
+          } else {
+            this.cbxOptionSetValue.next([]);
+          }
+          if (allowDefault)
+            this.cbxOptionSetValue.value.unshift({
+              optionSetValueId: null,
+              value: this.translateService.instant("LIST_STATUS.ALL"),
             });
         }),
         catchError((err) => {

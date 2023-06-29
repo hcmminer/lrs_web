@@ -3,5 +3,6 @@ export class RequestApiModel {
   searchV1DTO? : {
     optionSetCode? : string,
     optionSetId? : any,
+    optionSetValueId? : any,
   }
 }
