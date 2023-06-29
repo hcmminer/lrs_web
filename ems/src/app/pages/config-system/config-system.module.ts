@@ -22,7 +22,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CRUDTableModule } from 'src/app/_metronic/shared/crud-table';
 import { TabOptionSetComponent } from './all-tab/tab-option-set/tab-option-set.component';
-import { AddEditDataComponent } from './all-tab/tab-option-set/childs/add-edit-data/add-edit-data-problem.component';
+import { AddEditDataComponent } from './all-tab/tab-option-set/childs/add-edit-data/add-edit-data.component';
 
 
 @NgModule({

@@ -5,8 +5,11 @@ export const cm = {
   list: "Danh sách",
   systemConfig: "Quản lý hệ thống",
   optionSet: "Quản lý cấu hình",
-  optionSetCode:"Mã cấu hình",
-  searchAdvance:'Tìm kiếm nâng cao',
-  add: 'Thêm mới',
-  
+  optionSetCode: "Mã cấu hình",
+  searchAdvance: "Tìm kiếm nâng cao",
+  add: "Thêm mới",
+  edit:"Cập nhật",
+  createBy: "Người tạo",
+  createDatetime: "Ngày tạo",
+  confirmDelete:"Xác nhận xóa",
 };

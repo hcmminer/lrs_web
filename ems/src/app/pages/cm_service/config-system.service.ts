@@ -62,7 +62,7 @@ export class ConfigSystemService implements OnDestroy {
           }
           if (allowDefault)
             this.cbxOptionSet.value.unshift({
-              optionSetId: '',
+              optionSetId: null,
               optionSetCode: this.translateService.instant("LIST_STATUS.ALL"),
             });
         }),

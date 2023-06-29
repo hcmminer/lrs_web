@@ -15,9 +15,10 @@ import { CommonService } from 'src/app/pages/cm_service/common.service';
   styleUrls: ['./add-edit-data.component.scss'],
 })
 export class AddEditDataComponent implements OnInit, OnDestroy {
-  typeCbx;
   propAction;
   propData;
+  optionSetCode;
+  description;
   show: boolean = false;
   showHide() {
     this.show = !this.show;
@@ -46,27 +47,19 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       this.id = this.data.id;
     } else {
     }
-
-
     this.loadForm();
   }
 
   loadForm() {
     if (this.propAction == 'add') {
       this.addEditForm = this.fb.group({
-        typeCbx: [this.typeCbx, [Validators.required]],
-        valueVn: ['', [Validators.required]],
-        valueLa: ['', [Validators.required]],
-        valueEn: ['', [Validators.required]],
-        description: [''],
+        optionSetCode: [this.optionSetCode, [Validators.required]],
+        description: [this.description, [Validators.required]],
       });
     } else {
       this.addEditForm = this.fb.group({
-        typeCbx: [this.propData.typeCbx, [Validators.required]],
-        valueVn: [this.propData.valueVn, [Validators.required]],
-        valueLa: [this.propData.valueLa, [Validators.required]],
-        valueEn: [this.propData.valueEn, [Validators.required]],
-        description: [this.propData.description],
+        optionSetCode: [this.propData.optionSetCode, [Validators.required]],
+        description: [this.propData.description, [Validators.required]],
       });
     }
   }
