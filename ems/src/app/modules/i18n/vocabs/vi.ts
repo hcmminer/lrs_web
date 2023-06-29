@@ -16,6 +16,7 @@ export const locale = {
       searchAdvance: "Tìm kiếm nâng cao",
       add: "Thêm mới",
       edit: "Cập nhật",
+      delete: "Xóa",
       createBy: "Người tạo",
       createDatetime: "Ngày tạo",
       confirmDelete: "Xác nhận xóa",
@@ -31,6 +32,7 @@ export const locale = {
       warning: "Cảnh báo",
       info: "Thông tin",
       description: "Mô tả",
+      action: "Hành động",
     },
     BTS_STATION: {
       TITLE: "Trạm BTS",

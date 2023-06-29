@@ -11,6 +11,7 @@ export const cm = {
   searchAdvance: "Tìm kiếm nâng cao",
   add: "Thêm mới",
   edit: "Cập nhật",
+  delete: "Xóa",
   createBy: "Người tạo",
   createDatetime: "Ngày tạo",
   confirmDelete: "Xác nhận xóa",
@@ -25,5 +26,6 @@ export const cm = {
   success: "Thành công",
   warning: "Cảnh báo",
   info: "Thông tin",
-  description: "Mô tả"
+  description: "Mô tả",
+  action: "Hành động"
 };

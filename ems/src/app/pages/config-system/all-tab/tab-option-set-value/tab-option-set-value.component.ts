@@ -26,14 +26,13 @@ import { AddEditDataComponent } from "./childs/add-edit-data/add-edit-data.compo
 import { RequestApiModel } from "src/app/pages/_model_api/request-api.model";
 import { CommonAlertDialogComponent } from "src/app/pages/materials/common-alert-dialog/common-alert-dialog.component";
 import { cm } from "../../lang";
-import { TabOptionSetValueComponent } from "../tab-option-set-value/tab-option-set-value.component";
 
 @Component({
-  selector: "app-tab-option-set",
-  templateUrl: "./tab-option-set.component.html",
-  styleUrls: ["./tab-option-set.component.scss"],
+  selector: 'app-tab-option-set-value',
+  templateUrl: './tab-option-set-value.component.html',
+  styleUrls: ['./tab-option-set-value.component.scss']
 })
-export class TabOptionSetComponent implements OnInit, OnDestroy {
+export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   cm = cm;
   optionSetId = null;
   applyFilter(event) {
@@ -140,19 +139,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);
   }
 
-  eViewDetail(item) {
-    const modalRef = this.modalService.open(TabOptionSetValueComponent, {
-      centered: true,
-      backdrop: false,
-      size: "xl"
-    });
-
-    modalRef.componentInstance.propData = item;
-
-    modalRef.result.then(() => {
-      this.eSearch();
-    });
-  }
+  
 
   eDelete(item) {
     const modalRef = this.modalService.open(CommonAlertDialogComponent, {
@@ -228,3 +215,4 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     return value;
   }
 }
+
