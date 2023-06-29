@@ -1,5 +1,5 @@
 export class ResponseModel {
-  status: boolean;
+  status?: boolean;
   message?: string;
   data?: {} | [];
   pageLimit?: number;

@@ -145,8 +145,8 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
       backdrop: false,
     });
     modalRef.componentInstance.data = {
-      type: "WARNING",
-      title: "COMMON_MODAL.WARNING",
+      type: "warning",
+      title: "cm.warning",
       message: this.translate.instant("cm.confirmDelete"),
       continue: true,
       cancel: true,
@@ -158,8 +158,8 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     modalRef.result.then(
       (result) => {
         const requestTarget = {
-          functionName: "deleteRootCbx",
-          id: item.id,
+          functionName: "delOptionSet",
+          optionSetId: item.optionSetId,
         };
         this.commonService
           .callAPICommon(requestTarget as RequestApiModel)
@@ -167,7 +167,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
             this.spinner.hide();
             if (res.errorCode == "0") {
               this.toastService.success(
-                this.translate.instant("FUNCTION.SUCCSESS_DELETE")
+                this.translate.instant('cm.delSuccess')
               );
               this.eSearch();
             } else {

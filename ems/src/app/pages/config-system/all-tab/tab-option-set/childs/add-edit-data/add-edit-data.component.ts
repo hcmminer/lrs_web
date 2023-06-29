@@ -1,18 +1,31 @@
-import { Component, EventEmitter, Inject, Injector, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Subscription } from 'rxjs';
-import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert-dialog/common-alert-dialog.component';
-import { ToastrService } from 'ngx-toastr';
-import { ConfigSystemService } from 'src/app/pages/cm_service/config-system.service';
-import { CommonService } from 'src/app/pages/cm_service/common.service';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+  Output,
+} from "@angular/core";
+import {
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from "@angular/forms";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Subscription } from "rxjs";
+import { CommonAlertDialogComponent } from "src/app/pages/materials/common-alert-dialog/common-alert-dialog.component";
+import { ToastrService } from "ngx-toastr";
+import { ConfigSystemService } from "src/app/pages/cm_service/config-system.service";
+import { CommonService } from "src/app/pages/cm_service/common.service";
 
 @Component({
-  selector: 'app-add-edit-data',
-  templateUrl: './add-edit-data.component.html',
-  styleUrls: ['./add-edit-data.component.scss'],
+  selector: "app-add-edit-data",
+  templateUrl: "./add-edit-data.component.html",
+  styleUrls: ["./add-edit-data.component.scss"],
 })
 export class AddEditDataComponent implements OnInit, OnDestroy {
   propAction;
@@ -39,7 +52,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private commonService: CommonService,
     @Inject(Injector) private readonly injector: Injector,
-    public spinner: NgxSpinnerService,
+    public spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -51,7 +64,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.propAction == 'add') {
+    if (this.propAction == "add") {
       this.addEditForm = this.fb.group({
         optionSetCode: [this.optionSetCode, [Validators.required]],
         description: [this.description, [Validators.required]],
@@ -113,56 +126,68 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       backdrop: false,
     });
     modalRef.componentInstance.data = {
-      type: 'WARNING',
-      title: 'COMMON_MODAL.WARNING',
-      message: this.propAction == 'add' ? this.translate.instant('confirmAdd') : this.translate.instant('confirmEdit'),
+      type: "warning",
+      title: "cm.warning",
+      message:
+        this.propAction == "add"
+          ? this.translate.instant("cm.confirmAdd")
+          : this.translate.instant("cm.confirmEdit"),
       continue: true,
       cancel: true,
       btn: [
-        { text: 'CANCEL', className: 'btn-outline-warning btn uppercase mx-2' },
-        { text: 'CONTINUE', className: 'btn btn-warning uppercase mx-2' },
+        { text: "CANCEL", className: "btn-outline-warning btn uppercase mx-2" },
+        { text: "CONTINUE", className: "btn btn-warning uppercase mx-2" },
       ],
     };
     modalRef.result.then(
       (result) => {
-        if (result == 'CANCEL') {
+        if (result == "CANCEL") {
           return false;
         }
-        if (result == 'CONTINUE') {
+        if (result == "CONTINUE") {
           this.addEditStaff();
         }
       },
       (reason) => {
         return false;
-      },
+      }
     );
   }
 
   addEditStaff() {
     const requestTarget = {
-      typeCbx: this.addEditForm.get('typeCbx').value,
-      valueVn: this.addEditForm.get('valueVn').value,
-      valueEn: this.addEditForm.get('valueEn').value,
-      valueLa: this.addEditForm.get('valueLa').value,
-      description: this.addEditForm.get('description').value,
+      optionSetV1DTO: {
+        optionSetCode: this.addEditForm.get("optionSetCode").value,
+        description: this.addEditForm.get("description").value,
+      },
     };
-    if (this.propAction == 'update') {
-      const requestTargetNew = { ...requestTarget, id: this.propData.id, functionName: 'editRootCbx' };
+    if (this.propAction == "edit") {
+      const requestTargetNew = {
+        ...requestTarget,
+        optionSetV1DTO: {
+          ...requestTarget.optionSetV1DTO,
+          optionSetId: this.propData.optionSetId,
+        },
+        functionName: "editOptionSet",
+      };
       this.commonService.callAPICommon(requestTargetNew).subscribe((res) => {
         this.spinner.hide();
-        if (res && res.errorCode == '0') {
-          this.toastService.success(this.translate.instant('FUNCTION.SUCCSESS_UPDATE'));
+        if (res && res.errorCode == "0") {
+          this.toastService.success(this.translate.instant("cm.editSuccess"));
           this.eClose();
         } else {
           this.toastService.error(res.description);
         }
       });
     } else {
-      const requestTargetNew = { ...requestTarget, functionName: 'insertRootCbx' };
+      const requestTargetNew = {
+        ...requestTarget,
+        functionName: "addOptionSet",
+      };
       this.commonService.callAPICommon(requestTargetNew).subscribe((res) => {
         this.spinner.hide();
-        if (res && res.errorCode == '0') {
-          this.toastService.success(this.translate.instant('FUNCTION.SUCCSESS_ADD'));
+        if (res && res.errorCode == "0") {
+          this.toastService.success(this.translate.instant("cm.addSuccess"));
           this.eClose();
         } else {
           this.toastService.error(res.description);

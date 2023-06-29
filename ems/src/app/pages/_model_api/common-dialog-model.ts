@@ -15,7 +15,7 @@
  *
  */
 export interface CommonDialogModel {
-  type?: 'ERROR' | 'SUCCESS' | 'WARNING' | 'INFO',
+  type?: 'error' | 'success' | 'warning' | 'info',
   title?: string,
   message?: string,
   retry?: boolean,

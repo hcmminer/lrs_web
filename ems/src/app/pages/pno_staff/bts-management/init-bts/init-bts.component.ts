@@ -141,7 +141,7 @@ export class InitBtsComponent implements OnInit {
         latitude : this.addForm.get('Lat').value.trim(),
       }
     };
-    return this.btsManagementService.callAPICommon(requestTarget as RequestApiModel);
+    return this.btsManagementService.callAPICommon(requestTarget as any);
   }
 
   submitFile() {

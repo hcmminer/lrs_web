@@ -35,25 +35,25 @@ export class CommonAlertDialogComponent implements OnInit {
 
   ngOnInit() {
     switch (this.data.type) {
-      case 'ERROR': {
+      case 'error': {
         this.headerClass = 'danger';
         this.closeIconSrc = this.defaultIconSrc + 'icon-error-20px.svg';
         this.iconSrc = this.defaultIconSrc + 'icon-error-72px.svg';
         break;
       }
-      case 'SUCCESS': {
+      case 'success': {
         this.headerClass = 'success';
         this.closeIconSrc = this.defaultIconSrc + 'icon-close-success.svg';
         this.iconSrc = this.defaultIconSrc + 'icon-success-72px.svg';
         break;
       }
-      case 'WARNING': {
+      case 'warning': {
         this.headerClass = 'warning';
         this.closeIconSrc = this.defaultIconSrc + 'icon-close-warning.svg';
         this.iconSrc = this.defaultIconSrc + 'icon-warning-72px.svg';
         break;
       }
-      case 'INFO': {
+      case 'info': {
         this.headerClass = 'info';
         this.closeIconSrc = this.defaultIconSrc + 'icon-close-info.svg';
         this.iconSrc = this.defaultIconSrc + 'icon-information-72px.svg';
@@ -63,7 +63,7 @@ export class CommonAlertDialogComponent implements OnInit {
   }
 
   eventClick(text: any) {
-      if(text.toUpperCase()==='CANCEL' || text.toUpperCase()==='HUY'){
+      if(text==='cancel' || text==='huy'){
           this.cancel();
       } else {
           if (this.data.enableConfirmInputText) {

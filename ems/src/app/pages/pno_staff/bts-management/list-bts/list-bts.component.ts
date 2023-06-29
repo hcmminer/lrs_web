@@ -243,7 +243,7 @@ export class ListBtsComponent implements OnInit, AfterViewInit {
         hasContractFile: this.btsManagementService.hasContractFile.value
       }
     };
-    return this.btsManagementService.callAPICommon(requestTarget as RequestApiModel);
+    return this.btsManagementService.callAPICommon(requestTarget as any);
   }
 
   getComboBoxDataBTSStation() {
@@ -260,7 +260,7 @@ export class ListBtsComponent implements OnInit, AfterViewInit {
         proCode: _proCode
       }
     };
-    return this.btsManagementService.callAPICommon(requestTarget as RequestApiModel);
+    return this.btsManagementService.callAPICommon(requestTarget as any);
   }
 
   formatStartDateToSend(event, row){
@@ -329,7 +329,7 @@ export class ListBtsComponent implements OnInit, AfterViewInit {
       functionName: 'updateBTSStation',
       btsStationDTOList: lst
     };
-    return this.btsManagementService.callAPICommon(requestTarget as RequestApiModel);
+    return this.btsManagementService.callAPICommon(requestTarget as any);
   }
 
   getFile(filePath){
@@ -337,7 +337,7 @@ export class ListBtsComponent implements OnInit, AfterViewInit {
       functionName :"getFile",
       filePath: filePath
     }
-    this.btsManagementService.callAPICommon(request as RequestApiModel).subscribe(res => {
+    this.btsManagementService.callAPICommon(request as any).subscribe(res => {
       if (res.errorCode == '0'){
         const downloadLink = document.createElement("a");
         const fileName = `${filePath}.pdf`;
