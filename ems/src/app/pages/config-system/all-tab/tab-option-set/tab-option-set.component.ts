@@ -151,15 +151,17 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
       continue: true,
       cancel: true,
       btn: [
-        { text: "CANCEL", className: "btn-outline-warning btn uppercase mx-2" },
-        { text: "CONTINUE", className: "btn btn-warning uppercase mx-2" },
+        { text: "cancel", className: "btn-outline-warning btn uppercase mx-2" },
+        { text: "continue", className: "btn btn-warning uppercase mx-2" },
       ],
     };
     modalRef.result.then(
       (result) => {
         const requestTarget = {
           functionName: "delOptionSet",
-          optionSetId: item.optionSetId,
+          optionSetV1DTO : {            
+            optionSetId: item.optionSetId,
+          }
         };
         this.commonService
           .callAPICommon(requestTarget as RequestApiModel)

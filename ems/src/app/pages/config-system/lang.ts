@@ -1,10 +1,12 @@
 export const cm = {
+  no: 'STT',
   search: "Tìm kiếm",
   resset: "Nhập lại",
   searchInfor: "Thông tin tìm kiếm",
   list: "Danh sách",
   systemConfig: "Quản lý hệ thống",
   optionSet: "Quản lý cấu hình",
+  optionSetValue: 'Quản lý tham số cấu hình',
   optionSetCode: "Mã cấu hình",
   searchAdvance: "Tìm kiếm nâng cao",
   add: "Thêm mới",
@@ -23,4 +25,5 @@ export const cm = {
   success: "Thành công",
   warning: "Cảnh báo",
   info: "Thông tin",
+  description: "Mô tả"
 };

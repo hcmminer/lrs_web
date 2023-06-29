@@ -135,16 +135,16 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       continue: true,
       cancel: true,
       btn: [
-        { text: "CANCEL", className: "btn-outline-warning btn uppercase mx-2" },
-        { text: "CONTINUE", className: "btn btn-warning uppercase mx-2" },
+        { text: "cancel", className: "btn-outline-warning btn uppercase mx-2" },
+        { text: "continue", className: "btn btn-warning uppercase mx-2" },
       ],
     };
     modalRef.result.then(
       (result) => {
-        if (result == "CANCEL") {
+        if (result == "cancel") {
           return false;
         }
-        if (result == "CONTINUE") {
+        if (result == "continue") {
           this.addEditStaff();
         }
       },
