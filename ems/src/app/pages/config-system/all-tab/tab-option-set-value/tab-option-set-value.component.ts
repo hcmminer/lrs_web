@@ -34,6 +34,7 @@ import { cm } from "../../lang";
 })
 export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   propData;
+  optionSetId;
   optionSetCode;
   cm = cm;
   value = null;
@@ -82,15 +83,25 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
+    this.optionSetId = this.propData?.optionSetId;
     this.optionSetCode = this.propData?.optionSetCode;
     this.loadSearchForm();
     this.eSearch();
-    this.configSystemService.getListOptionSetValue(
+    // this.configSystemService.getListOptionSetValue(
+    //   {
+    //     functionName: "listOptionSetValue",
+    //     searchV1DTO: {
+    //       optionSetValueId: null,
+    //       optionSetId: this.propData?.optionSetId || null,
+    //     },
+    //   },
+    //   true
+    // );
+    this.configSystemService.getListOptionSet(
       {
-        functionName: "listOptionSetValue",
+        functionName: "listOptionSet",
         searchV1DTO: {
-          optionSetValueId: null,
-          optionSetId: this.propData?.optionSetId || null,
+          optionSetId: null,
         },
       },
       true
@@ -134,8 +145,12 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
       backdrop: false,
       size: "xl",
     });
-    modalRef.componentInstance.propData = item;
+    modalRef.componentInstance.propEdit = item; // edit only
     modalRef.componentInstance.propAction = action;
+    modalRef.componentInstance.propAdd = {
+      optionSetIdForAdd: this.optionSetId,
+    }; // add only
+
     modalRef.result.then(() => {
       this.eSearch();
     });
@@ -145,6 +160,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: "listOptionSetValue",
       searchV1DTO: {
+        optionSetId: this.optionSetId,
         value: this.searchForm.get("value").value,
       },
     };

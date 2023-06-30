@@ -28,11 +28,13 @@ import { CommonService } from "src/app/pages/cm_service/common.service";
   styleUrls: ["./add-edit-data.component.scss"],
 })
 export class AddEditDataComponent implements OnInit, OnDestroy {
+  propAdd;
+  propEdit;
   propAction;
-  propData;
 
   //
-  optionSetId = null;
+  optionSetIdForAdd; // tu cha
+  optionSetId; // cho edit
   value;
   nameVi;
   nameEn;
@@ -62,41 +64,33 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    if (this.isUpdate) {
-      this.id = this.data.id;
+    if (this.propAction == "add") {
+      this.optionSetIdForAdd = this.propAdd.optionSetIdForAdd;
     } else {
+      this.optionSetId = this.propEdit.optionSetId;
     }
-    this.loadForm();
 
-    this.configSystemService.getListOptionSet(
-      {
-        functionName: "listOptionSet",
-        searchV1DTO: {
-          optionSetId: null,
-        },
-      },
-      true
-    );
+    this.loadForm();
   }
 
   loadForm() {
     if (this.propAction == "add") {
       this.addEditForm = this.fb.group({
-        optionSetId: [this.optionSetId, [Validators.required]],
+        optionSetIdForAdd: [this.optionSetIdForAdd, [Validators.required]],
         value: [this.value, [Validators.required]],
         nameVi: [this.nameVi, [Validators.required]],
         nameEn: [this.nameEn, [Validators.required]],
         nameLa: [this.nameLa, [Validators.required]],
         description: [this.description, [Validators.required]],
       });
-    } else {
+    } else if (this.propAction == "edit") {
       this.addEditForm = this.fb.group({
-        optionSetId: [this.propData.optionSetId, [Validators.required]],
-        value: [this.propData.value, [Validators.required]],
-        nameVi: [this.propData.nameVi, [Validators.required]],
-        nameEn: [this.propData.nameEn, [Validators.required]],
-        nameLa: [this.propData.nameLa, [Validators.required]],
-        description: [this.propData.description, [Validators.required]],
+        optionSetId: [this.optionSetId, [Validators.required]],
+        value: [this.propEdit.value, [Validators.required]],
+        nameVi: [this.propEdit.nameVi, [Validators.required]],
+        nameEn: [this.propEdit.nameEn, [Validators.required]],
+        nameLa: [this.propEdit.nameLa, [Validators.required]],
+        description: [this.propEdit.description, [Validators.required]],
       });
     }
   }
@@ -181,7 +175,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   addEditStaff() {
     const requestTarget = {
       optionSetValueV1DTO: {
-        optionSetId: this.propData.optionSetId,
+        optionSetId: this.propEdit.optionSetId,
         value: this.addEditForm.get("value").value,
         nameVi: this.addEditForm.get("nameVi").value,
         nameEn: this.addEditForm.get("nameEn").value,
@@ -194,7 +188,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
         ...requestTarget,
         optionSetValueV1DTO: {
           ...requestTarget.optionSetValueV1DTO,
-          optionSetValueId: this.propData.optionSetValueId,
+          optionSetValueId: this.propEdit.optionSetValueId,
         },
         functionName: "editOptionSetValue",
       };

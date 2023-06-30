@@ -12,19 +12,38 @@
           "cm.optionSetCode" | translate
         }}</label>
         <div class="col-md-3">
-          <select
-            class="form-control"
-            name="optionSetId"
-            id="optionSetId"
-            formControlName="optionSetId"
-          >
-            <option
-              *ngFor="let item of configSystemService.cbxOptionSet | async"
-              [value]="item.optionSetId"
+          <ng-container *ngIf="propAction == 'add'">
+            <select
+              class="form-control"
+              name="optionSetIdForAdd"
+              id="optionSetIdForAdd"
+              formControlName="optionSetIdForAdd"
+              [(ngModel)]="optionSetIdForAdd"
             >
-              {{ item.optionSetCode }}
-            </option>
-          </select>
+              <option
+                *ngFor="let item of configSystemService.cbxOptionSet | async"
+                [value]="item.optionSetId"
+              >
+                {{ item.optionSetCode }}
+              </option>
+            </select>
+          </ng-container>
+          <ng-container *ngIf="propAction == 'edit'">
+            <select
+              class="form-control"
+              name="optionSetId"
+              id="optionSetId"
+              formControlName="optionSetId"
+              [(ngModel)]="optionSetId"
+            >
+              <option
+                *ngFor="let item of configSystemService.cbxOptionSet | async"
+                [value]="item.optionSetId"
+              >
+                {{ item.optionSetCode }}
+              </option>
+            </select>
+          </ng-container>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-3"></div>
