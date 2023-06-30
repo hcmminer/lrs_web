@@ -174,21 +174,15 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   }
 
   addEditStaff() {
-    const requestTarget = {
-      optionSetValueV1DTO: {
-        optionSetId: this.addEditForm.get("optionSetId").value,
-        value: this.addEditForm.get("value").value,
-        nameVi: this.addEditForm.get("nameVi").value,
-        nameEn: this.addEditForm.get("nameEn").value,
-        nameLa: this.addEditForm.get("nameLa").value,
-        description: this.addEditForm.get("description").value,
-      },
-    };
     if (this.propAction == "edit") {
       const requestTargetNew = {
-        ...requestTarget,
         optionSetValueV1DTO: {
-          ...requestTarget.optionSetValueV1DTO,
+          optionSetId: this.addEditForm.get("optionSetId").value,
+          value: this.addEditForm.get("value").value,
+          nameVi: this.addEditForm.get("nameVi").value,
+          nameEn: this.addEditForm.get("nameEn").value,
+          nameLa: this.addEditForm.get("nameLa").value,
+          description: this.addEditForm.get("description").value,
           optionSetValueId: this.propEdit.optionSetValueId,
         },
         functionName: "editOptionSetValue",
@@ -204,7 +198,14 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       });
     } else {
       const requestTargetNew = {
-        ...requestTarget,
+        optionSetValueV1DTO: {
+          optionSetId: this.addEditForm.get("optionSetIdForAdd").value,
+          value: this.addEditForm.get("value").value,
+          nameVi: this.addEditForm.get("nameVi").value,
+          nameEn: this.addEditForm.get("nameEn").value,
+          nameLa: this.addEditForm.get("nameLa").value,
+          description: this.addEditForm.get("description").value,
+        },
         functionName: "addOptionSetValue",
       };
       this.commonService.callAPICommon(requestTargetNew).subscribe((res) => {
