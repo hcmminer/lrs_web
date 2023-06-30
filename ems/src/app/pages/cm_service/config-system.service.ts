@@ -26,7 +26,7 @@ export class ConfigSystemService implements OnDestroy {
     private toastrService: ToastrService,
     public translateService: TranslateService,
     private commonService: CommonService,
-    public spinner: NgxSpinnerService,
+    public spinner: NgxSpinnerService
   ) {
     const token = localStorage.getItem(CONFIG.KEY.TOKEN);
     const language = localStorage.getItem(CONFIG.KEY.LOCALIZATION);
@@ -64,7 +64,7 @@ export class ConfigSystemService implements OnDestroy {
           if (allowDefault)
             this.cbxOptionSet.value.unshift({
               optionSetId: null,
-              optionSetCode: this.translateService.instant("LIST_STATUS.ALL"),
+              optionSetCode: this.translateService.instant("cm.select"),
             });
         }),
         catchError((err) => {

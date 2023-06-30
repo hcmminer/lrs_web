@@ -40,8 +40,8 @@ export const locale = {
       nameVi: "Tên(Vi)",
       nameEn: "Tên(En)",
       nameLa: "Tên(La)",
-  of: 'của'
-
+      select: "Lựa chọn",
+      of: "của",
     },
     BTS_STATION: {
       TITLE: "Trạm BTS",
