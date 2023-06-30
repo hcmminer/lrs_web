@@ -210,7 +210,8 @@
           ></mat-paginator>
         </div>
         <button
-          class="btn bg-black btn-outline-dark mr-0"
+          *ngIf="mustShowClose"
+          class="btn bg-black btn-outline-dark float-right"
           style="width: 70px; font-weight: 700"
           (click)="eCloseWithoutEdit()"
         >

@@ -33,7 +33,8 @@ import { cm } from "../../lang";
   styleUrls: ["./tab-option-set-value.component.scss"],
 })
 export class TabOptionSetValueComponent implements OnInit, OnDestroy {
-  propData;
+  mustShowClose; // từ ông
+  propData; // từ ông
   optionSetId;
   optionSetCode;
   cm = cm;
@@ -87,16 +88,6 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
     this.optionSetCode = this.propData?.optionSetCode;
     this.loadSearchForm();
     this.eSearch();
-    // this.configSystemService.getListOptionSetValue(
-    //   {
-    //     functionName: "listOptionSetValue",
-    //     searchV1DTO: {
-    //       optionSetValueId: null,
-    //       optionSetId: this.propData?.optionSetId || null,
-    //     },
-    //   },
-    //   true
-    // );
     this.configSystemService.getListOptionSet(
       {
         functionName: "listOptionSet",

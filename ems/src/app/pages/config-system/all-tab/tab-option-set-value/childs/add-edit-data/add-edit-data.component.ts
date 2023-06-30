@@ -65,7 +65,8 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.propAction == "add") {
-      this.optionSetIdForAdd = this.propAdd.optionSetIdForAdd;
+      // nếu nhận từ ông || từ cha
+      this.optionSetIdForAdd = this.propAdd.optionSetIdForAdd || null;
     } else {
       this.optionSetId = this.propEdit.optionSetId;
     }

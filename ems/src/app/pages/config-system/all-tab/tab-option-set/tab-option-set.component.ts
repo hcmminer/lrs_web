@@ -139,6 +139,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     });
 
     modalRef.componentInstance.propData = item;
+    modalRef.componentInstance.mustShowClose = true;
 
     modalRef.result.then(() => {
       this.eSearch();

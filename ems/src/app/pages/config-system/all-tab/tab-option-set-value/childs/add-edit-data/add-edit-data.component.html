@@ -8,9 +8,11 @@
     <hr />
     <form action="#" class="form form-label-right" [formGroup]="addEditForm">
       <div class="row form-group gx-6 mb-0 justify-content-center">
-        <label class="col-md-2 form-label col-form-label" for="optionSetId">{{
-          "cm.optionSetCode" | translate
-        }}</label>
+        <label
+          class="col-md-2 mb-12 form-label col-form-label"
+          for="optionSetId"
+          >{{ "cm.optionSetCode" | translate }}</label
+        >
         <div class="col-md-3">
           <ng-container *ngIf="propAction == 'add'">
             <select
