@@ -28,11 +28,11 @@ import { CommonAlertDialogComponent } from "src/app/pages/materials/common-alert
 import { cm } from "../../lang";
 
 @Component({
-  selector: 'app-tab-option-set-value',
-  templateUrl: './tab-option-set-value.component.html',
-  styleUrls: ['./tab-option-set-value.component.scss']
+  selector: "app-tab-option-set-value",
+  templateUrl: "./tab-option-set-value.component.html",
+  styleUrls: ["./tab-option-set-value.component.scss"],
 })
-export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
+export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   propData;
   optionSetCode;
   cm = cm;
@@ -62,7 +62,7 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   ];
 
   constructor(
-    public activeModal : NgbActiveModal,
+    public activeModal: NgbActiveModal,
     public configSystemService: ConfigSystemService,
     public router: Router,
     public translate: TranslateService,
@@ -82,7 +82,7 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    this.optionSetCode = this.propData?.optionSetCode
+    this.optionSetCode = this.propData?.optionSetCode;
     this.loadSearchForm();
     this.eSearch();
     this.configSystemService.getListOptionSetValue(
@@ -90,7 +90,7 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
         functionName: "listOptionSetValue",
         searchV1DTO: {
           optionSetValueId: null,
-          optionSetId : this.propData?.optionSetId || null
+          optionSetId: this.propData?.optionSetId || null,
         },
       },
       true
@@ -145,14 +145,11 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: "listOptionSetValue",
       searchV1DTO: {
-        optionSetValueId: this.searchForm.get("optionSetValueId").value,
-        optionSetId : this.propData?.optionSetId || null
+        value: this.searchForm.get("value").value,
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);
   }
-
-  
 
   eDelete(item) {
     const modalRef = this.modalService.open(CommonAlertDialogComponent, {
@@ -228,4 +225,3 @@ export class TabOptionSetValueComponent  implements OnInit, OnDestroy {
     return value;
   }
 }
-

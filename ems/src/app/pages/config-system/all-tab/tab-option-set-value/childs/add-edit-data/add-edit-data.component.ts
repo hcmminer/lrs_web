@@ -30,6 +30,9 @@ import { CommonService } from "src/app/pages/cm_service/common.service";
 export class AddEditDataComponent implements OnInit, OnDestroy {
   propAction;
   propData;
+
+  //
+  optionSetId = null;
   value;
   nameVi;
   nameEn;
@@ -64,11 +67,22 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
     } else {
     }
     this.loadForm();
+
+    this.configSystemService.getListOptionSet(
+      {
+        functionName: "listOptionSet",
+        searchV1DTO: {
+          optionSetId: null,
+        },
+      },
+      true
+    );
   }
 
   loadForm() {
     if (this.propAction == "add") {
       this.addEditForm = this.fb.group({
+        optionSetId: [this.optionSetId, [Validators.required]],
         value: [this.value, [Validators.required]],
         nameVi: [this.nameVi, [Validators.required]],
         nameEn: [this.nameEn, [Validators.required]],
@@ -77,6 +91,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       });
     } else {
       this.addEditForm = this.fb.group({
+        optionSetId: [this.propData.optionSetId, [Validators.required]],
         value: [this.propData.value, [Validators.required]],
         nameVi: [this.propData.nameVi, [Validators.required]],
         nameEn: [this.propData.nameEn, [Validators.required]],
@@ -166,7 +181,7 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   addEditStaff() {
     const requestTarget = {
       optionSetValueV1DTO: {
-        optionSetId : this.propData.optionSetId,
+        optionSetId: this.propData.optionSetId,
         value: this.addEditForm.get("value").value,
         nameVi: this.addEditForm.get("nameVi").value,
         nameEn: this.addEditForm.get("nameEn").value,

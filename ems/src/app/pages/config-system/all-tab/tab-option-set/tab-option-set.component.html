@@ -9,23 +9,21 @@
             {{ "cm.searchInfor" | translate }}
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <label class="col-md-2 form-label col-form-label" for="optionSetId">{{
-              "cm.optionSetCode" | translate
-            }}</label>
+            <label
+              class="col-md-2 form-label col-form-label"
+              for="optionSetId"
+              >{{ "cm.optionSetCode" | translate }}</label
+            >
             <div class="col-md-3">
-              <select
+              <input
+                type="text"
                 class="form-control"
-                name="optionSetId"
-                id="optionSetId"
-                formControlName="optionSetId"
-              >
-                <option
-                  *ngFor="let item of configSystemService.cbxOptionSet | async"
-                  [value]="item.optionSetId"
-                >
-                  {{ item.optionSetCode }}
-                </option>
-              </select>
+                id="optionSetCode"
+                autocomplete="off"
+                formControlName="optionSetCode"
+                [class.is-invalid]="isControlInvalid('optionSetCode')"
+                maxlength="101"
+              />
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-3"></div>
@@ -105,8 +103,15 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.optionSetCode" | translate }}
                 </th>
-                <td class="text-left" mat-cell *matCellDef="let item" (click)="eViewDetail(item)">
-                  <a class="text-primary hover-opacity-49 cursor-pointer">{{ item.optionSetCode }}</a>
+                <td
+                  class="text-left"
+                  mat-cell
+                  *matCellDef="let item"
+                  (click)="eViewDetail(item)"
+                >
+                  <a class="text-primary hover-opacity-49 cursor-pointer">{{
+                    item.optionSetCode
+                  }}</a>
                 </td>
               </ng-container>
 
@@ -118,7 +123,6 @@
                   {{ item.description }}
                 </td>
               </ng-container>
-              
 
               <ng-container matColumnDef="createDatetime">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>

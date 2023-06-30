@@ -79,15 +79,6 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadSearchForm();
     this.eSearch();
-    this.configSystemService.getListOptionSet(
-      {
-        functionName: "listOptionSet",
-        searchV1DTO: {
-          optionSetId: null,
-        },
-      },
-      true
-    );
   }
 
   announceSortChange(sortState: Sort) {
@@ -100,7 +91,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
   eResetForm() {
     this.loadSearchForm();
   }
-  // tim kiem nhan vien theo truong
+
   eSearch() {
     if (!this.isValidForm()) {
       this.searchForm.markAllAsTouched();
@@ -134,7 +125,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: "listOptionSet",
       searchV1DTO: {
-        optionSetId: this.searchForm.get("optionSetId").value,
+        optionSetCode: this.searchForm.get("optionSetCode").value,
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);
@@ -144,7 +135,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(TabOptionSetValueComponent, {
       centered: true,
       backdrop: false,
-      size: "xl"
+      size: "xl",
     });
 
     modalRef.componentInstance.propData = item;
