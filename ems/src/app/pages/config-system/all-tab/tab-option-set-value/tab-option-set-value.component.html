@@ -209,10 +209,10 @@
             aria-label="Select page of results"
           ></mat-paginator>
         </div>
+
         <button
-          *ngIf="mustShowClose"
-          class="btn bg-black btn-outline-dark float-right"
-          style="width: 70px; font-weight: 700"
+          class="btn btn-outline-primary mx-3 float-right"
+          style="width: 150px"
           (click)="eCloseWithoutEdit()"
         >
           {{ "cm.close" | translate }}

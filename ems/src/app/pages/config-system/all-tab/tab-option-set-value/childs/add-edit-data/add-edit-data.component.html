@@ -7,7 +7,7 @@
     </h5>
     <hr />
     <form action="#" class="form form-label-right" [formGroup]="addEditForm">
-      <div class="row form-group gx-6 mb-0 justify-content-center">
+      <div class="row form-group gx-6 mb-0 justify-content-around">
         <label
           class="col-md-2 mb-12 form-label col-form-label"
           for="optionSetId"
@@ -69,7 +69,7 @@
         <div class="col-md-3"></div>
       </div>
 
-      <div class="row form-group gx-6 mb-0 justify-content-center">
+      <div class="row form-group gx-6 mb-0 justify-content-around">
         <label class="col-md-2 mb-12 form-label col-form-label" for="value"
           >{{ "cm.value" | translate }}
           <span style="color: red">*</span>
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="row form-group gx-6 mb-0 justify-content-center">
+      <div class="row form-group gx-6 mb-0 justify-content-around">
         <label class="col-md-2 mb-12 form-label col-form-label" for="nameEn"
           >{{ "cm.nameEn" | translate }}
           <span style="color: red">*</span>
@@ -172,15 +172,16 @@
         </div>
       </div>
 
-      <div class="row form-group gx-6 mb-0 justify-content-center">
+      <div class="row form-group gx-6 mb-0 justify-content-around">
         <label
           class="col-md-2 mb-12 form-label col-form-label"
           for="description"
           >{{ "cm.description" | translate }}
           <span style="color: red">*</span>
         </label>
-        <div class="col-md-8">
-          <input
+        <div class="col-md-9">
+          <textarea
+            rows="3"
             type="text"
             class="form-control"
             id="description"
@@ -188,7 +189,9 @@
             formControlName="description"
             [class.is-invalid]="isControlInvalid('description')"
             maxlength="101"
-          />
+          >
+          </textarea>
+
           <div
             class="invalid-feedback"
             *ngIf="controlHasError('required', 'description')"

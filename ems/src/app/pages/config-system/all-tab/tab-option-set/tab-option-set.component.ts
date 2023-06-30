@@ -135,7 +135,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(TabOptionSetValueComponent, {
       centered: true,
       backdrop: false,
-      size: "xl",
+      size: "xxl",
     });
 
     modalRef.componentInstance.propData = item;
