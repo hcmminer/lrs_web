@@ -29,6 +29,15 @@
                 {{ item.optionSetCode }}
               </option>
             </select>
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="controlHasError('required', 'optionSetIdForAdd')"
+            >
+              {{
+                "VALIDATION.REQUIRED"
+                  | translate : { name: "cm.value" | translate }
+              }}
+            </div>
           </ng-container>
           <ng-container *ngIf="propAction == 'edit'">
             <select
@@ -45,6 +54,15 @@
                 {{ item.optionSetCode }}
               </option>
             </select>
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="controlHasError('required', 'optionSetId')"
+            >
+              {{
+                "VALIDATION.REQUIRED"
+                  | translate : { name: "cm.value" | translate }
+              }}
+            </div>
           </ng-container>
         </div>
         <div class="col-md-2"></div>
