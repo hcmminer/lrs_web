@@ -35,7 +35,7 @@ import { TabOptionSetValueComponent } from "../tab-option-set-value/tab-option-s
 })
 export class TabOptionSetComponent implements OnInit, OnDestroy {
   cm = cm;
-  optionSetId = null;
+  optionSetode = null;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -71,7 +71,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
   ) {}
   loadSearchForm() {
     this.searchForm = this.fb.group({
-      optionSetId: [this.optionSetId],
+      optionSetCode: [this.optionSetode],
     });
   }
   private subscriptions: Subscription[] = [];

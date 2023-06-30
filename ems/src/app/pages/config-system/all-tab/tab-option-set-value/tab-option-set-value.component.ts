@@ -36,7 +36,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   propData;
   optionSetCode;
   cm = cm;
-  optionSetValueId = null;
+  value = null;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -76,7 +76,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   ) {}
   loadSearchForm() {
     this.searchForm = this.fb.group({
-      optionSetValueId: [this.optionSetValueId],
+      value: [this.value],
     });
   }
   private subscriptions: Subscription[] = [];
