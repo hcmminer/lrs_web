@@ -178,11 +178,11 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       const requestTargetNew = {
         optionSetValueV1DTO: {
           optionSetId: this.addEditForm.get("optionSetId").value,
-          value: this.addEditForm.get("value").value,
-          nameVi: this.addEditForm.get("nameVi").value,
-          nameEn: this.addEditForm.get("nameEn").value,
-          nameLa: this.addEditForm.get("nameLa").value,
-          description: this.addEditForm.get("description").value,
+          value: this.addEditForm.get("value").value.trim(),
+          nameVi: this.addEditForm.get("nameVi").value.trim(),
+          nameEn: this.addEditForm.get("nameEn").value.trim(),
+          nameLa: this.addEditForm.get("nameLa").value.trim(),
+          description: this.addEditForm.get("description").value.trim(),
           optionSetValueId: this.propEdit.optionSetValueId,
         },
         functionName: "editOptionSetValue",
@@ -200,11 +200,11 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
       const requestTargetNew = {
         optionSetValueV1DTO: {
           optionSetId: this.addEditForm.get("optionSetIdForAdd").value,
-          value: this.addEditForm.get("value").value,
-          nameVi: this.addEditForm.get("nameVi").value,
-          nameEn: this.addEditForm.get("nameEn").value,
-          nameLa: this.addEditForm.get("nameLa").value,
-          description: this.addEditForm.get("description").value,
+          value: this.addEditForm.get("value").value.trim(),
+          nameVi: this.addEditForm.get("nameVi").value.trim(),
+          nameEn: this.addEditForm.get("nameEn").value.trim(),
+          nameLa: this.addEditForm.get("nameLa").value.trim(),
+          description: this.addEditForm.get("description").value.trim(),
         },
         functionName: "addOptionSetValue",
       };

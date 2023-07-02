@@ -4,6 +4,8 @@ export const locale = {
   data: {
     CONFIG_SYSTEM: "Quản lý hệ thống",
     cm: {
+      continue: "Tiếp tục",
+      cancel: "Hủy",
       no: "STT",
       search: "Tìm kiếm",
       resset: "Nhập lại",

@@ -125,7 +125,7 @@ export class TabOptionSetComponent implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: "listOptionSet",
       searchV1DTO: {
-        optionSetCode: this.searchForm.get("optionSetCode").value,
+        optionSetCode: this.searchForm.get("optionSetCode").value?.trim(),
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);

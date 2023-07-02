@@ -152,7 +152,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
       functionName: "listOptionSetValue",
       searchV1DTO: {
         optionSetId: this.optionSetId,
-        value: this.searchForm.get("value").value,
+        value: this.searchForm.get("value").value?.trim(),
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);
@@ -179,7 +179,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
         const requestTarget = {
           functionName: "delOptionSetValue",
           optionSetValueV1DTO: {
-            optionSetValueId: item.optionSetId,
+            optionSetValueId: item.optionSetValueId,
           },
         };
         this.commonService

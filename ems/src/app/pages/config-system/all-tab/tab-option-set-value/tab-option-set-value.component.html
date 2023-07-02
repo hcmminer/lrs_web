@@ -211,6 +211,7 @@
         </div>
 
         <button
+          *ngIf="mustShowClose"
           class="btn btn-outline-primary mx-3 float-right"
           style="width: 150px"
           (click)="eCloseWithoutEdit()"

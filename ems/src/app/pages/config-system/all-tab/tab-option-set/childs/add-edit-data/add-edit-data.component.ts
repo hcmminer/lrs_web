@@ -157,8 +157,8 @@ export class AddEditDataComponent implements OnInit, OnDestroy {
   addEditStaff() {
     const requestTarget = {
       optionSetV1DTO: {
-        optionSetCode: this.addEditForm.get("optionSetCode").value,
-        description: this.addEditForm.get("description").value,
+        optionSetCode: this.addEditForm.get("optionSetCode").value.trim(),
+        description: this.addEditForm.get("description").value.trim(),
       },
     };
     if (this.propAction == "edit") {
