@@ -31,8 +31,36 @@
                 maxlength="101"
               />
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-3"></div>
+
+            <ng-container *ngIf="!mustShowClose">
+              <label
+                class="col-md-2 mb-12 form-label col-form-label"
+                for="optionSetId"
+                >{{ "cm.optionSetCode" | translate }}</label
+              >
+              <div class="col-md-3">
+                <select
+                  class="form-control"
+                  name="optionSetId"
+                  id="optionSetId"
+                  formControlName="optionSetId"
+                >
+                  <option
+                    *ngFor="
+                      let item of configSystemService.cbxOptionSet | async
+                    "
+                    [ngValue]="item.optionSetId"
+                  >
+                    {{ item.optionSetCode }}
+                  </option>
+                </select>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="mustShowClose">
+              <div class="col-md-2"></div>
+              <div class="col-md-3"></div>
+            </ng-container>
+
             <!--End -->
           </div>
           <div class="form-group row pb-0">
@@ -63,7 +91,7 @@
         >
           <div class="">
             <h5 class="card-label" style="font-weight: 700">
-              {{ cm.list | translate }}
+              {{ "cm.list" | translate }}
             </h5>
           </div>
           <div class="">

@@ -25,7 +25,6 @@ import { ConfigSystemService } from "src/app/pages/cm_service/config-system.serv
 import { AddEditDataComponent } from "./childs/add-edit-data/add-edit-data.component";
 import { RequestApiModel } from "src/app/pages/_model_api/request-api.model";
 import { CommonAlertDialogComponent } from "src/app/pages/materials/common-alert-dialog/common-alert-dialog.component";
-import { cm } from "../../lang";
 
 @Component({
   selector: "app-tab-option-set-value",
@@ -37,7 +36,6 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   propData; // từ ông
   optionSetId;
   optionSetCode;
-  cm = cm;
   value = null;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -79,12 +77,13 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   loadSearchForm() {
     this.searchForm = this.fb.group({
       value: [this.value],
+      optionSetId: [null],
     });
   }
   private subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    this.optionSetId = this.propData?.optionSetId;
+    this.optionSetId = this.propData?.optionSetId || null; // set null để hiện default cbx
     this.optionSetCode = this.propData?.optionSetCode;
     this.loadSearchForm();
     this.eSearch();
@@ -151,7 +150,8 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: "listOptionSetValue",
       searchV1DTO: {
-        optionSetId: this.optionSetId,
+        optionSetId:
+          this.optionSetId || this.searchForm.get("optionSetId").value,
         value: this.searchForm.get("value").value?.trim(),
       },
     };
