@@ -25,7 +25,6 @@ import { InlineSVGModule } from "ng-inline-svg";
 import { NgxDropzoneModule } from "ngx-dropzone";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CRUDTableModule } from "src/app/_metronic/shared/crud-table";
-import { TabOptionSetComponent } from "./all-tab/tab-option-set/tab-option-set.component";
 import { ProvincialManagementComponent } from "./all-tab/provincial-management/provincial-management.component";
 import { SharedDisplayHtmlModule } from "src/app/_metronic/shared/shared-display-html/shared-display-html.module";
 import { FormAddEditProvinceComponent } from "./all-tab/provincial-management/form-add-edit-province/form-add-edit-province.component";
@@ -34,12 +33,24 @@ import { CommuneManagementComponent } from "./all-tab/commune-management/commune
 import { FormAddEditCommuneComponent } from "./all-tab/commune-management/form-add-edit-commune/form-add-edit-commune.component";
 import { VillageManagementComponent } from "./all-tab/village-management/village-management.component";
 import { FormAddEditVillageComponent } from "./all-tab/village-management/form-add-edit-village/form-add-edit-village.component";
+// bandv..
+import { TabOptionSetComponent } from "./all-tab/tab-option-set/tab-option-set.component";
+import { TabOptionSetValueComponent } from "./all-tab/tab-option-set-value/tab-option-set-value.component";
+import { AddEditDataComponent } from "./all-tab/tab-option-set/childs/add-edit-data/add-edit-data.component";
+import { AddEditDataComponent as AddEditDataComponent_1 } from "./all-tab/tab-option-set-value/childs/add-edit-data/add-edit-data.component";
+// ..bandv
 
 @NgModule({
   declarations: [
-    CommonAlertDialogComponent,
+    // bandv..
     ConfigSystemComponent,
     TabOptionSetComponent,
+    TabOptionSetValueComponent,
+    AddEditDataComponent,
+    AddEditDataComponent_1,
+    // ..bandv
+
+    CommonAlertDialogComponent,
     ProvincialManagementComponent,
     FormAddEditProvinceComponent,
     CommuneManagementComponent,
@@ -72,7 +83,7 @@ import { FormAddEditVillageComponent } from "./all-tab/village-management/form-a
     MatInputModule,
     MatTabsModule,
     MatRadioModule,
-    SharedDisplayHtmlModule,
+    // SharedDisplayHtmlModule,
   ],
 })
 export class ConfigSystemModule {}
