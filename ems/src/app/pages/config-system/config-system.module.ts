@@ -83,7 +83,7 @@ import { AddEditDataComponent as AddEditDataComponent_1 } from "./all-tab/tab-op
     MatInputModule,
     MatTabsModule,
     MatRadioModule,
-    // SharedDisplayHtmlModule,
+    SharedDisplayHtmlModule,
   ],
 })
 export class ConfigSystemModule {}
