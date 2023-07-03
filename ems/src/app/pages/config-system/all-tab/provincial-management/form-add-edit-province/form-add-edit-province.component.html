@@ -1,0 +1,123 @@
+<div class="pt-5 pl-5 pr-5">
+    <div class="">
+      <!-- begin: Filtration form -->
+      <h5 style="font-weight: 700">
+        {{
+          isUpdate || isUpdateFile ? ('PROVINCIAL_MANAGEMENT.UPDATE_PROVINCE' | translate) : ('PROVINCIAL_MANAGEMENT.ADD_PROVINCE' | translate)
+        }}
+      </h5>
+      <hr />
+      <br />
+      <!-- <div class="row form-group" *ngIf="!isUpdate && !isUpdateFile">
+        <label class="col-md-2 form-label col-form-label" style="padding-left: 75px" for="tinhDi">{{
+          'LABEL.METHOD' | translate
+        }}</label>
+        <div class="col-md-4 d-flex align-items-center">
+          <mat-radio-group [(ngModel)]="addType" (change)="changeState()">
+            <mat-radio-button *ngFor="let type of addTypeList" [value]="type.value" [checked]="type.checked">
+              {{ type.name }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> -->
+      
+      <div *ngIf="addType == 'single' && !isUpdateFile">
+        <!-- add form -->
+        <form action="#" class="form form-label-right" [formGroup]="addEditForm" >
+          <div class="row form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <div class="row">
+                <label class="col-md-2 form-label col-form-label font-14" for="provinceCode"
+                >{{ 'PROVINCIAL_MANAGEMENT.PROVINCE_CODE' | translate }}<span style="color: red">*</span></label
+              >
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  name="provinceCode"
+                  id="provinceCode"
+                  class="form-control"
+                  formControlName="provinceCode"
+                  maxlength="100"
+                />
+                <div
+                  *ngIf="
+                    addEditForm.get('provinceCode').invalid &&
+                    (addEditForm.get('provinceCode').dirty || addEditForm.get('provinceCode').touched)
+                  "
+                >
+                  <small class="form-text text-danger" *ngIf="addEditForm.get('provinceCode').errors.required">
+                    {{
+                      'VALIDATION.REQUIRED'
+                        | translate
+                          : {
+                              name: 'PROVINCIAL_MANAGEMENT.PROVINCE_CODE' | translate
+                            }
+                    }}
+                  </small>
+                </div>
+              </div>
+                <div class="col-md-2"></div>
+                <label class="col-md-2 form-label col-form-label font-14" for="provinceName"
+                  >{{ 'PROVINCIAL_MANAGEMENT.PROVINCE_NAME' | translate }}<span style="color: red">*</span></label
+                >
+                <div class="col-md-3">
+                  <input
+                    type="text"
+                    name="provinceName"
+                    id="provinceName"
+                    class="form-control"
+                    formControlName="provinceName"
+                    maxlength="100"
+                  />
+                  <div
+                    *ngIf="
+                      addEditForm.get('provinceName').invalid &&
+                      (addEditForm.get('provinceName').dirty || addEditForm.get('provinceName').touched)
+                    "
+                  >
+                    <small class="form-text text-danger" *ngIf="addEditForm.get('provinceName').errors.required">
+                      {{
+                        'VALIDATION.REQUIRED'
+                          | translate
+                            : {
+                                name: 'PROVINCIAL_MANAGEMENT.PROVINCE_NAME' | translate
+                              }
+                      }}
+                    </small>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="d-flex justify-content-end my-5">
+            <button
+              type="button"
+              class="font-weight-bolder btn btn-outline-primary mx-3"
+              (click)="closeDialog()"
+              style="padding: 8px 32px !important"
+            >
+              {{ 'BUTTON.CANCEL2' | translate }}
+            </button>
+            <button
+              type="button"
+              class="font-weight-bolder btn btn-outline-primary mx-3"
+              [disabled]="addEditForm.invalid"
+              (click)="save()"
+              style="padding: 8px 32px !important"
+            >
+              {{ 'BUTTON.SAVE' | translate }}
+            </button>
+          </div>
+        </form>
+  
+ 
+      </div>
+  
+
+      <!-- end: Filtration form -->
+    </div>
+  </div>
+  
