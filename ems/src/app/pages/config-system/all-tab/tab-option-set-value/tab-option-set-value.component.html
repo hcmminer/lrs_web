@@ -133,6 +133,14 @@
                   {{ index + 1 }}
                 </td>
               </ng-container>
+              <ng-container matColumnDef="optionSetCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.optionSetCode" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.optionSetCode }}
+                </td>
+              </ng-container>
               <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.value" | translate }}

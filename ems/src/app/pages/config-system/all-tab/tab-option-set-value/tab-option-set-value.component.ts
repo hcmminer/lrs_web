@@ -51,6 +51,7 @@ export class TabOptionSetValueComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   columnsToDisplay = [
     "index",
+    "optionSetCode",
     "value",
     "nameVi",
     "nameEn",
