@@ -25,7 +25,6 @@ import { ConfigSystemService } from "src/app/pages/cm_service/config-system.serv
 import { AddEditDataComponent } from "./childs/add-edit-data/add-edit-data.component";
 import { RequestApiModel } from "src/app/pages/_model_api/request-api.model";
 import { CommonAlertDialogComponent } from "src/app/pages/materials/common-alert-dialog/common-alert-dialog.component";
-import { cm } from "../../lang";
 import { TabOptionSetValueComponent } from "../tab-option-set-value/tab-option-set-value.component";
 
 @Component({
@@ -34,7 +33,6 @@ import { TabOptionSetValueComponent } from "../tab-option-set-value/tab-option-s
   styleUrls: ["./tab-option-set.component.scss"],
 })
 export class TabOptionSetComponent implements OnInit, OnDestroy {
-  cm = cm;
   optionSetode = null;
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
