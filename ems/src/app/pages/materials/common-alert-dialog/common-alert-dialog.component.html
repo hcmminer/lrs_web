@@ -1,0 +1,44 @@
+ <div class="dialog-wrapper">
+    <div class="dialog-header" [ngClass]="headerClass">
+        <h3 class="title flex-grow-1" [ngClass]="headerClass">{{data.title | translate}}</h3>
+        <button *ngIf="!data.hideCancelBtn" style="background: transparent;
+    border: none;
+    min-width: unset;
+    padding: 0;
+    height: 20px;" (click)="cancel()"><img [src]="closeIconSrc"  style="cursor: pointer"></button>
+    </div>
+    <div class="dialog-content">
+        <div class="d-flex">
+            <div style="height: 72px; width: 72px">
+                <img [src]="iconSrc">
+            </div>
+            <div class="text-content">
+                <p>{{data.message | translate}}</p>
+            </div>
+        </div>
+        <div *ngIf="data && data.enableConfirmInputText">
+            <input 
+                class="form-control" 
+                [class.is-invalid]="confirmInputTextInvalidMsg != ''" 
+                [placeholder]="data && data.confirmInputTextPlaceHolder" 
+                [(ngModel)]="confirmInputTextValue"
+                (change)="confirmInputTextInvalidMsg = ''"
+            />
+            <div
+                class="invalid-feedback d-block"
+                *ngIf="confirmInputTextInvalidMsg != ''"
+            >
+                {{ confirmInputTextInvalidMsg }}
+            </div>
+        </div>
+    </div>
+    <div class="dialog-header d-flex align-content-center justify-content-end">
+        <ng-container *ngIf="data.btn">
+            <ng-container *ngFor="let btn of data.btn">
+                <button [ngClass]="btn.className" (click)="eventClick(btn.text)">
+                  <span>  {{('cm.'+ btn.text) | translate}}</span>
+                </button>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

@@ -20,7 +20,8 @@ export const environment = {
   defaultLanguage: "vi",
   siteKey: "6LfhzDscAAAAABgJweEE_WN5e6ZgtfQZGqYiQJPW",
   // apiUrl: "http://10.120.44.68:8095/cms-gw/api/v1/redirect",
-  apiUrl: "http://10.120.44.77:8095/lrs-gw/api/v1/redirect",
+  // apiUrl: "http://10.120.44.77:8095/lrs-gw/api/v1/redirect",
+  apiUrl: "http://localhost:8080/api/v1/redirect",
 };
 
 /*

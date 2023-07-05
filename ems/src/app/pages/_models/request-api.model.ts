@@ -1,3 +1,8 @@
 export class RequestApiModel {
-  functionName: string;
+  functionName?: string;
+  searchV1DTO? : {
+    optionSetCode? : string,
+    optionSetId? : any,
+    optionSetValueId? : any,
+  }
 }

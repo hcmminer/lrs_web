@@ -6,27 +6,61 @@
         <form action="#" class="form form-label-right" [formGroup]="searchForm">
           <!-- Thông tin tìm kiếm -->
           <div class="font-weight-bolder mb-12" style="font-size: 1.275rem">
-            {{ "cm.searchInfor" | translate }}
+            <div>
+              {{ "cm.optionSetValue" | translate }}
+              <span *ngIf="optionSetCode">
+                {{ "cm.of" | translate }}
+                <span class="text-primary">
+                  {{ optionSetCode }}
+                </span>
+              </span>
+            </div>
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <label
-              class="col-md-2 form-label col-form-label"
-              for="optionSetId"
-              >{{ "cm.optionSetCode" | translate }}</label
-            >
+            <label class="col-md-2 form-label col-form-label" for="value">{{
+              "cm.value" | translate
+            }}</label>
             <div class="col-md-3">
               <input
                 type="text"
                 class="form-control"
-                id="optionSetCode"
+                id="value"
                 autocomplete="off"
-                formControlName="optionSetCode"
-                [class.is-invalid]="isControlInvalid('optionSetCode')"
+                formControlName="value"
+                [class.is-invalid]="isControlInvalid('value')"
                 maxlength="101"
               />
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-3"></div>
+
+            <ng-container *ngIf="!mustShowClose">
+              <label
+                class="col-md-2 mb-12 form-label col-form-label"
+                for="optionSetId"
+                >{{ "cm.optionSetCode" | translate }}</label
+              >
+              <div class="col-md-3">
+                <select
+                  class="form-control"
+                  name="optionSetId"
+                  id="optionSetId"
+                  formControlName="optionSetId"
+                >
+                  <option
+                    *ngFor="
+                      let item of configSystemService.cbxOptionSet | async
+                    "
+                    [ngValue]="item.optionSetId"
+                  >
+                    {{ item.optionSetCode }}
+                  </option>
+                </select>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="mustShowClose">
+              <div class="col-md-2"></div>
+              <div class="col-md-3"></div>
+            </ng-container>
+
             <!--End -->
           </div>
           <div class="form-group row pb-0">
@@ -103,15 +137,41 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.optionSetCode" | translate }}
                 </th>
-                <td
-                  class="text-left"
-                  mat-cell
-                  *matCellDef="let item"
-                  (click)="eViewDetail(item)"
-                >
-                  <a class="text-primary hover-opacity-49 cursor-pointer">{{
-                    item.optionSetCode
-                  }}</a>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.optionSetCode }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.value" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.value }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nameVi">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameVi" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameVi }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="nameEn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameEn" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameEn }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="nameLa">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.nameLa" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.nameLa }}
                 </td>
               </ng-container>
 
@@ -185,6 +245,15 @@
             aria-label="Select page of results"
           ></mat-paginator>
         </div>
+
+        <button
+          *ngIf="mustShowClose"
+          class="btn btn-outline-primary mx-3 float-right"
+          style="width: 150px"
+          (click)="eCloseWithoutEdit()"
+        >
+          {{ "cm.close" | translate }}
+        </button>
       </div>
     </div>
   </div>
