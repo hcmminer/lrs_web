@@ -50,8 +50,7 @@ export class CommuneManagementComponent implements OnInit {
     this.loadSearchForm();
   }
 
-  ngOnInit(): void {
-    this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
+  initCombobox(){
     let requestListProvince = {
       functionName: "searchProvince",
       userName: this.userName,
@@ -59,6 +58,10 @@ export class CommuneManagementComponent implements OnInit {
     };
     this.communeManagementService.getcbxProvinces(requestListProvince, true);
     this.eSearch();
+  }
+  ngOnInit(): void {
+    this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
+   this.initCombobox();
   }
 
   doSearch() {
@@ -153,6 +156,7 @@ export class CommuneManagementComponent implements OnInit {
     };
     modalRef.componentInstance.req = requestTarget;
     modalRef.result.then((result) => {
+      this.initCombobox();
       this.eSearch();
     });
   }
@@ -196,6 +200,7 @@ export class CommuneManagementComponent implements OnInit {
                 this.translate.instant("COMMUNE_MANAGEMENT.DELETE_SUCCESS")
               );
               this.eSearch();
+              this.initCombobox();
             } else {
               this.toastrService.error(res.description);
             }

@@ -83,7 +83,29 @@ export const locale = {
       ADD_SUCCESS: 'Thêm mới mường thành công',
       UPDATE_SUCCESS: 'Cập nhật mường thành công',
       DELETE_SUCCESS: 'Xóa mường thành công',
+      NO_MATCH_DATA:'Không có dữ liệu'
     },
+
+    VILLAGE_MANAGEMENT: {
+      TITLE: 'Quản lý bản',
+      ADD_PCOMMUNE: 'Thêm bản mới',
+      UPDATE_COMMUNE: 'Cập nhật bản',
+      VILLAGE: 'Bản',
+      VILLAGE_CODE: 'Mã bản',
+      PROVINCE_CODE: 'Mã tỉnh',
+      COMMUNE_NAME: 'Tên mường',
+      VILLAGE_NAME: 'Tên bản',
+      ACTION: 'Hành động',
+      LIST_COMMUNE: 'Danh sách mường',
+      LIST_VILLAGE: 'Danh sách bản',
+      CONFIRM_ADD: 'Bạn có chắc chắn muốn thêm mới bản này không?',
+      CONFIRM_UPDATE: 'Bạn có chắc chắn muốn cập nhật bản này không?',
+      CONFIRM_DELETE: 'Bạn có chắc chắn muốn xóa bản này không?',
+      ADD_SUCCESS: 'Thêm mới bản thành công',
+      UPDATE_SUCCESS: 'Cập nhật bản thành công',
+      DELETE_SUCCESS: 'Xóa bản thành công',
+    },
+
 
     COMMON_MODAL: {
       WARNING: 'Cảnh báo',

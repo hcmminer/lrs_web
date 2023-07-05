@@ -32,12 +32,12 @@ import { CommonAlertDialogComponent } from "../common/common-alert-dialog/common
 import { CommuneManagementComponent } from "./all-tab/commune-management/commune-management.component";
 import { FormAddEditCommuneComponent } from "./all-tab/commune-management/form-add-edit-commune/form-add-edit-commune.component";
 import { VillageManagementComponent } from "./all-tab/village-management/village-management.component";
-import { FormAddEditVillageComponent } from "./all-tab/village-management/form-add-edit-village/form-add-edit-village.component";
 // bandv..
 import { TabOptionSetComponent } from "./all-tab/tab-option-set/tab-option-set.component";
 import { TabOptionSetValueComponent } from "./all-tab/tab-option-set-value/tab-option-set-value.component";
 import { AddEditDataComponent } from "./all-tab/tab-option-set/childs/add-edit-data/add-edit-data.component";
 import { AddEditDataComponent as AddEditDataComponent_1 } from "./all-tab/tab-option-set-value/childs/add-edit-data/add-edit-data.component";
+import {FormAddEditVillageComponent} from "./all-tab/village-management/form-add-village/form-add-edit-village.component";
 // ..bandv
 
 @NgModule({

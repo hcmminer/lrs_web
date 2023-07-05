@@ -16,6 +16,8 @@ export class CommuneManagementService {
   isLoading = new BehaviorSubject<boolean>(false);
   public cbxProvices = new BehaviorSubject<any[]>([]);
   public listCommune = new BehaviorSubject<any[]>([]);
+  public cbxCommunes = new BehaviorSubject<any[]>([]);
+
 
 
 
@@ -59,8 +61,25 @@ export class CommuneManagementService {
           });
         }
       }else {
-        this.cbxProvices.next([])
-        this.toastrService.error(res.description)
+        this.cbxProvices.next([]);
+        this.toastrService.error(res.description);
+      }
+    })
+  }
+
+  getcbxCommunes(request: RequestApiModel, allowDDefault:boolean){
+    this.callAPICommon(request).subscribe(res =>{
+      if(res.errorCode == "0"){
+        this.cbxCommunes.next(res.data);
+        if(allowDDefault){
+          this.cbxCommunes.value.unshift({
+            distId: '',
+            distCode: this.translateService.instant('DEFAULT_OPTION.SELECT'),
+          });
+        }
+      }else {
+        this.cbxCommunes.next([]);
+        this.toastrService.error(res.description);
       }
     })
   }
