@@ -8,7 +8,7 @@ const routes: Routes = [
     // component: QuanLyDanhMucComponent,
     children: [
       { path: "options", component: ConfigSystemComponent },
-      { path: "", redirectTo: "search", pathMatch: "full" },
+      { path: "", redirectTo: "options", pathMatch: "full" },
       { path: "**", redirectTo: "error/404", pathMatch: "full" },
     ],
   },

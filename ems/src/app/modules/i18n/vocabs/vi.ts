@@ -79,9 +79,10 @@ export const locale = {
       LIST_COMMUNE: 'Danh sách mường',
       CONFIRM_ADD: 'Bạn có chắc chắn muốn thêm mới mường này không?',
       CONFIRM_UPDATE: 'Bạn có chắc chắn muốn cập nhật mường này không?',
-      CONFIRM_DELETE: 'Bạn có chắc chắn muốn xóa bản này không?',
+      CONFIRM_DELETE: 'Bạn có chắc chắn muốn xóa mường này không?',
       ADD_SUCCESS: 'Thêm mới mường thành công',
       UPDATE_SUCCESS: 'Cập nhật mường thành công',
+      DELETE_SUCCESS: 'Xóa mường thành công',
     },
 
     COMMON_MODAL: {

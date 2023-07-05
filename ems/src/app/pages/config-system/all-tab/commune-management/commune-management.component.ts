@@ -11,6 +11,8 @@ import { FormAddEditCommuneComponent } from "./form-add-edit-commune/form-add-ed
 import { DatePipe } from "@angular/common";
 import { CommuneManagementService } from "src/app/pages/_services/commune-management.service";
 import { ToastrService } from "ngx-toastr";
+import { CommonAlertDialogComponent } from "src/app/pages/common/common-alert-dialog/common-alert-dialog.component";
+import { TranslateService } from "@ngx-translate/core";
 
 const queryInit = {
   communeName: "",
@@ -42,7 +44,8 @@ export class CommuneManagementComponent implements OnInit {
     public communeManagementService: CommuneManagementService,
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public translate: TranslateService
   ) {
     this.loadSearchForm();
   }
@@ -155,24 +158,53 @@ export class CommuneManagementComponent implements OnInit {
   }
 
   deleteCommune(item: any){
-    const requestTarget = {
-      functionName: "deleteDistrict",
-      userName: this.userName,
-      districtDTO: {
-        proId: item.proId,
-        distId: item.distId
-    }
-    };
-   let rq =  this.communeManagementService.callAPICommon(
-      requestTarget as RequestApiModel
-    ).subscribe(res =>{
-      if(res.errorCode == '0'){
-        this.toastrService.success(res.description)
-      }else{
-        this.toastrService.error(res.description)
-      }
+    const modalRef = this.modalService.open(CommonAlertDialogComponent, {
+      centered: true,
+      backdrop: "static",
     });
-    this.subscriptions.push(rq);
+    modalRef.componentInstance.data = {
+      type: "WARNING",
+      title: "COMMON_MODAL.WARNING",
+      message: this.translate.instant("COMMUNE_MANAGEMENT.CONFIRM_DELETE"),
+      continue: true,
+      cancel: true,
+      btn: [
+        {
+          text: this.translate.instant("CANCEL"),
+          className: "btn-outline-warning btn uppercase mx-2",
+        },
+        {
+          text: this.translate.instant("CONTINUE"),
+          className: "btn btn-warning uppercase mx-2",
+        },
+      ],
+    };
+    modalRef.result.then(
+      (result) => {
+        const requestTarget = {
+          functionName: "deleteDistrict",
+          userName: this.userName,
+          districtDTO: {
+            proId: item.proId,
+            distId: item.distId
+        }
+        };
+        let rq = this.communeManagementService.callAPICommon(requestTarget as RequestApiModel)
+          .subscribe((res) => {
+            if (res.errorCode == "0") {
+              this.toastrService.success(
+                this.translate.instant("COMMUNE_MANAGEMENT.DELETE_SUCCESS")
+              );
+              this.eSearch();
+            } else {
+              this.toastrService.error(res.description);
+            }
+          });
+          this.subscriptions.push(rq);
+      },
+      (reason) => {}
+    );
+
   }
 
   transform(value: string) {
