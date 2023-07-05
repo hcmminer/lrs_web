@@ -151,7 +151,7 @@ export class FormAddEditCommuneComponent implements OnInit {
 
   loadAddForm() {
     this.addEditForm = this.fb.group({
-      proId:[this.isUpdate ? this.item.proId : '', [Validators.required]],
+      proId:[this.isUpdate ? this.item.proId : 0, [Validators.required]],
       communeCode: [this.isUpdate ? this.item.distCode : '', [Validators.required]],
       communeName: [this.isUpdate ? this.item.distName : '', [Validators.required]],
     });
@@ -216,7 +216,7 @@ export class FormAddEditCommuneComponent implements OnInit {
     const requestTarget = {
       functionName: this.isUpdate ? 'updateDistrict' : 'addDistrict',
       userName: this.userName,
-      provinceDTO: {
+      districtDTO: {
         proId: this.addEditForm.get("proId").value,
         distName: this.addEditForm.get("communeName").value,
         distCode: this.addEditForm.get("communeCode").value,

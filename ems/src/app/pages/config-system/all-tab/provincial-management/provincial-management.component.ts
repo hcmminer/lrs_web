@@ -10,6 +10,8 @@ import { FormAddEditProvinceComponent } from "./form-add-edit-province/form-add-
 import { DatePipe } from "@angular/common";
 import { CONFIG } from "src/app/utils/constants";
 import { ToastrService } from "ngx-toastr";
+import { CommonAlertDialogComponent } from "src/app/pages/common/common-alert-dialog/common-alert-dialog.component";
+import { TranslateService } from "@ngx-translate/core";
 
 const queryInit = {
   // provinceCode: "",
@@ -43,7 +45,8 @@ export class ProvincialManagementComponent implements OnInit {
     public provincialManagementService: ProvincialManagementService,
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public translate: TranslateService
   ) {
     this.loadSearchForm();
   }
@@ -80,14 +83,24 @@ export class ProvincialManagementComponent implements OnInit {
       if (res.errorCode == "0") {
         this.dataChange = !this.dataChange;
         this.provincialManagementService.listProvice.next(res.data);
-        this.dataSource = new MatTableDataSource(this.provincialManagementService.listProvice.value);
+        this.dataSource = new MatTableDataSource(
+          this.provincialManagementService.listProvice.value
+        );
         this.dataSource.sort = this.sort;
-        this.totalRecord.next(this.provincialManagementService.listProvice.value.length);
+        this.totalRecord.next(
+          this.provincialManagementService.listProvice.value.length
+        );
         this.showTotalPages.next(
-          Math.ceil(this.provincialManagementService.listProvice.value.length / this.pageSize) <= 5
-            ? Math.ceil(this.provincialManagementService.listProvice.value.length / this.pageSize)
+          Math.ceil(
+            this.provincialManagementService.listProvice.value.length /
+              this.pageSize
+          ) <= 5
+            ? Math.ceil(
+                this.provincialManagementService.listProvice.value.length /
+                  this.pageSize
+              )
             : 5
-        );        
+        );
       } else {
         this.provincialManagementService.listProvice.next([]);
         this.dataSource = new MatTableDataSource(
@@ -124,15 +137,14 @@ export class ProvincialManagementComponent implements OnInit {
     const requestTarget = {
       userName: this.userName,
 
-        // provinceCode: this.searchForm.get("provinceCode").value,
-        provinceName: this.searchForm.get("provinceName").value,
-        // fromConstructionDateStr: this.transform(
-        //   this.searchForm.get("start").value
-        // ),
-        // toConstructionDateStr: this.transform(this.searchForm.get("end").value),
-        // pageSize: this.pageSize,
-        // pageNumber: this.currentPage + 1,
-
+      // provinceCode: this.searchForm.get("provinceCode").value,
+      provinceName: this.searchForm.get("provinceName").value,
+      // fromConstructionDateStr: this.transform(
+      //   this.searchForm.get("start").value
+      // ),
+      // toConstructionDateStr: this.transform(this.searchForm.get("end").value),
+      // pageSize: this.pageSize,
+      // pageNumber: this.currentPage + 1,
     };
     modalRef.componentInstance.req = requestTarget;
     modalRef.result.then((result) => {
@@ -141,25 +153,52 @@ export class ProvincialManagementComponent implements OnInit {
   }
 
   //delete province
-  deleteProvince(item: any){
-    const requestTarget = {
-      functionName: "deleteProvince",
-      userName: this.userName,
-      provinceDTO: {
-        proId: item.proId
-    }
-    };
-   let rq =  this.provincialManagementService.callAPICommon(
-      requestTarget as RequestApiModel
-    ).subscribe(res =>{
-      if(res.errorCode == '0'){
-        this.toastrService.success(res.description)
-      }else{
-        this.toastrService.error(res.description)
-      }
+  deleteProvince(item: any) {
+    const modalRef = this.modalService.open(CommonAlertDialogComponent, {
+      centered: true,
+      backdrop: "static",
     });
-    this.subscriptions.push(rq);
-    
+    modalRef.componentInstance.data = {
+      type: "WARNING",
+      title: "COMMON_MODAL.WARNING",
+      message: this.translate.instant("PROVINCIAL_MANAGEMENT.CONFIRM_DELETE"),
+      continue: true,
+      cancel: true,
+      btn: [
+        {
+          text: this.translate.instant("CANCEL"),
+          className: "btn-outline-warning btn uppercase mx-2",
+        },
+        {
+          text: this.translate.instant("CONTINUE"),
+          className: "btn btn-warning uppercase mx-2",
+        },
+      ],
+    };
+    modalRef.result.then(
+      (result) => {
+        const requestTarget = {
+          functionName: "deleteProvince",
+          userName: this.userName,
+          provinceDTO: {
+            proId: item.proId,
+          },
+        };
+        let rq = this.provincialManagementService
+          .callAPICommon(requestTarget as RequestApiModel)
+          .subscribe((res) => {
+            if (res.errorCode == "0") {
+              this.toastrService.success(
+                this.translate.instant("PROVINCIAL_MANAGEMENT.DELETE_SUCCESS")
+              );
+              this.eSearch();
+            } else {
+              this.toastrService.error(res.description);
+            }
+          });
+      },
+      (reason) => {}
+    );
   }
 
   transform(value: string) {
