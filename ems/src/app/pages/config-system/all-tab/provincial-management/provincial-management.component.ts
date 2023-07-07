@@ -117,7 +117,13 @@ export class ProvincialManagementComponent implements OnInit {
     const requestTarget = {
       functionName: "searchProvince",
       userName: this.userName,
-      provinceName: this.searchForm.get("provinceName").value,
+      provinceDTO: {
+        provinceName: this.searchForm.get("provinceName").value,
+      },
+      dataParams: {
+        currentPage: this.currentPage + 1,
+        pageLimit: this.pageSize      }
+
     };
     return this.provincialManagementService.callAPICommon(
       requestTarget as RequestApiModel

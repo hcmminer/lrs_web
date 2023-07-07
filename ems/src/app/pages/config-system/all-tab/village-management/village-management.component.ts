@@ -18,6 +18,7 @@ const queryInit = {
   communeName: "",
   proId: "",
   distId: "",
+  communeId: ""
 };
 
 @Component({
@@ -55,19 +56,20 @@ export class VillageManagementComponent implements OnInit {
     this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
 
     let requestListCommune = {
-      functionName: "searchDistrict",
+      functionName: "getListDistrict",
       userName: this.userName,
-      proId: null,
-      distName: ''
+      proCode: null,
+      distId:null
     };
     this.communeManagementService.getcbxCommunes(requestListCommune, true);
     this.searchForm.get('proId').valueChanges.subscribe(value => {
       let requestListCommuneByProvince = {
-        functionName: "searchDistrict",
-        districtDTO: {
+        functionName: "getListDistrict",
+        provinceDTO: {
           userName: this.userName,
-          proId: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
-          distName: ''
+          proCode: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+          distId: this.searchForm.get('distId').value ===  '' ? null : +this.searchForm.get('distId').value ,
+
         }
       };
       this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
@@ -148,16 +150,24 @@ export class VillageManagementComponent implements OnInit {
 
   conditionSearch() {
     const requestTarget = {
-      functionName: "searchDistrict",
+      functionName: "searchCommune",
       userName: this.userName,
-      districtDTO:
+      communeDTO:
       {
         proId:
         this.searchForm.get("proId").value == ""
           ? null
           : +this.searchForm.get("proId").value,
-          distName: this.searchForm.get("communeName").value
-      }
+          distName: this.searchForm.get("communeName").value,
+        distId:
+            this.searchForm.get("distId").value == ""
+                ? null
+                : +this.searchForm.get("distId").value,
+
+      },
+      dataParams: {
+        currentPage: this.currentPage + 1,
+        pageLimit: this.pageSize      }
     
     };
     return this.communeManagementService.callAPICommon(
@@ -218,11 +228,12 @@ export class VillageManagementComponent implements OnInit {
     modalRef.result.then(
       (result) => {
         const requestTarget = {
-          functionName: "deleteDistrict",
+          functionName: "deleteCommune",
           userName: this.userName,
-          districtDTO: {
+          communeDTO: {
             proId: item.proId,
-            distId: item.distId
+            distId: item.distId,
+            communeId:item.communeId
         }
         };
         let rq = this.communeManagementService.callAPICommon(requestTarget as RequestApiModel)

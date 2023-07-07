@@ -83,13 +83,14 @@ export const locale = {
       ADD_SUCCESS: 'Thêm mới mường thành công',
       UPDATE_SUCCESS: 'Cập nhật mường thành công',
       DELETE_SUCCESS: 'Xóa mường thành công',
-      NO_MATCH_DATA:'Không có dữ liệu'
+      NO_MATCH_DATA:'Không có dữ liệu',
+      ADD_COMMUNE:'Thêm mới mường'
     },
 
     VILLAGE_MANAGEMENT: {
       TITLE: 'Quản lý bản',
       ADD_PCOMMUNE: 'Thêm bản mới',
-      UPDATE_COMMUNE: 'Cập nhật bản',
+      UPDATE_VILLAGE: 'Cập nhật bản',
       VILLAGE: 'Bản',
       VILLAGE_CODE: 'Mã bản',
       PROVINCE_CODE: 'Mã tỉnh',
@@ -104,6 +105,7 @@ export const locale = {
       ADD_SUCCESS: 'Thêm mới bản thành công',
       UPDATE_SUCCESS: 'Cập nhật bản thành công',
       DELETE_SUCCESS: 'Xóa bản thành công',
+      ADD_VILLAGE: 'Thêm mới bản'
     },
 
 

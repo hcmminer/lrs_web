@@ -36,8 +36,8 @@
                      <div class="col-md-2">
                     <select
                             class="form-control font-14"
-                            name="proId"
-                            id="proId"
+                            name="distId"
+                            id="distId"
                             formControlName="distId"
                             [(ngModel)]="query.distId"
                     >
@@ -154,19 +154,21 @@
                     {{ paginator.pageIndex * paginator.pageSize + index + 1 }}
                   </td>
                 </ng-container>
+
+
                 <!-- provinceCode  -->
                 <ng-container matColumnDef="provinceCode">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                    {{ 'COMMUNE_MANAGEMENT.PROVINCE_CODE' | translate }}
+                    {{ 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate }}
                   </th>
-                  <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.proCode }}</td>
+                  <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.communeCode }}</td>
                 </ng-container>
                   <!-- provinceName  -->
                   <ng-container matColumnDef="communeName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      {{ 'COMMUNE_MANAGEMENT.COMMUNE_NAME' | translate }}
+                      {{ 'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate }}
                     </th>
-                    <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.distName }}</td>
+                    <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.communeName }}</td>
                   </ng-container>
                 <!-- material -->
                 <!-- <ng-container matColumnDef="material">

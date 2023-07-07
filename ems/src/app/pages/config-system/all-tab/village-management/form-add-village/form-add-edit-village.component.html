@@ -3,7 +3,7 @@
       <!-- begin: Filtration form -->
       <h5 style="font-weight: 700">
         {{
-          isUpdate || isUpdateFile ? ('COMMUNE_MANAGEMENT.UPDATE_COMMUNE' | translate) : ('COMMUNE_MANAGEMENT.ADD_COMMUNE' | translate)
+          isUpdate || isUpdateFile ? ('VILLAGE_MANAGEMENT.UPDATE_VILLAGE' | translate) : ('VILLAGE_MANAGEMENT.ADD_VILLAGE' | translate)
         }}
       </h5>
       <hr />
@@ -20,7 +20,7 @@
           </mat-radio-group>
         </div>
       </div> -->
-      
+
       <div *ngIf="addType == 'single' && !isUpdateFile">
         <!-- add form -->
         <form action="#" class="form form-label-right" [formGroup]="addEditForm">
@@ -39,8 +39,8 @@
                     formControlName="proId"
                   >
                     <ng-container *ngFor="let item of communeManagementService.cbxProvices | async">
-                      <option [value]="item.proId">
-                        <span>{{ item.proCode }}</span> 
+                      <option [ngValue]="item.proId">
+                        <span>{{ item.proCode }}</span>
                       </option>
                     </ng-container>
                   </select>
@@ -50,64 +50,101 @@
                 >{{ 'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate }}<span style="color: red">*</span></label
               >
               <div class="col-md-3">
-                <input
-                  type="text"
-                  name="communeCode"
-                  id="communeCode"
-                  class="form-control"
-                  formControlName="communeCode"
-                  maxlength="100"
-                />
-                <div
-                  *ngIf="
+                  <select
+                          class="form-control font-14"
+                          name="distId"
+                          id="distId"
+                          formControlName="distId"
+                  >
+                      <ng-container *ngFor="let item of communeManagementService.cbxCommunes | async">
+                          <option [ngValue]="item.distId">
+                              <span>{{ item.distCode }}</span>
+                          </option>
+                      </ng-container>
+                  </select>
+<!--                  <div-->
+<!--                          *ngIf="-->
+<!--                    addEditForm.get('distId').invalid &&-->
+<!--                    (addEditForm.get('distId').dirty || addEditForm.get('distId').touched)-->
+<!--                  "-->
+<!--                  >-->
+<!--                      <small class="form-text text-danger" *ngIf="addEditForm.get('distId').errors.required">-->
+<!--                          {{-->
+<!--                          'VALIDATION.REQUIRED'-->
+<!--                              | translate-->
+<!--                              : {-->
+<!--                                  name: 'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate-->
+<!--                              }-->
+<!--                          }}-->
+<!--                      </small>-->
+<!--                  </div>-->
+              </div>
+
+              </div>
+                <div class="row mt-3"></div>
+                <div class="row">
+                    <label class="col-md-2 form-label col-form-label font-14" for="proId">{{
+                        'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate
+                        }}</label>
+                    <div class="col-md-3">
+                        <input
+                                type="text"
+                                name="communeName"
+                                id="communeName"
+                                class="form-control"
+                                formControlName="communeCode"
+                                maxlength="100"
+                        />
+                        <div
+                                *ngIf="
                     addEditForm.get('communeCode').invalid &&
                     (addEditForm.get('communeCode').dirty || addEditForm.get('communeCode').touched)
                   "
-                >
-                  <small class="form-text text-danger" *ngIf="addEditForm.get('communeCode').errors.required">
-                    {{
-                      'VALIDATION.REQUIRED'
-                        | translate
-                          : {
-                              name: 'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate
-                            }
-                    }}
-                  </small>
-                </div>
-              </div>
-     
-              </div>
-              <div class="row mt-3">
-                <label class="col-md-2 form-label col-form-label font-14" for="communeName"
-                >{{ 'COMMUNE_MANAGEMENT.COMMUNE_NAME' | translate }}<span style="color: red">*</span></label
-              >
-              <div class="col-md-3">
-                <input
-                  type="text"
-                  name="communeName"
-                  id="communeName"
-                  class="form-control"
-                  formControlName="communeName"
-                  maxlength="100"
-                />
-                <div
-                  *ngIf="
+                        >
+                            <small class="form-text text-danger" *ngIf="addEditForm.get('communeCode').errors.required">
+                                {{
+                                'VALIDATION.REQUIRED'
+                                    | translate
+                                    : {
+                                        name: 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate
+                                    }
+                                }}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <label class="col-md-2 form-label col-form-label font-14" for="communeName"
+                    >{{ 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate }}<span style="color: red">*</span></label
+                    >
+                    <div class="col-md-3">
+                        <input
+                                type="text"
+                                name="communeCode"
+                                id="communeCode"
+                                class="form-control"
+                                formControlName="communeName"
+                                maxlength="100"
+                        />
+                        <div
+                                *ngIf="
                     addEditForm.get('communeName').invalid &&
                     (addEditForm.get('communeName').dirty || addEditForm.get('communeName').touched)
                   "
-                >
-                  <small class="form-text text-danger" *ngIf="addEditForm.get('communeName').errors.required">
-                    {{
-                      'VALIDATION.REQUIRED'
-                        | translate
-                          : {
-                              name: 'COMMUNE_MANAGEMENT.COMMUNE_NAME' | translate
-                            }
-                    }}
-                  </small>
+                        >
+                            <small class="form-text text-danger" *ngIf="addEditForm.get('communeName').errors.required">
+                                {{
+                                'VALIDATION.REQUIRED'
+                                    | translate
+                                    : {
+                                        name: 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate
+                                    }
+                                }}
+                            </small>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-              </div>
+
             </div>
             <div class="col-md-1"></div>
           </div>
@@ -131,10 +168,10 @@
             </button>
           </div>
         </form>
-  
- 
+
+
       </div>
-  
+
 
       <!-- end: Filtration form -->
     </div>

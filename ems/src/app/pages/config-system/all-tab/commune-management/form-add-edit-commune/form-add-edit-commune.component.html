@@ -39,7 +39,7 @@
                     formControlName="proId"
                   >
                     <ng-container *ngFor="let item of communeManagementService.cbxProvices | async">
-                      <option [value]="item.proId">
+                      <option [ngValue]="item.proId">
                         <span>{{ item.proCode }}</span> 
                       </option>
                     </ng-container>

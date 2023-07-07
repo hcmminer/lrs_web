@@ -80,30 +80,18 @@ export class FormAddEditCommuneComponent implements OnInit {
     public communeManagementService: CommuneManagementService,
     private _liveAnnouncer: LiveAnnouncer,
     @Inject(Injector) private readonly injector: Injector,
-  ) {}
-
-  initCombobox() {
-    // let reqGetListStatus = { userName: this.userName };
-    // let reqGetListAssetCode = {
-    //   userName: this.userName,
-    //   searchDTO: {
-    //     assetCode: '',
-    //     pageSize: 10,
-    //     pageNumber: 1,
-    //   },
-    // };
-    // this.openingBalanceService.getListOrganisation(reqGetListStatus, 'get-list-organisation', true);
-    // this.openingBalanceService.getCbxBcParentAssetCode(reqGetListAssetCode, 'get-bc-parent-asset-code');
+  ) {
   }
 
+
   ngOnInit(): void {
+    this.loadAddForm();
     let requestListProvince = {
-      functionName: "searchProvince",
+      functionName: "getListProvince",
       userName: this.userName,
       provinceName: "",
     };
-    this.communeManagementService.getcbxProvinces(requestListProvince, false);
-    this.loadAddForm();
+    this.communeManagementService.getcbxProvinces(requestListProvince, true);
     // this.initCombobox();
     // this.modelChanged.pipe(debounceTime(800)).subscribe((str:any) => {     
     //   let tempAssetCode = !str.assetCode
@@ -146,15 +134,15 @@ export class FormAddEditCommuneComponent implements OnInit {
     //     'errorMsg',
     //   ];
     // }
-    
+
   }
 
   loadAddForm() {
     this.addEditForm = this.fb.group({
-      proId:[this.isUpdate ? this.item.proId : 0, [Validators.required]],
+      proId:[this.isUpdate ? this.item.proId : '', [Validators.required]],
       communeCode: [this.isUpdate ? this.item.distCode : '', [Validators.required]],
       communeName: [this.isUpdate ? this.item.distName : '', [Validators.required]],
-    });
+    })
   }
 
   loadAddFileForm() {
@@ -217,7 +205,7 @@ export class FormAddEditCommuneComponent implements OnInit {
       functionName: this.isUpdate ? 'updateDistrict' : 'addDistrict',
       userName: this.userName,
       districtDTO: {
-        proId: this.addEditForm.get("proId").value,
+        proId: +this.addEditForm.get("proId").value,
         distName: this.addEditForm.get("communeName").value,
         distCode: this.addEditForm.get("communeCode").value,
         distId: this.isUpdate ? this.item.distId : null

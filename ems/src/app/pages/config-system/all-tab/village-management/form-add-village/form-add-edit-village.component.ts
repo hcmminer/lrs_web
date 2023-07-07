@@ -12,9 +12,14 @@ import { Subject, Subscription } from 'rxjs';
 import { RequestApiModel } from 'src/app/pages/_models/request-api.model';
 import { CommuneManagementService } from 'src/app/pages/_services/commune-management.service';
 import { CommonAlertDialogComponent } from 'src/app/pages/common/common-alert-dialog/common-alert-dialog.component';
+import {CONFIG} from "../../../../../utils/constants";
 
 const MAX_FILE_SIZE_TEMPLATE = 1024 * 1024 * 10;
-
+const queryInit = {
+  communeName: "",
+  proId: "",
+  distId: "",
+};
 @Component({
   selector: 'app-form-add-edit-commune',
   templateUrl: './form-add-edit-village.component.html',
@@ -43,10 +48,14 @@ export class FormAddEditVillageComponent implements OnInit {
   pageSize;
   resultDesc;
   resultCode: string;
+  public searchForm: FormGroup;
   userName: any;
   addEditForm: FormGroup;
   addFileForm: FormGroup;
   addType: string = 'single';
+  public query = {
+    ...queryInit,
+  };
   addTypeList = [
     {
       value: 'single',
@@ -83,77 +92,54 @@ export class FormAddEditVillageComponent implements OnInit {
   ) {}
 
   initCombobox() {
-    // let reqGetListStatus = { userName: this.userName };
-    // let reqGetListAssetCode = {
-    //   userName: this.userName,
-    //   searchDTO: {
-    //     assetCode: '',
-    //     pageSize: 10,
-    //     pageNumber: 1,
-    //   },
-    // };
-    // this.openingBalanceService.getListOrganisation(reqGetListStatus, 'get-list-organisation', true);
-    // this.openingBalanceService.getCbxBcParentAssetCode(reqGetListAssetCode, 'get-bc-parent-asset-code');
-  }
-
-  ngOnInit(): void {
+    // combobox tinh
     let requestListProvince = {
-      functionName: "searchProvince",
+      functionName: "getListProvince",
       userName: this.userName,
       provinceName: "",
     };
-    this.communeManagementService.getcbxProvinces(requestListProvince, false);
+    this.communeManagementService.getcbxProvinces(requestListProvince, true);
+
+    //combobox muong
+    let requestListCommune = {
+      functionName: "getListDistrict",
+      provinceDTO: {
+        userName: this.userName,
+        proCode: null,
+        distName: ''
+      }
+    };
+    this.communeManagementService.getcbxCommunes(requestListCommune, true);
+
+  }
+
+  ngOnInit(): void {
+    console.log(this.item)
+    this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
+    this.initCombobox();
     this.loadAddForm();
-    // this.initCombobox();
-    // this.modelChanged.pipe(debounceTime(800)).subscribe((str:any) => {     
-    //   let tempAssetCode = !str.assetCode
-    //   ? str
-    //   : str.assetCode;
-    //   let reqGetListStatus = {
-    //     userName: this.userName,
-    //     searchDTO: {
-    //       assetCode: tempAssetCode,
-    //       pageSize: 10,
-    //       pageNumber: 1,
-    //     },
-    //   };
-    //   this.openingBalanceService.getCbxBcParentAssetCode(reqGetListStatus, 'get-bc-parent-asset-code', tempAssetCode);
-    // });
-    // this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
-    // if (this.isUpdateFile) {
-    //   this.columnsToDisplay = [
-    //     'index',
-    //     'assetCode',
-    //     'materialTotalStr',
-    //     'materialStr',
-    //     'laborTotalStr',
-    //     'laborStr',
-    //     'constructionDateStr',
-    //     'errorMsg',
-    //   ];
-    //   this.addType = 'file';
-    //   this.loadAddFileForm();
-    // } else {
-    //   this.columnsToDisplay = [
-    //     'index',
-    //     'organisation',
-    //     'parentAssetCode',
-    //     'assetCode',
-    //     'contract',
-    //     'material',
-    //     'labor',
-    //     'constructionDateStr',
-    //     'errorMsg',
-    //   ];
-    // }
-    
+    //event change
+    this.addEditForm.get('proId').valueChanges.subscribe(value => {
+      let requestListCommuneByProvince = {
+        functionName: "searchDistrict",
+        districtDTO: {
+          userName: this.userName,
+          proId: this.addEditForm.get('proId').value ===  '' ? null : +this.addEditForm.get('proId').value ,
+          distName: ''
+        }
+      };
+      this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
+    });
+
   }
 
   loadAddForm() {
     this.addEditForm = this.fb.group({
       proId:[this.isUpdate ? this.item.proId : 0, [Validators.required]],
-      communeCode: [this.isUpdate ? this.item.distCode : '', [Validators.required]],
-      communeName: [this.isUpdate ? this.item.distName : '', [Validators.required]],
+      distId:[this.isUpdate ? this.item.distId : 0, [Validators.required]],
+      communeId: [this.isUpdate ? this.item.communeId : 0, [Validators.required]],
+      communeCode: [this.isUpdate ? this.item.communeCode : '', [Validators.required]],
+      communeName: [this.isUpdate ? this.item.communeName : '', [Validators.required]],
     });
   }
 
@@ -214,13 +200,15 @@ export class FormAddEditVillageComponent implements OnInit {
 
   conditionAddEdit() {
     const requestTarget = {
-      functionName: this.isUpdate ? 'updateDistrict' : 'addDistrict',
+      functionName: this.isUpdate ? 'updateCommune' : 'addCommune',
       userName: this.userName,
-      districtDTO: {
-        proId: this.addEditForm.get("proId").value,
-        distName: this.addEditForm.get("communeName").value,
-        distCode: this.addEditForm.get("communeCode").value,
-        distId: this.isUpdate ? this.item.distId : null
+      communeDTO: {
+        proId: +this.addEditForm.get("proId").value,
+        communeCode: this.addEditForm.get("communeCode").value,
+        communeName: this.addEditForm.get("communeName").value,
+        distId: +this.addEditForm.get("distId").value,
+        communeId: +this.addEditForm.get("communeId").value,
+
       },
     };
     return this.communeManagementService.callAPICommon(requestTarget as RequestApiModel);

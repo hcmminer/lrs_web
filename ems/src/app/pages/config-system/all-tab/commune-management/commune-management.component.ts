@@ -28,7 +28,7 @@ export class CommuneManagementComponent implements OnInit {
   public currentPage = 0;
   public pageSize: number = 10;
   public dataChange = false;
-  public totalRecord = new BehaviorSubject<any>(0);
+  public recordTotal  = new BehaviorSubject<any>(0);
   public showTotalPages = new BehaviorSubject<any>(0);
   public searchForm: FormGroup;
   private subscriptions: Subscription[] = [];
@@ -52,7 +52,7 @@ export class CommuneManagementComponent implements OnInit {
 
   initCombobox(){
     let requestListProvince = {
-      functionName: "searchProvince",
+      functionName: "getListProvince",
       userName: this.userName,
       provinceName: "",
     };
@@ -93,10 +93,10 @@ export class CommuneManagementComponent implements OnInit {
           this.communeManagementService.listCommune.value
         );
         this.dataSource.sort = this.sort;
-        this.totalRecord.next(
+        this.recordTotal .next(
           this.communeManagementService.listCommune.value.length
         );
-        this.showTotalPages.next(
+        this.recordTotal.next(
           Math.ceil(res.totalSuccess / this.pageSize) <= 5
             ? Math.ceil(res.totalSuccess / this.pageSize)
             : 5
@@ -106,8 +106,8 @@ export class CommuneManagementComponent implements OnInit {
         this.dataSource = new MatTableDataSource(
           this.communeManagementService.listCommune.value
         );
-        this.totalRecord.next(0);
-        this.showTotalPages.next(0);
+        this.recordTotal .next(1);
+        this.showTotalPages.next(1);
       }
     });
     this.subscriptions.push(rq);
@@ -124,8 +124,12 @@ export class CommuneManagementComponent implements OnInit {
           ? null
           : +this.searchForm.get("proId").value,
           distName: this.searchForm.get("communeName").value
-      }
-    
+      },
+      dataParams: {
+        currentPage: this.currentPage + 1,
+        pageLimit: this.pageSize      }
+
+
     };
     return this.communeManagementService.callAPICommon(
       requestTarget as RequestApiModel
