@@ -93,6 +93,7 @@ export const locale = {
       UPDATE_VILLAGE: 'Cập nhật bản',
       VILLAGE: 'Bản',
       VILLAGE_CODE: 'Mã bản',
+      PROVINCE_NAME: 'Tên tỉnh',
       PROVINCE_CODE: 'Mã tỉnh',
       COMMUNE_NAME: 'Tên mường',
       VILLAGE_NAME: 'Tên bản',
@@ -105,7 +106,8 @@ export const locale = {
       ADD_SUCCESS: 'Thêm mới bản thành công',
       UPDATE_SUCCESS: 'Cập nhật bản thành công',
       DELETE_SUCCESS: 'Xóa bản thành công',
-      ADD_VILLAGE: 'Thêm mới bản'
+      ADD_VILLAGE: 'Thêm mới bản',
+      DISTRICT_NAME: 'Tên mường'
     },
 
 

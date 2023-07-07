@@ -41,7 +41,7 @@ export class VillageManagementComponent implements OnInit {
   @ViewChild("formSearch") formSearch: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   public dataSource: MatTableDataSource<any>;
-  public columnsToDisplay = ["index", "provinceCode", "communeName", "action"];
+  public columnsToDisplay = ["index", "provinceName","districtName", "communeName", "action"];
   constructor(
     public communeManagementService: CommuneManagementService,
     private fb: FormBuilder,
@@ -65,9 +65,9 @@ export class VillageManagementComponent implements OnInit {
     this.searchForm.get('proId').valueChanges.subscribe(value => {
       let requestListCommuneByProvince = {
         functionName: "getListDistrict",
-        provinceDTO: {
+        districtDTO: {
           userName: this.userName,
-          proCode: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+          proId: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
           distId: this.searchForm.get('distId').value ===  '' ? null : +this.searchForm.get('distId').value ,
 
         }
@@ -129,11 +129,11 @@ export class VillageManagementComponent implements OnInit {
         );
         this.dataSource.sort = this.sort;
         this.totalRecord.next(
-          this.communeManagementService.listCommune.value.length
+            res.pageInfo.recordTotal
         );
         this.showTotalPages.next(
-          Math.ceil(res.totalSuccess / this.pageSize) <= 5
-            ? Math.ceil(res.totalSuccess / this.pageSize)
+          Math.ceil(res.pageInfo.recordTotal / this.pageSize) <= 5
+            ? Math.ceil(res.pageInfo.recordTotal / this.pageSize)
             : 5
         );
       } else {

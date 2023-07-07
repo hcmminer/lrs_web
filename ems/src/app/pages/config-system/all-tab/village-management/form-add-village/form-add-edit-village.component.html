@@ -58,26 +58,26 @@
                   >
                       <ng-container *ngFor="let item of communeManagementService.cbxCommunes | async">
                           <option [ngValue]="item.distId">
-                              <span>{{ item.distCode }}</span>
+                              <span>{{ item.distName }}</span>
                           </option>
                       </ng-container>
                   </select>
-<!--                  <div-->
-<!--                          *ngIf="-->
-<!--                    addEditForm.get('distId').invalid &&-->
-<!--                    (addEditForm.get('distId').dirty || addEditForm.get('distId').touched)-->
-<!--                  "-->
-<!--                  >-->
-<!--                      <small class="form-text text-danger" *ngIf="addEditForm.get('distId').errors.required">-->
-<!--                          {{-->
-<!--                          'VALIDATION.REQUIRED'-->
-<!--                              | translate-->
-<!--                              : {-->
-<!--                                  name: 'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate-->
-<!--                              }-->
-<!--                          }}-->
-<!--                      </small>-->
-<!--                  </div>-->
+                  <div
+                          *ngIf="
+                    addEditForm.get('distId').invalid &&
+                    (addEditForm.get('distId').dirty || addEditForm.get('distId').touched)
+                  "
+                  >
+                      <small class="form-text text-danger" *ngIf="addEditForm.get('distId').errors.required">
+                          {{
+                          'VALIDATION.REQUIRED'
+                              | translate
+                              : {
+                                  name: 'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate
+                              }
+                          }}
+                      </small>
+                  </div>
               </div>
 
               </div>

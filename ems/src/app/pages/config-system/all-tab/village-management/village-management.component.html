@@ -13,7 +13,7 @@
               <div class="col-lg-10 col-sm-10">
                 <div class="row">
                   <label class="col-lg-2 col-sm-12 form-label col-form-label font-14" for="proId">{{
-                    'COMMUNE_MANAGEMENT.PROVINCE_CODE' | translate
+                    'VILLAGE_MANAGEMENT.PROVINCE_NAME' | translate
                   }}</label>
                   <div class="col-md-2">
                     <select
@@ -25,13 +25,13 @@
                     >
                       <ng-container *ngFor="let item of communeManagementService.cbxProvices | async">
                         <option [value]="item.proId">
-                          <span>{{ item.proCode }}</span> 
+                          <span>{{ item.proCode }}- {{ item.proName }}</span>
                         </option>
                       </ng-container>
                     </select>
                   </div>
                   <label class="col-lg-2 col-sm-12 form-label col-form-label font-14" for="proId">{{
-                    'COMMUNE_MANAGEMENT.COMMUNE_CODE' | translate
+                    'COMMUNE_MANAGEMENT.COMMUNE_NAME' | translate
                     }}</label>
                      <div class="col-md-2">
                     <select
@@ -43,7 +43,7 @@
                     >
                       <ng-container *ngFor="let item of communeManagementService.cbxCommunes | async">
                         <option [value]="item.distId">
-                          <span>{{ item.distCode }}</span>
+                          <span>{{ item.distName }}</span>
                         </option>
                       </ng-container>
                     </select>
@@ -51,7 +51,7 @@
 
 
                   <label class="col-lg-2 col-sm-12 form-label col-form-label font-14" for="communeName"
-                  >{{ 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate }}<span style="color: red">*</span></label
+                  >{{ 'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate }}<span style="color: red">*</span></label
                 >
                    <div class="col-md-2">
                   <input
@@ -156,20 +156,27 @@
                 </ng-container>
 
 
-                <!-- provinceCode  -->
-                <ng-container matColumnDef="provinceCode">
+                <!-- provinceName  -->
+                <ng-container matColumnDef="provinceName">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                    {{ 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate }}
+                    {{ 'VILLAGE_MANAGEMENT.PROVINCE_NAME' | translate }}
                   </th>
-                  <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.communeCode }}</td>
+                  <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.proName }}</td>
                 </ng-container>
-                  <!-- provinceName  -->
-                  <ng-container matColumnDef="communeName">
+                  <!-- districtName  -->
+                  <ng-container matColumnDef="districtName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      {{ 'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate }}
+                      {{ 'VILLAGE_MANAGEMENT.DISTRICT_NAME' | translate }}
                     </th>
-                    <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.communeName }}</td>
+                    <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.districtName }}</td>
                   </ng-container>
+                <!-- districtName  -->
+                <ng-container matColumnDef="communeName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ 'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate }}
+                  </th>
+                  <td mat-cell *matCellDef="let item" style="text-align: left">{{ item.communeName }}</td>
+                </ng-container>
                 <!-- material -->
                 <!-- <ng-container matColumnDef="material">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -220,7 +227,7 @@
                 <!-- Row shown when there is no matching data. -->
                 <tr class="mat-row" *matNoDataRow>
                   <td class="mat-cell" colspan="15">
-                    {{ 'NO_MATCH_DATA' | translate }}
+                    {{ 'COMMUNE_MANAGEMENT.NO_MATCH_DATA' | translate }}
                   </td>
                 </tr>
               </table>

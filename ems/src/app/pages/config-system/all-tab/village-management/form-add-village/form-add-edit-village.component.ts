@@ -103,9 +103,9 @@ export class FormAddEditVillageComponent implements OnInit {
     //combobox muong
     let requestListCommune = {
       functionName: "getListDistrict",
-      provinceDTO: {
+      districtDTO: {
         userName: this.userName,
-        proCode: null,
+        proName: null,
         distName: ''
       }
     };
@@ -121,7 +121,7 @@ export class FormAddEditVillageComponent implements OnInit {
     //event change
     this.addEditForm.get('proId').valueChanges.subscribe(value => {
       let requestListCommuneByProvince = {
-        functionName: "searchDistrict",
+        functionName: "getListDistrict",
         districtDTO: {
           userName: this.userName,
           proId: this.addEditForm.get('proId').value ===  '' ? null : +this.addEditForm.get('proId').value ,

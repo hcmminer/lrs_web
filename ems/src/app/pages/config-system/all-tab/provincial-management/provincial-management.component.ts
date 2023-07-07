@@ -88,15 +88,15 @@ export class ProvincialManagementComponent implements OnInit {
         );
         this.dataSource.sort = this.sort;
         this.totalRecord.next(
-          this.provincialManagementService.listProvice.value.length
+        res.pageInfo.recordTotal
         );
         this.showTotalPages.next(
           Math.ceil(
-            this.provincialManagementService.listProvice.value.length /
+              res.pageInfo.recordTotal /
               this.pageSize
           ) <= 5
             ? Math.ceil(
-                this.provincialManagementService.listProvice.value.length /
+              res.pageInfo.recordTotal /
                   this.pageSize
               )
             : 5

@@ -28,7 +28,7 @@ export class CommuneManagementComponent implements OnInit {
   public currentPage = 0;
   public pageSize: number = 10;
   public dataChange = false;
-  public recordTotal  = new BehaviorSubject<any>(0);
+  public totalRecord  = new BehaviorSubject<any>(0);
   public showTotalPages = new BehaviorSubject<any>(0);
   public searchForm: FormGroup;
   private subscriptions: Subscription[] = [];
@@ -93,12 +93,11 @@ export class CommuneManagementComponent implements OnInit {
           this.communeManagementService.listCommune.value
         );
         this.dataSource.sort = this.sort;
-        this.recordTotal .next(
-          this.communeManagementService.listCommune.value.length
-        );
-        this.recordTotal.next(
-          Math.ceil(res.totalSuccess / this.pageSize) <= 5
-            ? Math.ceil(res.totalSuccess / this.pageSize)
+        this.totalRecord .next(
+            res.pageInfo.recordTotal        );
+        this.showTotalPages.next(
+          Math.ceil(res.pageInfo.recordTotal / this.pageSize) <= 5
+            ? Math.ceil(res.pageInfo.recordTotal / this.pageSize)
             : 5
         );
       } else {
@@ -106,7 +105,7 @@ export class CommuneManagementComponent implements OnInit {
         this.dataSource = new MatTableDataSource(
           this.communeManagementService.listCommune.value
         );
-        this.recordTotal .next(1);
+        this.totalRecord .next(1);
         this.showTotalPages.next(1);
       }
     });
