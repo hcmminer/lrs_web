@@ -1,0 +1,115 @@
+<div class="position-relative rounded">
+  <div class="container">
+    <h5 class="font-weight-boldest mb-5">
+      {{ propAction == 'edit' ? ('cm.edit' | translate) : ('cm.add' | translate) }}
+    </h5>
+    <hr />
+    <form action="#" class="form form-label-right" [formGroup]="addEditForm">
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetId">{{
+          'cm.areaCode' | translate
+          }}</label>
+        <div class="col-md-3">
+          <select class="form-control" name="optionSetValueId" id="optionSetValueId" formControlName="optionSetValueId">
+            <option *ngFor="let item of configSystemService.cbxArea | async" [ngValue]="item.optionSetValueId">
+              {{ item.value }}
+            </option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'optionSetValueId')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.areaCode' | translate } }}
+          </div>
+        </div>
+
+        <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ 'cm.province' | translate }}</label>
+        <div class="col-md-3">
+          <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
+            <option *ngFor="let item of configSystemService.cbxProvince | async"
+              [ngValue]="item.proId || item.provinceId">
+              {{ item.proName }}
+            </option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'provinceId')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.province' | translate } }}
+          </div>
+        </div>
+      </div>
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <!-- startDate -->
+        <label class="col-md-2 mb-12 form-label col-form-label font-14" for="startDate">{{ 'cm.startDate' | translate
+          }}<span style="color: red">*</span></label>
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="startDate" [matDatepicker]="picker2" (dateChange)="eChangeDate2($event)"
+              (input)="eChangeDate2($event)" class="w-100" />
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2" class="icon-datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <div style="color: red" *ngIf="t2msg != ''">
+              {{ t2msg | translate }}
+            </div>
+          </mat-form-field>
+        </div>
+        <!-- endDate -->
+        <label class="col-md-2 mb-12 form-label col-form-label font-14" for="endDate">{{ 'cm.endDate' | translate
+          }}<span style="color: red">*</span></label>
+        <div class="col-md-3">
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="endDate" (dateChange)="eChangeDate3($event)" (input)="eChangeDate3($event)"
+              [matDatepicker]="picker3" />
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker3" class="icon-datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+            <div style="color: red" *ngIf="t3msg != ''">
+              {{ t3msg | translate }}
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <!-- amount... -->
+        <label class="col-md-2 mb-12 form-label col-form-label" for="amount">{{ 'cm.amountMax' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input type="number" class="form-control" id="amount" autocomplete="off" formControlName="amount"
+            [class.is-invalid]="isControlInvalid('amount')" maxlength="101" />
+
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.amountMax' | translate } }}
+          </div>
+        </div>
+        <!-- ...amount -->
+        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
+      </div>
+
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="description">{{ 'cm.description' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-8">
+          <textarea rows="3" class="form-control" id="description" autocomplete="off" formControlName="description"
+            [class.is-invalid]="isControlInvalid('description')" maxlength="101">
+          </textarea>
+
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.description' | translate } }}
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex justify-content-end mb-5">
+      <button class="btn btn-outline-primary mx-3" style="width: 150px" (click)="eCloseWithoutEdit()">
+        {{ 'cm.close' | translate }}
+      </button>
+      <button class="btn btn-primary mx-3" style="width: 150px" (click)="eSave()">
+        {{ 'cm.save' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="pb-1"></div>
+  <ngx-spinner bdColor="rgba(0,0,0,0.6)" size="default" color="#1dc5be" type="ball-clip-rotate"
+    [fullScreen]="true"></ngx-spinner>
+</div>

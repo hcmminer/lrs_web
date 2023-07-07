@@ -38,6 +38,8 @@ import { TabOptionSetComponent } from "./all-tab/tab-option-set/tab-option-set.c
 import { TabOptionSetValueComponent } from "./all-tab/tab-option-set-value/tab-option-set-value.component";
 import { AddEditDataComponent } from "./all-tab/tab-option-set/childs/add-edit-data/add-edit-data.component";
 import { AddEditDataComponent as AddEditDataComponent_1 } from "./all-tab/tab-option-set-value/childs/add-edit-data/add-edit-data.component";
+import { PriceRangeManagerComponent } from "./sub-menus/price-range-manager/price-range-manager.component";
+import { AddEditPriceRangeComponent } from "./sub-menus/price-range-manager/childs/add-edit-price-range/add-edit-price-range.component";
 // ..bandv
 
 @NgModule({
@@ -48,6 +50,8 @@ import { AddEditDataComponent as AddEditDataComponent_1 } from "./all-tab/tab-op
     TabOptionSetValueComponent,
     AddEditDataComponent,
     AddEditDataComponent_1,
+    PriceRangeManagerComponent,
+    AddEditPriceRangeComponent,
     // ..bandv
 
     CommonAlertDialogComponent,
