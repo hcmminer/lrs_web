@@ -81,7 +81,7 @@ export class PriceRangeManagerComponent implements OnInit, OnDestroy {
       {
         functionName: 'listArea',
         searchV1DTO: {
-          optionSetId: '100',
+          optionSetId: '999',
         },
       },
       true,

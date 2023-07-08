@@ -74,7 +74,8 @@
           <div class="">
             <div (click)="openModal(null, 'add')" class="btn btn-green font-weight-bolder mx-2"
               style="height: 38px; padding: 7px 32px; margin: auto">
-              <i class="fas fa-plus cursor-pointer" style="color: white"></i>
+              <i class="mr-2 fas fa-plus cursor-pointer text-white"></i>
+                {{ "cm.add" | translate }}
             </div>
           </div>
         </div>
@@ -131,7 +132,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.amountMax" | translate }}
                 </th>
-                <td class="text-left" mat-cell *matCellDef="let item">
+                <td class="text-right" mat-cell *matCellDef="let item">
                   {{ item.amount | number }}
                 </td>
               </ng-container>
@@ -139,7 +140,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.startDate" | translate }}
                 </th>
-                <td class="text-left" mat-cell *matCellDef="let item">
+                <td class="text-center" mat-cell *matCellDef="let item">
                   {{ item.startDate }}
                 </td>
               </ng-container>
@@ -147,7 +148,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.expiredDate" | translate }}
                 </th>
-                <td class="text-left" mat-cell *matCellDef="let item">
+                <td class="text-center" mat-cell *matCellDef="let item">
                   {{ item.expiredDate }}
                 </td>
               </ng-container>
