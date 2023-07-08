@@ -72,8 +72,8 @@ export class AddEditPriceRangeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadForm();
-    this.optionSetValueId = this.propData.optionSetValueId;
-    this.provinceId = this.propData.provinceId;
+    this.optionSetValueId = this.propData?.optionSetValueId || null;
+    this.provinceId = this.propData?.provinceId || null;
   }
 
   convertStringVNToUTCDate(vn) {
