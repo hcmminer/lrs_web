@@ -6,11 +6,26 @@
     <hr />
     <form action="#" class="form form-label-right" [formGroup]="addEditForm">
       <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ 'cm.provinceCode' |
+          translate}}</label>
+        <div class="col-md-3">
+          <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId"
+            [(ngModel)]="provinceId" (ngModelChange)="selectProvince($event)">
+            <option *ngFor="let item of configSystemService.cbxProvince | async"
+              [ngValue]="item.proId || item.provinceId">
+              {{ item.proCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'provinceId')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.province' | translate } }}
+          </div>
+        </div>
         <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetId">{{
           'cm.areaCode' | translate
           }}</label>
         <div class="col-md-3">
-          <select class="form-control" name="optionSetValueId" id="optionSetValueId" formControlName="optionSetValueId">
+          <select class="form-control" name="optionSetValueId" id="optionSetValueId" formControlName="optionSetValueId"
+            [(ngModel)]="optionSetValueId" (ngModelChange)="selectAreaCode($event)">
             <option *ngFor="let item of configSystemService.cbxArea | async" [ngValue]="item.optionSetValueId">
               {{ item.value }}
             </option>
@@ -20,18 +35,31 @@
           </div>
         </div>
 
-        <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ 'cm.province' | translate }}</label>
+
+      </div>
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <!-- priceCode -->
+        <label class="col-md-2 mb-12 form-label col-form-label" for="amount">{{ 'cm.priceCode' | translate }}
+          <span style="color: red">*</span>
+        </label>
         <div class="col-md-3">
-          <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
-            <option *ngFor="let item of configSystemService.cbxProvince | async"
-              [ngValue]="item.proId || item.provinceId">
-              {{ item.proName }}
-            </option>
-          </select>
-          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'provinceId')">
-            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.province' | translate } }}
+          <input disabled class="form-control" id="priceCode" autocomplete="off"
+            [value]="(provinceCode || '')+(areaCode || '')" />
+        </div>
+        <!-- amount... -->
+        <label class="col-md-2 mb-12 form-label col-form-label" for="amount">{{ 'cm.amountMax' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input type="number" class="form-control" id="amount" autocomplete="off" formControlName="amount"
+            [class.is-invalid]="isControlInvalid('amount')" maxlength="101" />
+
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.amountMax' | translate } }}
           </div>
         </div>
+        <!-- ...amount -->
+
       </div>
       <div class="row form-group gx-6 mb-0 justify-content-center">
         <!-- startDate -->
@@ -66,23 +94,7 @@
         </div>
       </div>
 
-      <div class="row form-group gx-6 mb-0 justify-content-center">
-        <!-- amount... -->
-        <label class="col-md-2 mb-12 form-label col-form-label" for="amount">{{ 'cm.amountMax' | translate }}
-          <span style="color: red">*</span>
-        </label>
-        <div class="col-md-3">
-          <input type="number" class="form-control" id="amount" autocomplete="off" formControlName="amount"
-            [class.is-invalid]="isControlInvalid('amount')" maxlength="101" />
 
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">
-            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.amountMax' | translate } }}
-          </div>
-        </div>
-        <!-- ...amount -->
-        <div class="col-md-2"></div>
-        <div class="col-md-3"></div>
-      </div>
 
       <div class="row form-group gx-6 mb-0 justify-content-center">
         <label class="col-md-2 mb-12 form-label col-form-label" for="description">{{ 'cm.description' | translate }}

@@ -1,4 +1,15 @@
-import { Component, EventEmitter, Inject, Injector, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+  Output,
+  ElementRef,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +27,19 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./add-edit-price-range.component.scss'],
 })
 export class AddEditPriceRangeComponent implements OnInit, OnDestroy {
+  selectProvince(event) {
+    let arrClone = [...this.configSystemService.cbxProvince.value];
+    let arr = arrClone.shift();
+    this.provinceCode = arrClone.find((i) => i.proId == event)?.proCode;
+  }
+  selectAreaCode(event) {
+    let arrClone = [...this.configSystemService.cbxArea.value];
+    let arr = arrClone.shift();
+    this.areaCode = arrClone.find((i) => i.optionSetValueId == event)?.value;
+  }
   // form
+  provinceCode = null;
+  areaCode = null;
   optionSetValueId = null;
   provinceId = null;
   proId = null;
@@ -49,19 +72,9 @@ export class AddEditPriceRangeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadForm();
+    this.optionSetValueId = this.propData.optionSetValueId;
+    this.provinceId = this.propData.provinceId;
   }
-
-  dateNow = new Date();
-
-  // loadAddEditForm() {
-  //   this.addEditForm = this.fb.group({
-  //     beginContractDate: [new Date(this.dateNow.getFullYear(), this.dateNow.getMonth(), 1), [Validators.required]],
-  //     expiredContractDate: [
-  //       new Date(this.dateNow.getFullYear(), this.dateNow.getMonth() + 1, 0),
-  //       [Validators.required],
-  //     ],
-  //   });
-  // }
 
   convertStringVNToUTCDate(vn) {
     let vnArr = vn.split('/');

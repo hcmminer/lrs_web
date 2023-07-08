@@ -24,8 +24,8 @@ import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert
   styleUrls: ['./price-range-manager.component.scss'],
 })
 export class PriceRangeManagerComponent implements OnInit, OnDestroy {
-  areaCode = null;
-  proId = null;
+  optionSetValueId;
+  provinceId;
 
   applyFilter(event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -43,7 +43,8 @@ export class PriceRangeManagerComponent implements OnInit, OnDestroy {
   columnsToDisplay = [
     'index',
     'priceCode',
-    'province',
+    'provinceCode',
+    'areaCode',
     'amount',
     'startDate',
     'expiredDate',
@@ -67,8 +68,8 @@ export class PriceRangeManagerComponent implements OnInit, OnDestroy {
   ) {}
   loadSearchForm() {
     this.searchForm = this.fb.group({
-      areaCode: [this.areaCode],
-      proId: [this.proId],
+      optionSetValueId: [this.optionSetValueId],
+      provinceId: [this.provinceId],
     });
   }
   private subscriptions: Subscription[] = [];
@@ -132,8 +133,8 @@ export class PriceRangeManagerComponent implements OnInit, OnDestroy {
     const requestTarget = {
       functionName: 'listPriceRange',
       searchV1DTO: {
-        areaCode: this.searchForm.get('areaCode').value?.trim(),
-        proId: this.searchForm.get('proId').value?.trim(),
+        optionSetValueId: this.searchForm.get('optionSetValueId').value,
+        provinceId: this.searchForm.get('provinceId').value,
       },
     };
     return this.commonService.callAPICommon(requestTarget as RequestApiModel);

@@ -25,21 +25,23 @@
             {{ "cm.searchInfor" | translate }}
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetId">{{ "cm.areaCode" | translate
+            <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetValueId">{{ "cm.areaCode" | translate
               }}</label>
             <div class="col-md-3">
-              <select class="form-control" name="areaCode" id="areaCode" formControlName="areaCode">
+              <select class="form-control" name="optionSetValueId" id="optionSetValueId"
+                formControlName="optionSetValueId">
                 <option *ngFor="let item of configSystemService.cbxArea | async" [ngValue]="item.optionSetValueId">
                   {{ item.value }}
                 </option>
               </select>
             </div>
 
-            <label class="col-md-2 mb-12 form-label col-form-label" for="proId">{{ "cm.province" | translate }}</label>
+            <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ "cm.provinceCode" | translate
+              }}</label>
             <div class="col-md-3">
-              <select class="form-control" name="proId" id="proId" formControlName="proId">
+              <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
                 <option *ngFor="let item of configSystemService.cbxProvince | async" [ngValue]="item.proId">
-                  {{ item.proName }}
+                  {{ item.proCode }}
                 </option>
               </select>
             </div>
@@ -100,25 +102,28 @@
                   {{ index + 1 }}
                 </td>
               </ng-container>
+              <ng-container matColumnDef="provinceCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.provinceCode" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.provinceCode}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="areaCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ "cm.areaCode" | translate }}
+                </th>
+                <td class="text-left" mat-cell *matCellDef="let item">
+                  {{ item.areaCode }}
+                </td>
+              </ng-container>
               <ng-container matColumnDef="priceCode">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   {{ "cm.priceCode" | translate }}
                 </th>
                 <td class="text-left" mat-cell *matCellDef="let item">
-                  {{
-                  item.priceCode
-                  }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="province">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                  {{ "cm.province" | translate }}
-                </th>
-                <td class="text-left" mat-cell *matCellDef="let item">
-                  {{
-                  item.province
-                  }}
+                  {{ item.priceCode }}
                 </td>
               </ng-container>
 
@@ -127,9 +132,7 @@
                   {{ "cm.amountMax" | translate }}
                 </th>
                 <td class="text-left" mat-cell *matCellDef="let item">
-                  {{
-                  item.amount | number
-                  }}
+                  {{ item.amount | number }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="startDate">
@@ -137,9 +140,7 @@
                   {{ "cm.startDate" | translate }}
                 </th>
                 <td class="text-left" mat-cell *matCellDef="let item">
-                  {{
-                  item.startDate
-                  }}
+                  {{ item.startDate }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="expiredDate">
@@ -147,9 +148,7 @@
                   {{ "cm.expiredDate" | translate }}
                 </th>
                 <td class="text-left" mat-cell *matCellDef="let item">
-                  {{
-                  item.expiredDate
-                  }}
+                  {{ item.expiredDate }}
                 </td>
               </ng-container>
 

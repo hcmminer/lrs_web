@@ -10,6 +10,7 @@ export const locale = {
       mustIsMoney: '{{name}} không được âm',
       areaCode: 'Mã khu vực',
       province: 'Tỉnh',
+      provinceCode: 'Mã tỉnh',
       startDate: 'Ngày bắt đầu',
       endDate: 'Ngày kết thúc',
       expiredDate: 'Ngày kết thúc',

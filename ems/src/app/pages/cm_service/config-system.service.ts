@@ -160,6 +160,7 @@ export class ConfigSystemService implements OnDestroy {
             this.cbxProvince.value.unshift({
               proId: null,
               provinceId: null,
+              proCode: this.translateService.instant('LIST_STATUS.ALL'),
               proName: this.translateService.instant('LIST_STATUS.ALL'),
             });
         }),
