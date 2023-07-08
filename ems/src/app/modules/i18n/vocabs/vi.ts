@@ -3,7 +3,7 @@ export const locale = {
   lang: 'vi',
   data: {
     CONFIG_SYSTEM: 'Quản lý hệ thống',
-    options: 'Quản lý cấu hình',
+    optionsManager: 'Quản lý các cấu hình',
     priceRangeManager: 'Quản lý đơn giá',
     staffManager: 'Quản lý nhân viên',
     cm: {

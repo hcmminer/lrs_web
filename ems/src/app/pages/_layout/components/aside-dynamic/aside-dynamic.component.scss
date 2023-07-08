@@ -20,3 +20,12 @@
 #kt_brand {
   border-right: 1px solid #559ED6;
 }
+
+.aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading .menu-text, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link .menu-text {
+  color: #ca5d2a;
+}
+
+.aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link {
+  border-bottom-left-radius: unset !important;
+  border-top-left-radius: unset !important;
+}

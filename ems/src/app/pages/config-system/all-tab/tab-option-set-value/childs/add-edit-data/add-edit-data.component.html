@@ -2,65 +2,40 @@
   <div class="container">
     <h5 class="font-weight-boldest mb-5">
       {{
-        propAction == "edit" ? ("cm.edit" | translate) : ("cm.add" | translate)
+      propAction == "edit" ? ("cm.edit" | translate) : ("cm.add" | translate)
       }}
     </h5>
     <hr />
     <form action="#" class="form form-label-right" [formGroup]="addEditForm">
       <div class="row form-group gx-6 mb-0 justify-content-around">
-        <label
-          class="col-md-2 mb-12 form-label col-form-label"
-          for="optionSetId"
-          >{{ "cm.optionSetCode" | translate }}</label
-        >
+        <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetId">{{ "cm.optionSetCode" | translate
+          }}</label>
         <div class="col-md-3">
           <ng-container *ngIf="propAction == 'add'">
-            <select
-              class="form-control"
-              name="optionSetIdForAdd"
-              id="optionSetIdForAdd"
-              formControlName="optionSetIdForAdd"
-              [(ngModel)]="optionSetIdForAdd"
-            >
-              <option
-                *ngFor="let item of configSystemService.cbxOptionSet | async"
-                [value]="item.optionSetId"
-              >
+            <select class="form-control" name="optionSetIdForAdd" id="optionSetIdForAdd"
+              formControlName="optionSetIdForAdd" [(ngModel)]="optionSetIdForAdd">
+              <option *ngFor="let item of configSystemService.cbxOptionSet | async" [value]="item.optionSetId">
                 {{ item.optionSetCode }}
               </option>
             </select>
-            <div
-              class="invalid-feedback d-block"
-              *ngIf="controlHasError('required', 'optionSetIdForAdd')"
-            >
+            <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'optionSetIdForAdd')">
               {{
-                "VALIDATION.REQUIRED"
-                  | translate : { name: "cm.value" | translate }
+              "VALIDATION.REQUIRED"
+              | translate : { name: "cm.value" | translate }
               }}
             </div>
           </ng-container>
           <ng-container *ngIf="propAction == 'edit'">
-            <select
-              class="form-control"
-              name="optionSetId"
-              id="optionSetId"
-              formControlName="optionSetId"
-              [(ngModel)]="optionSetId"
-            >
-              <option
-                *ngFor="let item of configSystemService.cbxOptionSet | async"
-                [value]="item.optionSetId"
-              >
+            <select class="form-control" name="optionSetId" id="optionSetId" formControlName="optionSetId"
+              [(ngModel)]="optionSetId">
+              <option *ngFor="let item of configSystemService.cbxOptionSet | async" [value]="item.optionSetId">
                 {{ item.optionSetCode }}
               </option>
             </select>
-            <div
-              class="invalid-feedback d-block"
-              *ngIf="controlHasError('required', 'optionSetId')"
-            >
+            <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'optionSetId')">
               {{
-                "VALIDATION.REQUIRED"
-                  | translate : { name: "cm.value" | translate }
+              "VALIDATION.REQUIRED"
+              | translate : { name: "cm.value" | translate }
               }}
             </div>
           </ng-container>
@@ -70,135 +45,77 @@
       </div>
 
       <div class="row form-group gx-6 mb-0 justify-content-around">
-        <label class="col-md-2 mb-12 form-label col-form-label" for="value"
-          >{{ "cm.value" | translate }}
+        <label class="col-md-2 mb-12 form-label col-form-label" for="value">{{ "cm.value" | translate }}
           <span style="color: red">*</span>
         </label>
         <div class="col-md-3">
-          <input
-            type="text"
-            class="form-control"
-            id="value"
-            autocomplete="off"
-            formControlName="value"
-            [class.is-invalid]="isControlInvalid('value')"
-            maxlength="101"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'value')"
-          >
+          <input type="text" class="form-control" id="value" autocomplete="off" formControlName="value"
+            [class.is-invalid]="isControlInvalid('value')" maxlength="101" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'value')">
             {{
-              "VALIDATION.REQUIRED"
-                | translate : { name: "cm.value" | translate }
+            "VALIDATION.REQUIRED"
+            | translate : { name: "cm.value" | translate }
             }}
           </div>
         </div>
 
-        <label class="col-md-2 mb-12 form-label col-form-label" for="nameVi"
-          >{{ "cm.nameVi" | translate }}
+        <label class="col-md-2 mb-12 form-label col-form-label" for="nameVi">{{ "cm.nameVi" | translate }}
           <span style="color: red">*</span>
         </label>
         <div class="col-md-3">
-          <input
-            type="text"
-            class="form-control"
-            id="nameVi"
-            autocomplete="off"
-            formControlName="nameVi"
-            [class.is-invalid]="isControlInvalid('nameVi')"
-            maxlength="101"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'nameVi')"
-          >
+          <input type="text" class="form-control" id="nameVi" autocomplete="off" formControlName="nameVi"
+            [class.is-invalid]="isControlInvalid('nameVi')" maxlength="101" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'nameVi')">
             {{
-              "VALIDATION.REQUIRED"
-                | translate : { name: "cm.nameVi" | translate }
+            "VALIDATION.REQUIRED"
+            | translate : { name: "cm.nameVi" | translate }
             }}
           </div>
         </div>
       </div>
       <div class="row form-group gx-6 mb-0 justify-content-around">
-        <label class="col-md-2 mb-12 form-label col-form-label" for="nameEn"
-          >{{ "cm.nameEn" | translate }}
+        <label class="col-md-2 mb-12 form-label col-form-label" for="nameEn">{{ "cm.nameEn" | translate }}
           <span style="color: red">*</span>
         </label>
         <div class="col-md-3">
-          <input
-            type="text"
-            class="form-control"
-            id="nameEn"
-            autocomplete="off"
-            formControlName="nameEn"
-            [class.is-invalid]="isControlInvalid('nameEn')"
-            maxlength="101"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'nameEn')"
-          >
+          <input type="text" class="form-control" id="nameEn" autocomplete="off" formControlName="nameEn"
+            [class.is-invalid]="isControlInvalid('nameEn')" maxlength="101" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'nameEn')">
             {{
-              "VALIDATION.REQUIRED"
-                | translate : { name: "cm.nameEn" | translate }
+            "VALIDATION.REQUIRED"
+            | translate : { name: "cm.nameEn" | translate }
             }}
           </div>
         </div>
 
-        <label class="col-md-2 mb-12 form-label col-form-label" for="nameLa"
-          >{{ "cm.nameLa" | translate }}
+        <label class="col-md-2 mb-12 form-label col-form-label" for="nameLa">{{ "cm.nameLa" | translate }}
           <span style="color: red">*</span>
         </label>
         <div class="col-md-3">
-          <input
-            type="text"
-            class="form-control"
-            id="nameLa"
-            autocomplete="off"
-            formControlName="nameLa"
-            [class.is-invalid]="isControlInvalid('nameLa')"
-            maxlength="101"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'nameLa')"
-          >
+          <input type="text" class="form-control" id="nameLa" autocomplete="off" formControlName="nameLa"
+            [class.is-invalid]="isControlInvalid('nameLa')" maxlength="101" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'nameLa')">
             {{
-              "VALIDATION.REQUIRED"
-                | translate : { name: "cm.nameLa" | translate }
+            "VALIDATION.REQUIRED"
+            | translate : { name: "cm.nameLa" | translate }
             }}
           </div>
         </div>
       </div>
 
       <div class="row form-group gx-6 mb-0 justify-content-around">
-        <label
-          class="col-md-2 mb-12 form-label col-form-label"
-          for="description"
-          >{{ "cm.description" | translate }}
+        <label class="col-md-2 mb-12 form-label col-form-label" for="description">{{ "cm.description" | translate }}
           <span style="color: red">*</span>
         </label>
         <div class="col-md-9">
-          <textarea
-            rows="3"
-            type="text"
-            class="form-control"
-            id="description"
-            autocomplete="off"
-            formControlName="description"
-            [class.is-invalid]="isControlInvalid('description')"
-            maxlength="101"
-          >
+          <textarea rows="3" type="text" class="form-control" id="description" autocomplete="off"
+            formControlName="description" [class.is-invalid]="isControlInvalid('description')" maxlength="500">
           </textarea>
 
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'description')"
-          >
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">
             {{
-              "VALIDATION.REQUIRED"
-                | translate : { name: "cm.description" | translate }
+            "VALIDATION.REQUIRED"
+            | translate : { name: "cm.description" | translate }
             }}
           </div>
         </div>
@@ -206,28 +123,15 @@
     </form>
 
     <div class="d-flex justify-content-end mb-5">
-      <button
-        class="btn btn-outline-primary mx-3"
-        style="width: 150px"
-        (click)="eCloseWithoutEdit()"
-      >
+      <button class="btn btn-outline-primary mx-3" style="width: 150px" (click)="eCloseWithoutEdit()">
         {{ "cm.close" | translate }}
       </button>
-      <button
-        class="btn btn-primary mx-3"
-        style="width: 150px"
-        (click)="eSave()"
-      >
+      <button class="btn btn-primary mx-3" style="width: 150px" (click)="eSave()">
         {{ "cm.save" | translate }}
       </button>
     </div>
   </div>
   <div class="pb-1"></div>
-  <ngx-spinner
-    bdColor="rgba(0,0,0,0.6)"
-    size="default"
-    color="#1dc5be"
-    type="ball-clip-rotate"
-    [fullScreen]="true"
-  ></ngx-spinner>
+  <ngx-spinner bdColor="rgba(0,0,0,0.6)" size="default" color="#1dc5be" type="ball-clip-rotate"
+    [fullScreen]="true"></ngx-spinner>
 </div>

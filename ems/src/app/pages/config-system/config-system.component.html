@@ -1,25 +1,14 @@
 <div class="position-relative" style="height: 100%">
-  <div
-    id="kt_subheader"
-    class="subheader py-2 py-lg-6 subheader-solid"
-    ng-reflect-ng-class="subheader-solid"
-  >
-    <div
-      class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
-      ng-reflect-ng-class="container-fluid"
-    >
+  <div id="kt_subheader" class="subheader py-2 py-lg-6 subheader-solid" ng-reflect-ng-class="subheader-solid">
+    <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap container-fluid"
+      ng-reflect-ng-class="container-fluid">
       <div class="d-flex align-items-center flex-wrap mr-1">
         <!--bindings={}-->
         <div class="d-flex align-items-baseline flex-wrap mr-5">
-          <ul
-            class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm"
-          >
-            <li
-              routerlinkactive="active"
-              class="breadcrumb-item ng-star-inserted active"
-              ng-reflect-router-link-active="active"
-            >
-              <a class="text-muted">{{ "options" | translate }}</a>
+          <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+            <li routerlinkactive="active" class="breadcrumb-item ng-star-inserted active"
+              ng-reflect-router-link-active="active">
+              <a class="text-muted">{{ "optionsManager" | translate }}</a>
             </li>
           </ul>
         </div>
@@ -29,29 +18,19 @@
   <!-- begin: Chi tiet phieu cong tac -->
   <div class="card card-custom gutter-b">
     <mat-tab-group mat-stretch-tabs>
-      <mat-tab label="{{ 'PROVINCIAL_MANAGEMENT.TITLE' | translate }}"
-        ><app-provincial-management></app-provincial-management
-      ></mat-tab>
-      <mat-tab label="{{ 'COMMUNE_MANAGEMENT.TITLE' | translate }}"
-        ><app-commune-management></app-commune-management
-      ></mat-tab>
+      <mat-tab
+        label="{{ 'PROVINCIAL_MANAGEMENT.TITLE' | translate }}"><app-provincial-management></app-provincial-management></mat-tab>
+      <mat-tab
+        label="{{ 'COMMUNE_MANAGEMENT.TITLE' | translate }}"><app-commune-management></app-commune-management></mat-tab>
 
       <!-- bandv.. -->
-      <mat-tab label="{{ 'cm.optionSet' | translate }}"
-        ><app-tab-option-set></app-tab-option-set
-      ></mat-tab>
-      <mat-tab label="{{ 'cm.optionSetValue' | translate }}"
-        ><app-tab-option-set-value></app-tab-option-set-value
-      ></mat-tab>
+      <mat-tab label="{{ 'cm.optionSet' | translate }}"><app-tab-option-set></app-tab-option-set></mat-tab>
+      <mat-tab
+        label="{{ 'cm.optionSetValue' | translate }}"><app-tab-option-set-value></app-tab-option-set-value></mat-tab>
       <!-- ...bandv -->
     </mat-tab-group>
   </div>
   <div class="pb-1"></div>
-  <ngx-spinner
-    bdColor="rgba(0,0,0,0.6)"
-    size="default"
-    color="#1dc5be"
-    type="ball-clip-rotate"
-    [fullScreen]="true"
-  ></ngx-spinner>
+  <ngx-spinner bdColor="rgba(0,0,0,0.6)" size="default" color="#1dc5be" type="ball-clip-rotate"
+    [fullScreen]="true"></ngx-spinner>
 </div>

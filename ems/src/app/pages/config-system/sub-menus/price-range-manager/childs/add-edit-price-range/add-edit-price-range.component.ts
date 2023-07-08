@@ -19,7 +19,7 @@ import { CommonAlertDialogComponent } from 'src/app/pages/materials/common-alert
 import { ToastrService } from 'ngx-toastr';
 import { ConfigSystemService } from 'src/app/pages/cm_service/config-system.service';
 import { CommonService } from 'src/app/pages/cm_service/common.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-add-edit-price-range',
@@ -97,7 +97,8 @@ export class AddEditPriceRangeComponent implements OnInit, OnDestroy {
         provinceId: [this.propData.provinceId, [Validators.required]],
         startDate: [this.convertStringVNToUTCDate(this.propData.startDate), [Validators.required]],
         endDate: [this.convertStringVNToUTCDate(this.propData.expiredDate), [Validators.required]],
-        amount: [this.propData.amount, [Validators.required]],
+        // formatNumber
+        amount: [formatNumber(this.propData.amount, 'en-US', '1.0'), [Validators.required]],
         description: [this.propData.description, [Validators.required]],
       });
     }
@@ -190,7 +191,8 @@ export class AddEditPriceRangeComponent implements OnInit, OnDestroy {
       priceRangeDTO: {
         optionSetValueId: this.addEditForm.get('optionSetValueId').value,
         provinceId: this.addEditForm.get('provinceId').value,
-        amount: this.addEditForm.get('amount').value,
+        // replace(/,/g, '')
+        amount: this.addEditForm.get('amount').value.replace(/,/g, ''),
         startDate: this.transform(this.addEditForm.get('startDate').value),
         expiredDate: this.transform(this.addEditForm.get('endDate').value),
         description: this.addEditForm.get('description').value.trim(),
