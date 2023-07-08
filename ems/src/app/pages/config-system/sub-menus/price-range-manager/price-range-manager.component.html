@@ -133,7 +133,7 @@
                   {{ "cm.amountMax" | translate }}
                 </th>
                 <td class="text-right" mat-cell *matCellDef="let item">
-                  {{ item.amount | number }}
+                  {{ item.amount | formatNumber }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="startDate">

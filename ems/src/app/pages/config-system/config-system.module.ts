@@ -37,6 +37,7 @@ import { AddEditDataComponent as AddEditDataComponent_1 } from './all-tab/tab-op
 import { PriceRangeManagerComponent } from './sub-menus/price-range-manager/price-range-manager.component';
 import { AddEditPriceRangeComponent } from './sub-menus/price-range-manager/childs/add-edit-price-range/add-edit-price-range.component';
 import { NumbersOnlyDirective } from '../directives/only-number.directive';
+import { FormatNumberPipe } from 'src/app/_metronic/core/pipes/formatNumber.pipe';
 // ..bandv
 
 @NgModule({
@@ -50,6 +51,7 @@ import { NumbersOnlyDirective } from '../directives/only-number.directive';
     PriceRangeManagerComponent,
     AddEditPriceRangeComponent,
     NumbersOnlyDirective,
+    FormatNumberPipe,
     // ..bandv
 
     CommonAlertDialogComponent,
@@ -87,6 +89,6 @@ import { NumbersOnlyDirective } from '../directives/only-number.directive';
     MatRadioModule,
     SharedDisplayHtmlModule,
   ],
-  exports: [NumbersOnlyDirective],
+  exports: [NumbersOnlyDirective,FormatNumberPipe],
 })
 export class ConfigSystemModule {}

@@ -53,7 +53,7 @@
         <div class="col-md-3">
           <input type="text" class="form-control" id="amount" autocomplete="off" autocomplete="off"
             formControlName="amount" NumbersOnly [allowThousandSeparator]="true"
-            [class.is-invalid]="isControlInvalid('amount')" maxlength="101" />
+            [class.is-invalid]="isControlInvalid('amount')" maxlength="18" />
 
           <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">
             {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.amountMax' | translate } }}

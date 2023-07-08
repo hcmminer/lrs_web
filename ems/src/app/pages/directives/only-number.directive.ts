@@ -1,6 +1,7 @@
 import { E } from '@angular/cdk/keycodes';
 import { formatNumber } from '@angular/common';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { debounce } from 'src/app/utils/functions';
 
 @Directive({ selector: '[NumbersOnly]' })
 export class NumbersOnlyDirective {
@@ -113,15 +114,21 @@ export class NumbersOnlyDirective {
     } else e.preventDefault();
   }
 
+
+  
+
   /**
    * Author: KhanhND
    * Event handler for host's keyup event (use for format number with thousand separator)
    * @param event
    */
+
+  @debounce()
   @HostListener('keyup', ['$event']) onKeyUp(e: KeyboardEvent) {
     if (this.allowThousandSeparator) {
       let nextValue: string = e.target['value'].replace(/,/g, '');
-      let formattedValue = nextValue != '' ? formatNumber(+nextValue, 'en-US', '1.0') : '';
+      // let formattedValue = nextValue != '' ? formatNumber(+nextValue, 'en-US', '1.0') : '';
+      let formattedValue = nextValue != '' ? nextValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '';
       e.target['value'] = formattedValue;
       return;
     }
