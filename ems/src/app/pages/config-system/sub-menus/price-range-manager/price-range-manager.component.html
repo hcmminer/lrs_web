@@ -25,6 +25,16 @@
             {{ "cm.searchInfor" | translate }}
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
+
+            <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ "cm.provinceCode" | translate
+            }}</label>
+          <div class="col-md-3">
+            <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
+              <option *ngFor="let item of configSystemService.cbxProvince | async" [ngValue]="item.proId">
+                {{ item.proCode }}
+              </option>
+            </select>
+          </div>
             <label class="col-md-2 mb-12 form-label col-form-label" for="optionSetValueId">{{ "cm.areaCode" | translate
               }}</label>
             <div class="col-md-3">
@@ -36,15 +46,7 @@
               </select>
             </div>
 
-            <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ "cm.provinceCode" | translate
-              }}</label>
-            <div class="col-md-3">
-              <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
-                <option *ngFor="let item of configSystemService.cbxProvince | async" [ngValue]="item.proId">
-                  {{ item.proCode }}
-                </option>
-              </select>
-            </div>
+            
             <!--End -->
           </div>
 
