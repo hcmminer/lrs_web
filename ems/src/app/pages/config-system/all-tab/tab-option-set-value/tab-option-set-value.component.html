@@ -17,21 +17,6 @@
             </div>
           </div>
           <div class="row form-group gx-6 d-flex justify-content-around">
-            <label class="col-md-2 form-label col-form-label" for="value">{{
-              "cm.value" | translate
-            }}</label>
-            <div class="col-md-3">
-              <input
-                type="text"
-                class="form-control"
-                id="value"
-                autocomplete="off"
-                formControlName="value"
-                [class.is-invalid]="isControlInvalid('value')"
-                maxlength="101"
-              />
-            </div>
-
             <ng-container *ngIf="!mustShowClose">
               <label
                 class="col-md-2 mb-12 form-label col-form-label"
@@ -56,6 +41,23 @@
                 </select>
               </div>
             </ng-container>
+            
+            <label class="col-md-2 form-label col-form-label" for="value">{{
+              "cm.value" | translate
+            }}</label>
+            <div class="col-md-3">
+              <input
+                type="text"
+                class="form-control"
+                id="value"
+                autocomplete="off"
+                formControlName="value"
+                [class.is-invalid]="isControlInvalid('value')"
+                maxlength="101"
+              />
+            </div>
+
+            
             <ng-container *ngIf="mustShowClose">
               <div class="col-md-2"></div>
               <div class="col-md-3"></div>
