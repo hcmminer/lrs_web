@@ -74,7 +74,7 @@ export class CommuneManagementService {
         if(allowDDefault){
           this.cbxCommunes.value.unshift({
             distId: '',
-            distName: this.translateService.instant('DEFAULT_OPTION.SELECT'),
+            districtName: this.translateService.instant('DEFAULT_OPTION.SELECT'),
           });
         }
       }else {

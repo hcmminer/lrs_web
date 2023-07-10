@@ -177,6 +177,7 @@ export class VillageManagementComponent implements OnInit {
 
   //display form add
   displayFormAdd(item: any, isUpdate, isUpdateFile) {
+    debugger
     const modalRef = this.modalService.open(FormAddEditVillageComponent, {
       centered: true,
       backdrop: "static",

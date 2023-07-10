@@ -58,7 +58,7 @@
                   >
                       <ng-container *ngFor="let item of communeManagementService.cbxCommunes | async">
                           <option [ngValue]="item.distId">
-                              <span>{{ item.distName }}</span>
+                              <span>{{ item.districtName }}</span>
                           </option>
                       </ng-container>
                   </select>

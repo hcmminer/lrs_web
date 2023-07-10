@@ -105,7 +105,7 @@ export class FormAddEditVillageComponent implements OnInit {
       functionName: "getListDistrict",
       districtDTO: {
         userName: this.userName,
-        proName: null,
+        proId: this.isUpdate ? this.item.proId : null ,
         distName: ''
       }
     };
