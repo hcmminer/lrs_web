@@ -423,6 +423,9 @@ export const locale = {
       CONFIRM_CLOSE: 'Bạn có muốn xóa dữ liệu đã nhập không?',
       SELECT: 'Lựa chọn',
       APPROVE: 'Phê duyệt',
+      ADD_LOCATION:'Thêm mới mã vị trí',
+      COMEBACK:'Quay lại',
+      SEARCH_CONTRACT:'Tìm kiếm hợp đồng thuê trạm'
     },
     COMMON: {
       INDEX: 'STT',

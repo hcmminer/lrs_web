@@ -19,12 +19,19 @@ import { CRUDTableModule } from 'src/app/_metronic/shared/crud-table';
 import {NgbDateCustomParserFormatter} from '../../../_metronic/core/utils/ngb-date-custom-parser-formatter';
 import {SharedDisplayHtmlModule} from '../../../_metronic/shared/shared-display-html/shared-display-html.module';
 import {MatInputModule} from '@angular/material/input';
+import {StationRentalContractBtsComponent} from "./station-rental-contract-bts/station-rental-contract-bts.component";
+import {ContractManagementComponent} from "./saerch-contract/contract-management.component";
+import {FormAddEditLocationComponent} from "./saerch-contract/form-add-location/form-add-edit-location.component";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
     BtsManagementComponent,
     ListBtsComponent,
-    InitBtsComponent
+    InitBtsComponent,
+    StationRentalContractBtsComponent,
+      ContractManagementComponent,
+    FormAddEditLocationComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +50,8 @@ import {MatInputModule} from '@angular/material/input';
     NgxSpinnerModule,
     NgxDropzoneModule,
     SharedDisplayHtmlModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
