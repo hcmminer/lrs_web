@@ -54,30 +54,23 @@ export class VillageManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
-
-    let requestListCommune = {
-      functionName: "getListDistrict",
-      userName: this.userName,
-      proCode: null,
-      distId:null
-    };
-    this.communeManagementService.getcbxCommunes(requestListCommune, true);
-    this.searchForm.get('proId').valueChanges.subscribe(value => {
-      let requestListCommuneByProvince = {
-        functionName: "getListDistrict",
-        districtDTO: {
-          userName: this.userName,
-          proId: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
-          distId: this.searchForm.get('distId').value ===  '' ? null : +this.searchForm.get('distId').value ,
-
-        }
-      };
-      this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
+    this.communeManagementService.cbxCommunes.next([]);
+    this.communeManagementService.cbxCommunes.value.unshift({
+      distId: '',
+      districtName: this.translate.instant('DEFAULT_OPTION.SELECT'),
     });
-
     this.eSearch();
+  }
 
-
+  changeProvince(){
+    let requestListCommuneByProvince = {
+      functionName: "getListDistrict",
+      districtDTO: {
+        userName: this.userName,
+        proId: this.searchForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+      }
+    };
+    this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
   }
 
   // ngOnInit(): void {
@@ -177,7 +170,6 @@ export class VillageManagementComponent implements OnInit {
 
   //display form add
   displayFormAdd(item: any, isUpdate, isUpdateFile) {
-    debugger
     const modalRef = this.modalService.open(FormAddEditVillageComponent, {
       centered: true,
       backdrop: "static",

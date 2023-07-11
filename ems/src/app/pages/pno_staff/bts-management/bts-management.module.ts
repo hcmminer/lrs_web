@@ -23,6 +23,7 @@ import {StationRentalContractBtsComponent} from "./station-rental-contract-bts/s
 import {ContractManagementComponent} from "./saerch-contract/contract-management.component";
 import {FormAddEditLocationComponent} from "./saerch-contract/form-add-location/form-add-edit-location.component";
 import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import {MatTableModule} from "@angular/material/table";
     ListBtsComponent,
     InitBtsComponent,
     StationRentalContractBtsComponent,
-      ContractManagementComponent,
-    FormAddEditLocationComponent
+    FormAddEditLocationComponent,
+    ContractManagementComponent,
+
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import {MatTableModule} from "@angular/material/table";
     NgxDropzoneModule,
     SharedDisplayHtmlModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

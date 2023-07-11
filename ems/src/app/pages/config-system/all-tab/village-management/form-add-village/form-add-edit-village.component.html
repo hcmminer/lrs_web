@@ -33,6 +33,7 @@
                 }}</label>
                 <div class="col-md-3">
                   <select
+                          (change)="changeProvince"
                     class="form-control font-14"
                     name="proId"
                     id="proId"
@@ -106,7 +107,7 @@
                                 'VALIDATION.REQUIRED'
                                     | translate
                                     : {
-                                        name: 'VILLAGE_MANAGEMENT.VILLAGE_CODE' | translate
+                                        name: 'VILLAGE_MANAGEMENT.VILLAGE_NAME' | translate
                                     }
                                 }}
                             </small>

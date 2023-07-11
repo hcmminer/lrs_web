@@ -1,0 +1,22 @@
+::ng-deep .mat-tab-label-content {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+::ng-deep .mat-header-cell {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+
+::ng-deep .mat-paginator-range-actions{
+  padding-right: 80px;
+}
+
+::ng-deep .mat-paginator-range-label{
+  min-width: 100px;
+}
+
+::ng-deep .mat-flat-button{
+  min-width: 40px !important;
+}

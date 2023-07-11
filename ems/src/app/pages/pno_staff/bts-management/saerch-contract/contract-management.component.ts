@@ -5,7 +5,6 @@ import { MatTableDataSource } from "@angular/material/table";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { RequestApiModel } from "src/app/pages/_models/request-api.model";
-import { ProvincialManagementService } from "src/app/pages/_services/provincial-management.service";
 import { CONFIG } from "src/app/utils/constants";
 import { FormAddEditLocationComponent } from "./form-add-location/form-add-edit-location.component";
 import { DatePipe } from "@angular/common";
@@ -13,6 +12,7 @@ import { CommuneManagementService } from "src/app/pages/_services/commune-manage
 import { ToastrService } from "ngx-toastr";
 import { CommonAlertDialogComponent } from "src/app/pages/common/common-alert-dialog/common-alert-dialog.component";
 import { TranslateService } from "@ngx-translate/core";
+import {SelectionModel} from "@angular/cdk/collections";
 
 const queryInit = {
   communeName: "",
@@ -22,11 +22,12 @@ const queryInit = {
 };
 
 @Component({
-  selector: "app-village-management",
+  selector: "app-contract-management",
   templateUrl: "./contract-management.component.html",
   styleUrls: ["./contract-management.component.scss"],
 })
 export class ContractManagementComponent implements OnInit {
+  selection = new SelectionModel<Element>(true, []);
   public currentPage = 0;
   public pageSize: number = 10;
   public dataChange = false;
@@ -41,7 +42,7 @@ export class ContractManagementComponent implements OnInit {
   @ViewChild("formSearch") formSearch: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   public dataSource: MatTableDataSource<any>;
-  public columnsToDisplay = ["index", "provinceName","districtName", "communeName", "action"];
+  public columnsToDisplay = ["select","index", "provinceName","districtName", "communeName", "action"];
   constructor(
     public communeManagementService: CommuneManagementService,
     private fb: FormBuilder,
@@ -61,6 +62,7 @@ export class ContractManagementComponent implements OnInit {
       proCode: null,
       distId:null
     };
+
     this.communeManagementService.getcbxCommunes(requestListCommune, true);
     this.searchForm.get('proId').valueChanges.subscribe(value => {
       let requestListCommuneByProvince = {
@@ -79,6 +81,7 @@ export class ContractManagementComponent implements OnInit {
 
 
   }
+
 
   // ngOnInit(): void {
   //   this.userName = localStorage.getItem(CONFIG.KEY.USER_NAME);
@@ -168,7 +171,7 @@ export class ContractManagementComponent implements OnInit {
       dataParams: {
         currentPage: this.currentPage + 1,
         pageLimit: this.pageSize      }
-    
+
     };
     return this.communeManagementService.callAPICommon(
       requestTarget as RequestApiModel
@@ -177,7 +180,6 @@ export class ContractManagementComponent implements OnInit {
 
   //display form add
   displayFormAdd(item: any, isUpdate, isUpdateFile) {
-    debugger
     const modalRef = this.modalService.open(FormAddEditLocationComponent, {
       centered: true,
       backdrop: "static",
@@ -255,6 +257,7 @@ export class ContractManagementComponent implements OnInit {
 
   }
 
+
   transform(value: string) {
     let datePipe = new DatePipe("en-US");
     value = datePipe.transform(value, "dd/MM/yyyy");
@@ -314,5 +317,15 @@ export class ContractManagementComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
+  }
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }

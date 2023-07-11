@@ -19,6 +19,8 @@ const queryInit = {
   communeName: "",
   proId: "",
   distId: "",
+  communeId: "",
+
 };
 @Component({
   selector: 'app-form-add-edit-commune',
@@ -101,15 +103,11 @@ export class FormAddEditVillageComponent implements OnInit {
     this.communeManagementService.getcbxProvinces(requestListProvince, true);
 
     //combobox muong
-    let requestListCommune = {
-      functionName: "getListDistrict",
-      districtDTO: {
-        userName: this.userName,
-        proId: this.isUpdate ? this.item.proId : null ,
-        distName: ''
-      }
-    };
-    this.communeManagementService.getcbxCommunes(requestListCommune, true);
+    this.communeManagementService.cbxCommunes.next([]);
+    this.communeManagementService.cbxCommunes.value.unshift({
+      distId: '',
+      districtName: this.translate.instant('DEFAULT_OPTION.SELECT'),
+    });
 
   }
 
@@ -133,11 +131,22 @@ export class FormAddEditVillageComponent implements OnInit {
 
   }
 
+  changeProvince(){
+    let requestListCommuneByProvince = {
+      functionName: "getListDistrict",
+      districtDTO: {
+        userName: this.userName,
+        proId: this.addEditForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+      }
+    };
+    this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
+  }
+
   loadAddForm() {
     this.addEditForm = this.fb.group({
-      proId:[this.isUpdate ? this.item.proId : 0, [Validators.required]],
-      distId:[this.isUpdate ? this.item.distId : 0, [Validators.required]],
-      communeId: [this.isUpdate ? this.item.communeId : 0, [Validators.required]],
+      proId:[this.isUpdate ? this.item.proId : this.query.proId, [Validators.required]],
+      distId:[this.isUpdate ? this.item.distId : this.query.distId, [Validators.required]],
+      communeId: [this.isUpdate ? this.item.communeId : this.query.communeId, [Validators.required]],
       communeCode: [this.isUpdate ? this.item.communeCode : '', [Validators.required]],
       communeName: [this.isUpdate ? this.item.communeName : '', [Validators.required]],
     });
@@ -207,7 +216,7 @@ export class FormAddEditVillageComponent implements OnInit {
         communeCode: this.addEditForm.get("communeCode").value,
         communeName: this.addEditForm.get("communeName").value,
         distId: +this.addEditForm.get("distId").value,
-        communeId: +this.addEditForm.get("communeId").value,
+        communeId: this.addEditForm.get("communeId").value === "" ? null : +this.addEditForm.get("communeId").value,
 
       },
     };

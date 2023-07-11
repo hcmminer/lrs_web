@@ -21,6 +21,7 @@
                       name="proId"
                       id="proId"
                       formControlName="proId"
+                      (change)="changeProvince()"
                       [(ngModel)]="query.proId"
                     >
                       <ng-container *ngFor="let item of communeManagementService.cbxProvices | async">
