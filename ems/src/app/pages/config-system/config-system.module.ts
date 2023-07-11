@@ -38,6 +38,8 @@ import { PriceRangeManagerComponent } from './sub-menus/price-range-manager/pric
 import { AddEditPriceRangeComponent } from './sub-menus/price-range-manager/childs/add-edit-price-range/add-edit-price-range.component';
 import { NumbersOnlyDirective } from '../directives/only-number.directive';
 import { FormatNumberPipe } from 'src/app/_metronic/core/pipes/formatNumber.pipe';
+import { UnitManagerComponent } from './sub-menus/unit-manager/unit-manager.component';
+import { AddEditUnitComponent } from './sub-menus/unit-manager/childs/add-edit-unit/add-edit-unit.component';
 // ..bandv
 
 @NgModule({
@@ -52,6 +54,8 @@ import { FormatNumberPipe } from 'src/app/_metronic/core/pipes/formatNumber.pipe
     AddEditPriceRangeComponent,
     NumbersOnlyDirective,
     FormatNumberPipe,
+    UnitManagerComponent,
+    AddEditUnitComponent,
     // ..bandv
 
     CommonAlertDialogComponent,
