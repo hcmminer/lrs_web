@@ -28,6 +28,7 @@ import { CommonAlertDialogComponent } from '../common/common-alert-dialog/common
 import { CommuneManagementComponent } from './all-tab/commune-management/commune-management.component';
 import { FormAddEditCommuneComponent } from './all-tab/commune-management/form-add-edit-commune/form-add-edit-commune.component';
 import { VillageManagementComponent } from './all-tab/village-management/village-management.component';
+import { FormAddEditVillageComponent } from './all-tab/village-management/form-add-edit-village/form-add-edit-village.component';
 // bandv..
 import { TabOptionSetComponent } from './all-tab/tab-option-set/tab-option-set.component';
 import { TabOptionSetValueComponent } from './all-tab/tab-option-set-value/tab-option-set-value.component';
@@ -37,7 +38,8 @@ import { PriceRangeManagerComponent } from './sub-menus/price-range-manager/pric
 import { AddEditPriceRangeComponent } from './sub-menus/price-range-manager/childs/add-edit-price-range/add-edit-price-range.component';
 import { NumbersOnlyDirective } from '../directives/only-number.directive';
 import { FormatNumberPipe } from 'src/app/_metronic/core/pipes/formatNumber.pipe';
-import {FormAddEditVillageComponent} from "./all-tab/village-management/form-add-village/form-add-edit-village.component";
+import { UnitManagerComponent } from './sub-menus/unit-manager/unit-manager.component';
+import { AddEditUnitComponent } from './sub-menus/unit-manager/childs/add-edit-unit/add-edit-unit.component';
 // ..bandv
 
 @NgModule({
@@ -52,6 +54,8 @@ import {FormAddEditVillageComponent} from "./all-tab/village-management/form-add
     AddEditPriceRangeComponent,
     NumbersOnlyDirective,
     FormatNumberPipe,
+    UnitManagerComponent,
+    AddEditUnitComponent,
     // ..bandv
 
     CommonAlertDialogComponent,

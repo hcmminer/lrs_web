@@ -1,0 +1,90 @@
+<div class="position-relative rounded">
+  <div class="container">
+    <h5 class="font-weight-boldest mb-5">
+      {{ propAction == 'edit' ? ('cm.edit' | translate) : ('cm.add' | translate) }}
+    </h5>
+    <hr />
+    <form action="#" class="form form-label-right" [formGroup]="addEditForm">
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+        <label class="col-md-2 mb-12 form-label col-form-label" for="provinceId">{{ 'cm.provinceName' |
+          translate}}</label>
+        <div class="col-md-3">
+          <select class="form-control" name="provinceId" id="provinceId" formControlName="provinceId">
+            <option *ngFor="let item of configSystemService.cbxProvince | async"
+              [ngValue]="item.proId || item.provinceId">
+              {{ item.proName }}
+            </option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'provinceId')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.province' | translate } }}
+          </div>
+        </div>
+
+        <!-- unitCode -->
+        <label class="col-md-2 mb-12 form-label col-form-label" for="unitCode">{{ 'cm.unitCode' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input  class="form-control" id="unitCode" autocomplete="off" formControlName="unitCode" maxlength="100"/>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'unitCode')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.unitCode' | translate } }}
+          </div>
+        </div>
+       
+
+      </div>
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+
+        <label class="col-md-2 mb-12 form-label col-form-label" for="unitNameVi">{{ 'cm.unitNameVi' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input  class="form-control" id="unitNameVi" autocomplete="off" formControlName="unitNameVi" maxlength="100"/>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'unitNameVi')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.unitNameVi' | translate } }}
+          </div>
+        </div>
+
+        <label class="col-md-2 mb-12 form-label col-form-label" for="unitNameEn">{{ 'cm.unitNameEn' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input  class="form-control" id="unitNameEn" autocomplete="off" formControlName="unitNameEn" maxlength="100"/>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'unitNameEn')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.unitNameEn' | translate } }}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row form-group gx-6 mb-0 justify-content-center">
+
+        <label class="col-md-2 mb-12 form-label col-form-label" for="unitNameLa">{{ 'cm.unitNameLa' | translate }}
+          <span style="color: red">*</span>
+        </label>
+        <div class="col-md-3">
+          <input  class="form-control" id="unitNameLa" autocomplete="off" formControlName="unitNameLa" maxlength="100"/>
+          <div class="invalid-feedback d-block" *ngIf="controlHasError('required', 'unitNameLa')">
+            {{ 'VALIDATION.REQUIRED' | translate : { name: 'cm.unitNameLa' | translate } }}
+          </div>
+        </div>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
+
+      </div>
+    </form>
+
+    <div class="d-flex justify-content-end mb-5">
+      <button class="btn btn-outline-primary mx-3" style="width: 150px" (click)="eCloseWithoutEdit()">
+        {{ 'cm.close' | translate }}
+      </button>
+      <button class="btn btn-primary mx-3" style="width: 150px" (click)="eSave()">
+        {{ 'cm.save' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="pb-1"></div>
+  <ngx-spinner bdColor="rgba(0,0,0,0.6)" size="default" color="#1dc5be" type="ball-clip-rotate"
+    [fullScreen]="true"></ngx-spinner>
+</div>
