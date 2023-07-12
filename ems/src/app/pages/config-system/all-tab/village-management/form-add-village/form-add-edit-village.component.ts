@@ -101,15 +101,8 @@ export class FormAddEditVillageComponent implements OnInit {
       provinceName: "",
     };
     this.communeManagementService.getcbxProvinces(requestListProvince, true);
-
-    //combobox muong
-    this.communeManagementService.cbxCommunes.next([]);
-    this.communeManagementService.cbxCommunes.value.unshift({
-      distId: '',
-      districtName: this.translate.instant('DEFAULT_OPTION.SELECT'),
-    });
-
   }
+
 
   ngOnInit(): void {
     console.log(this.item)
@@ -128,29 +121,54 @@ export class FormAddEditVillageComponent implements OnInit {
       };
       this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
     });
-
-  }
-
-  changeProvince(){
+  if(this.isUpdate){
     let requestListCommuneByProvince = {
       functionName: "getListDistrict",
       districtDTO: {
         userName: this.userName,
-        proId: this.addEditForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+        proId: this.item.proId,
+      }
+    };
+    this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
+  }else {
+    this.communeManagementService.cbxCommunes.next([]);
+    this.communeManagementService.cbxCommunes.value.unshift({
+      distId: '',
+      districtName: this.translate.instant('DEFAULT_OPTION.SELECT'),
+    });
+  }
+  }
+
+  changeProvince(){
+
+    let requestListCommuneByProvince = {
+      functionName: "getListDistrict",
+      districtDTO: {
+        userName: this.userName,
+        // proId: this.addEditForm.get('proId').value ===  '' ? null : +this.searchForm.get('proId').value ,
+        proId: this.isUpdate ? this.item.proId : null ,
       }
     };
     this.communeManagementService.getcbxCommunes(requestListCommuneByProvince, true);
   }
-
   loadAddForm() {
     this.addEditForm = this.fb.group({
       proId:[this.isUpdate ? this.item.proId : this.query.proId, [Validators.required]],
       distId:[this.isUpdate ? this.item.distId : this.query.distId, [Validators.required]],
-      communeId: [this.isUpdate ? this.item.communeId : this.query.communeId, [Validators.required]],
+      communeId: [this.isUpdate ? this.item.communeId : this.query.communeId],
       communeCode: [this.isUpdate ? this.item.communeCode : '', [Validators.required]],
       communeName: [this.isUpdate ? this.item.communeName : '', [Validators.required]],
     });
   }
+  // loadAddForm() {
+  //   this.addEditForm = this.fb.group({
+  //     proId:[this.isUpdate ? this.item.proId : 0, [Validators.required]],
+  //     distId:[this.isUpdate ? this.item.distId : 0, [Validators.required]],
+  //     communeId: [this.isUpdate ? this.item.communeId : 0, [Validators.required]],
+  //     communeCode: [this.isUpdate ? this.item.communeCode : '', [Validators.required]],
+  //     communeName: [this.isUpdate ? this.item.communeName : '', [Validators.required]],
+  //   });
+  // }
 
   loadAddFileForm() {
     this.addFileForm = this.fb.group({
