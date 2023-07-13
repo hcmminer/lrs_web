@@ -52,8 +52,8 @@ import {FormAddEditVillageComponent} from "./all-tab/village-management/form-add
     AddEditDataComponent_1,
     PriceRangeManagerComponent,
     AddEditPriceRangeComponent,
-    NumbersOnlyDirective,
-    FormatNumberPipe,
+    // NumbersOnlyDirective,
+    // FormatNumberPipe,
     UnitManagerComponent,
     AddEditUnitComponent,
     // ..bandv
@@ -93,6 +93,6 @@ import {FormAddEditVillageComponent} from "./all-tab/village-management/form-add
     MatRadioModule,
     SharedDisplayHtmlModule,
   ],
-  exports: [NumbersOnlyDirective,FormatNumberPipe],
+  // exports: [NumbersOnlyDirective,FormatNumberPipe],
 })
 export class ConfigSystemModule {}

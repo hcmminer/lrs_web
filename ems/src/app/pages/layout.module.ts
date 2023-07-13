@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     AsideDynamicComponent,
     HeaderMenuDynamicComponent,
     TruncatePipe,
-    CommonAlertDialogComponent
+    CommonAlertDialogComponent,
   ],
   imports: [
     FormsModule,

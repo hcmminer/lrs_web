@@ -12,10 +12,10 @@ const routes: Routes = [
     component: BtsManagementComponent,
     children: [
       { path: 'init-bts', component: InitBtsComponent},
-      { path: 'list-bts', component: ListBtsComponent},
+      // { path: 'list-bts', component: ListBtsComponent},
       { path: 'station-rental-contract-bts', component: StationRentalContractBtsComponent},
       { path: 'contract-management-bts', component: ContractManagementComponent},
-      { path: '', redirectTo: 'list-bts', pathMatch: 'full' },
+      // { path: '', redirectTo: 'list-bts', pathMatch: 'full' },
       { path: '**', redirectTo: 'error/404', pathMatch: 'full' },
     ],
   },

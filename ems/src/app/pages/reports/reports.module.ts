@@ -12,15 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbDateCustomParserFormatter } from '../../_metronic/core/utils/ngb-date-custom-parser-formatter';
 import { ReportDashboardOnlineComponent } from './report-dashboard-online/report-dashboard-online.component';
 import { ReportErrorOccurredResolvedComponent } from './report-error-occurred-resolved/report-error-occurred-resolved.component';
-import { SafeHtmlPipe } from '../../pipes/safeHtml.pipe';
 
 @NgModule({
   declarations: [
     ReportDashboardOnlineComponent,
     ReportSystemErrorComponent,
     ReportErrorOccurredResolvedComponent,
-    ReportsComponent,
-    SafeHtmlPipe
+    ReportsComponent
   ],
   imports: [
     CommonModule,

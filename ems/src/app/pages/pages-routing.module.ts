@@ -187,8 +187,13 @@ const routes: Routes = [
       {
         path: 'bts-management',
         loadChildren: () =>
-          import('./pno_staff/bts-management/bts-management.module').then((m) => m.BtsManagementModule),
+          import('./bts-container/bts-container.module').then((m) => m.BtsContainerModule),
       },
+      // {
+      //   path: 'bts-management',
+      //   loadChildren: () =>
+      //     import('./pno_staff/bts-management/bts-management.module').then((m) => m.BtsManagementModule),
+      // },
       {
         path: 'export-reports',
         loadChildren: () =>
